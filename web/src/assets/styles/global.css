@@ -1,0 +1,57 @@
+:root {
+  font-size: 60%;
+
+  --color-background: #FFFFFF;
+  --color-azul-de-fundo: #BEE4E7;
+  --color-amarelo-claro: #F8E183;
+  --color-amarelo-escuro: #F2C94C;
+  --color-rosa-fundo: #F5EFDE;
+  --color-rosa-claro: #FF5D5D;
+  --color-rosa-escuro: #E33D3D;
+  --color-texto-escuro: #404040;
+  --color-texto-claro: #BBBBBB;
+  --color-cinza-fundo: #F0F0F7;
+  --color-cinza-formulario: #FAFAFC;
+  --color-branco: #FFFFFF;
+  --color-secundary: #04D361;
+  --color-secundary-dark: #04BF58;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100vh;
+}
+
+body {
+  background: var(--color-background);
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body,
+input,
+button,
+textarea {
+  font: 500 1.6rem Poppins;
+  color: var(--color-texto-escuro);
+}
+
+.container {
+  width: 90vw;
+  max-width: 700px;
+}
+
+@media (min-width: 700px) {
+  :root {
+    font-size: 62.5%;
+  }
+}
