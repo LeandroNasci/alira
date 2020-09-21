@@ -1,7 +1,7 @@
 :root {
   font-size: 60%;
 
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-azul-de-fundo: #BEE4E7;
   --color-amarelo-claro: #F8E183;
   --color-amarelo-escuro: #F2C94C;
@@ -9,6 +9,7 @@
   --color-rosa-claro: #FF5D5D;
   --color-rosa-escuro: #E33D3D;
   --color-texto-escuro: #404040;
+  --color-texto-link: #8C8C8C;
   --color-texto-claro: #BBBBBB;
   --color-cinza-fundo: #F0F0F7;
   --color-cinza-formulario: #FAFAFC;
@@ -41,13 +42,17 @@ body,
 input,
 button,
 textarea {
-  font: 500 1.6rem Poppins;
+  font: 400 1.6rem Archivo;
   color: var(--color-texto-escuro);
+}
+
+p {
+  font: 500 1.6rem Poppins;
 }
 
 .container {
   width: 90vw;
-  max-width: 700px;
+  max-width: 1920px;
 }
 
 @media (min-width: 700px) {
