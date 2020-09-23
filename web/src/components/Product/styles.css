@@ -1,0 +1,33 @@
+#product {
+  background-color: var(--color-rosa-fundo);
+  border: 1px solid var(--color-azul-de-fundo);
+  border-radius: 4px;
+}
+
+#product img{
+  width: 100%;
+  padding: 0.8rem;
+}
+
+#product h5{
+  padding: 0 1rem;
+  font: 600 1.2rem Archivo;
+  color: var(--color-texto-escuro);
+  text-align: center;
+  text-decoration: none;
+}
+
+#product h4{
+  padding: 0.6rem 1rem;
+  font: 700 1.4rem Arima Madurai;
+  color: var(--color-rosa-claro);
+  text-align: center;
+  text-decoration: none;
+  justify-self: center;
+}
+
+@media (min-width: 750px) {
+  #product h4 {
+    font-size: 2rem;
+  }
+}

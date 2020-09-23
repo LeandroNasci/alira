@@ -6,6 +6,8 @@
   --color-amarelo-claro: #F8E183;
   --color-amarelo-escuro: #F2C94C;
   --color-rosa-fundo: #F5EFDE;
+  --color-rosa-sombra: #f9caba;
+  --color-rosa-separador:#fcb7aa;
   --color-rosa-claro: #FF5D5D;
   --color-rosa-escuro: #E33D3D;
   --color-texto-escuro: #404040;
@@ -48,6 +50,7 @@ textarea {
 
 p {
   font: 500 1.6rem Poppins;
+  margin: 1.6rem;
 }
 
 .container {

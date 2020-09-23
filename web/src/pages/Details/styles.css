@@ -1,0 +1,158 @@
+#page-details {
+  width: 100vw;
+  height: 100vh;
+}
+
+#page-details main {
+  margin: 3.2rem auto;
+  width: 90%;
+}
+
+.detail-item { /*article*/
+  background: var(--color-rosa-fundo);
+  border: 1px solid var(--color-azul-de-fundo);
+  border-radius: 1.6rem;
+  padding: 0 1.6rem;
+}
+
+.detail-item header {
+  padding: 1.2rem 0;
+  font: 600 1.2rem Archivo;
+  text-align: center;
+  border-bottom: 2px solid var(--color-rosa-separador);
+}
+
+.detail-item .detail-content {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid var(--color-rosa-separador);
+  padding-bottom: 2.4rem;
+}
+
+.detail-item .detail-preview {
+  padding-top: 2.4rem;
+}
+
+.detail-item .detail-preview > img {
+  width: 100%;
+  margin-top: 0rem;
+  padding-bottom: 1.2rem;
+}
+
+.detail-item .detail-images {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.detail-item .detail-images a {
+  width: 25%;
+}
+
+.detail-item .detail-images img {
+  width: 100%;
+  margin-top: 0rem;
+}
+
+.detail-item .detail-images :target {
+  filter: opacity(50%);
+}
+
+.detail-item .detail-description {
+  margin-bottom: 2.4rem;
+}
+
+.detail-item .detail-description h4 {
+  margin: 1.6rem;
+  padding: 3.2rem 0 0.8rem;
+  font: 600 1.4rem Archivo;
+  text-align: center;
+  border-bottom: 2px solid var(--color-rosa-separador);
+}
+
+.detail-item .detail-background {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  margin: 0.4rem;
+  padding: 1.6rem 0.8rem 0;
+  border-radius: 0.8rem;
+}
+
+.detail-item .detail-background p {
+  text-align: justify;
+  font-size: 1.2rem;
+}
+
+.detail-item .detail-background div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2.4rem 1.6rem 0rem;
+}
+
+.detail-item .detail-description div img {
+  width: 5rem;
+  color: var(--color-rosa-claro);
+}
+
+.detail-item .detail-description div span {
+  font: 700 3.6rem Arima Madurai;
+  color: var(--color-rosa-claro);
+}
+
+.detail-item footer {
+  margin: 3.2rem 0;
+  display: grid;
+  justify-items: center;
+}
+
+.detail-item footer button {
+  width: 24rem;
+  height: 6rem;
+  background: var(--color-amarelo-claro);
+  color: var(--color-texto-escuro);
+  border: 0;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font: 600 2rem Archivo;
+  transition: 0.2s;
+}
+
+.detail-item footer button:hover {
+  background: var(--color-amarelo-escuro);
+}
+
+@media (max-width: 350px) {
+  .detail-item .detail-description div {
+    justify-content: center;
+  }
+
+  .detail-item .detail-description div img {
+    display: none;
+  }
+
+  .detail-item .detail-description div span {
+    font: 700 10vw Arima Madurai;
+  }
+}
+
+@media (min-width: 700px) {
+  .detail-item .detail-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detail-item .detail-description {
+    margin-left: 2rem;
+    margin-bottom: 2.4rem;
+  }
+}
+
+@media (min-width: 750px) {
+  .detail-item .detail-preview > img {
+    width: 100%;
+    padding: 1.6rem;
+  }
+}
