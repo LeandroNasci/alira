@@ -2,6 +2,7 @@ import React from 'react';
 
 import Footer from '../../components/Footer';
 import PageHeader from '../../components/PageHeader';
+import ImagesCarousel from '../../components/ImagesCarousel';
 
 import aliraNotesIcon from '../../assets/images/icons/cat.svg';
 
@@ -20,21 +21,7 @@ function Details() {
 
           <div className="detail-content">
             <div className="detail-preview">
-              <img src="https://assets.xtechcommerce.com/uploads/images/medium/d1f294f6d3aa32257e07d766411b3c7a.png" alt="Destaque"/>
-              <div className="detail-images">
-                <a id="img1" href="#img1" >
-                  <img src="https://assets.xtechcommerce.com/uploads/images/medium/d1f294f6d3aa32257e07d766411b3c7a.png" alt="img1"/>
-                </a>
-
-                <a id="img2" href="#img2" >
-                  <img  src="https://assets.xtechcommerce.com/uploads/images/medium/d1f294f6d3aa32257e07d766411b3c7a.png" alt="img2"/>
-                </a>
-
-                <a id="img3" href="#img3" >
-                  <img  src="https://assets.xtechcommerce.com/uploads/images/medium/d1f294f6d3aa32257e07d766411b3c7a.png" alt="img3"/>
-                </a>
-
-              </div>
+              <ImagesCarousel />
             </div>
             <div className="detail-description">
               <h4>DESCRIÇÃO DO PRODUTO</h4>
