@@ -44,7 +44,9 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
           <Link to="/">Início</Link>
           <Link to="/">Bloquinhos</Link>
           <Link to="/">Cadernos</Link>
-          <Link to="/">Adesivos</Link>
+          <Link to="/">Postits</Link>
+          <Link to="/">Canetas</Link>
+          <Link to="/">Borrachas</Link>
           <Link to="/about">Quem Somos</Link>
       </nav>
     </header>

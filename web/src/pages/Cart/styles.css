@@ -1,0 +1,332 @@
+#page-cart {
+  width: 100vw;
+  height: 100vh;
+}
+
+#page-cart main {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-list {
+  width: 90%;
+  align-self: center;
+  justify-items: center;
+  padding-top: 0.8rem;
+}
+
+.product-list h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin: 1.6rem ;
+}
+
+.product-list > button {
+  width: 28rem;
+  height: 4rem;
+  margin: 2.4rem;
+  font: 700 1.6rem Archivo;
+  background: var(--color-amarelo-claro);
+  border: 0;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.cart-bar {
+  width: 100%;
+  min-width: 25rem;
+  align-self: center;
+  padding: 1.2rem;
+  margin-top: 3.6rem;
+  margin-bottom: 3.6rem;
+  background: var(--color-cinza-fundo);
+  border: 2px solid var(--color-azul-de-fundo);
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-info {
+  width: 100%;
+  background: white;
+  border: 2px solid var(--color-texto-escuro);
+  border-radius: 1rem;
+  padding: 2.4rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cart-info h3 {
+  font-size: 2.4rem;
+  text-align: center;
+  padding-bottom: 2.4rem;
+}
+
+.cart-info .shop-value {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-info .shop-value div {
+  font-size: 1.4rem;
+}
+
+.cart-info .shop-value span {
+  font: 700 2.4rem Arima Madurai;
+  color: var(--color-rosa-claro);
+}
+
+.cart-info p {
+  font: 400 1.2rem Poppins;
+}
+
+.cart-info button {
+  width: 100%;
+  height: 4rem;
+  max-width: 24rem;
+  padding: 0.4rem;
+  font: 700 1.6rem Archivo;
+  background: var(--color-amarelo-claro);
+  border: 0;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.cart-info button:hover {
+  background: var(--color-amarelo-escuro);
+
+}
+
+.send-info {
+  padding: 1.6rem;
+}
+
+.send-info .off {
+  width: 100%;
+  background: var(--color-rosa-claro);
+  color: white;
+  border-radius: 2rem;
+  text-align: center;
+  padding: 1.6rem;
+
+}
+
+.send-info .off h4 {
+  font: 700 2.4rem Archivo;
+  padding: 0.8rem;
+}
+
+.send-info .off p {
+  font: 600 1.6rem Poppins;
+  text-align: center;
+}
+
+.send-info .off b {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+
+.send-info p {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.send-info .zip-code {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.send-info .zip-code input {
+  width: 100%;
+  height: 4rem;
+  max-width: 24rem;
+  margin-top: 0.8rem;
+  border-radius: 0.6rem;
+  background: var(--color-cinza-formulario);
+  border: 2px solid var(--color-texto-escuro);
+  outline: 0;
+  padding: 0 1.6rem;
+  font: 2rem Archivo;
+  text-align: center;
+  color: var(--color-texto-claro);
+}
+
+.send-info .zip-code button {
+  width: 100%;
+  height: 4rem;
+  max-width: 24rem;
+  font: 700 1.6rem Archivo;
+  background: var(--color-amarelo-claro);
+  border: 0;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  margin-top: 1rem;
+  padding: 0.6rem;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.send-info .zip-code button:hover {
+  background: var(--color-amarelo-escuro);
+}
+
+.send-info .shipping-cost {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.4rem;
+  padding: 2.8rem 0 2rem;
+  border-bottom: 1px solid var(--color-texto-escuro);
+}
+
+.send-info .shipping-cost + .shipping-cost  {
+  border-bottom: none
+}
+
+.send-info .shipping-cost div h5 {
+  font-size: 2rem;
+}
+
+.send-info .shipping-cost div span {
+  font: 400 1.4rem Archivo;
+}
+
+.send-info .shipping-cost div p {
+  font: 400 1.8rem Archivo;
+  color: var(--color-rosa-claro);
+  margin-left: 0;
+}
+
+
+.send-info .shipping-cost div h6 {
+  font: 700 2.2rem Arima Madurai;
+  color: var(--color-rosa-claro);
+  text-align: end;
+}
+
+#strike {
+  text-decoration: line-through;
+  font: 700 1.6rem Arima Madurai;
+  color: var(--color-texto-escuro);
+  padding-bottom: 2.4rem;
+}
+
+@media (min-width: 500px) {
+  .send-info .shipping-cost div h5 {
+    font-size: 2.4rem;
+  }
+
+  .send-info .shipping-cost div span {
+    font-size: 1.7rem;
+  }
+
+  .send-info .shipping-cost div p {
+    font-size: 2.4rem;
+  }
+
+  .send-info .shipping-cost div h6 {
+    font-size: 3rem;
+  }
+
+  #strike {
+    font-size: 2rem;
+    padding-bottom: 1.6rem;
+  }
+}
+
+@media (min-width: 700px) {
+  .send-info .shipping-cost {
+  }
+
+  .send-info .shipping-cost div h5 {
+    font-size: 1.6rem;
+  }
+
+  .send-info .shipping-cost div span {
+    font-size: 1rem;
+  }
+
+  .send-info .shipping-cost div p {
+    font-size: 1.4rem;
+  }
+
+  .send-info .shipping-cost div h6 {
+    font-size: 2rem;
+  }
+
+  #strike {
+    font-size: 1.4rem;
+    padding-bottom: 1.8rem;
+  }
+}
+
+
+@media (min-width: 1080px) {
+  .send-info .shipping-cost {
+  }
+
+  .send-info .shipping-cost div h5 {
+    font-size: 1.6rem;
+  }
+
+  .send-info .shipping-cost div span {
+    font-size: 1rem;
+  }
+
+  .send-info .shipping-cost div p {
+    font-size: 1.4rem;
+  }
+
+  .send-info .shipping-cost div h6 {
+    font-size: 2rem;
+  }
+
+  #strike {
+    font-size: 1.4rem;
+    padding-bottom: 1.8rem;
+  }
+}
+
+
+@media (min-width: 700px) {
+  #page-cart main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin: 2.4rem;
+    justify-content: space-evenly;
+  }
+
+  .product-list {
+    align-self: flex-start;
+  }
+
+  .cart-bar {
+    width: 90%;
+    align-self: flex-start;
+    justify-self: center;
+  }
+
+  .cart-bar .send-info .off {
+    width: calc(100% + 10rem);
+    position: relative;
+    left: -5rem;
+  }
+
+}
+
+@media (min-width: 820px) {
+  main {
+    margin: 2.4rem 3.6rem;
+  }
+}
+
+

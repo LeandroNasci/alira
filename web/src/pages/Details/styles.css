@@ -16,6 +16,7 @@
 }
 
 .detail-item header {
+  margin-top: 1.6rem;
   padding: 1.2rem 0;
   font: 600 1.2rem Archivo;
   text-align: center;
@@ -123,14 +124,20 @@
 }
 
 @media (min-width: 700px) {
+  .detail-item {
+    width: 90%;
+    margin: 0 auto;
+  }
+
   .detail-item .detail-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 
   .detail-item .detail-preview {
-    width: 47vw;
+    width: 40vw;
     margin-bottom: auto;
+    margin-top: 6rem;
   }
 
   .detail-item .detail-description {
