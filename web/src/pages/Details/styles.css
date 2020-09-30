@@ -4,7 +4,7 @@
 }
 
 #page-details main {
-  margin: 3.2rem auto;
+  margin: 7.2rem auto;
   width: 90%;
 }
 
@@ -13,7 +13,8 @@
   border: 1px solid var(--color-azul-de-fundo);
   border-radius: 1.6rem;
   padding: 0 1.6rem;
-}
+
+  }
 
 .detail-item header {
   margin-top: 1.6rem;

@@ -221,20 +221,24 @@
 }
 
 @media (min-width: 500px) {
+  .send-info .shipping-cost {
+    margin: 0.4rem 2.4rem;
+  }
+
   .send-info .shipping-cost div h5 {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .send-info .shipping-cost div span {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
   }
 
   .send-info .shipping-cost div p {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
   }
 
   .send-info .shipping-cost div h6 {
-    font-size: 3rem;
+    font-size: 2.6rem;
   }
 
   #strike {
@@ -242,60 +246,6 @@
     padding-bottom: 1.6rem;
   }
 }
-
-@media (min-width: 700px) {
-  .send-info .shipping-cost {
-  }
-
-  .send-info .shipping-cost div h5 {
-    font-size: 1.6rem;
-  }
-
-  .send-info .shipping-cost div span {
-    font-size: 1rem;
-  }
-
-  .send-info .shipping-cost div p {
-    font-size: 1.4rem;
-  }
-
-  .send-info .shipping-cost div h6 {
-    font-size: 2rem;
-  }
-
-  #strike {
-    font-size: 1.4rem;
-    padding-bottom: 1.8rem;
-  }
-}
-
-
-@media (min-width: 1080px) {
-  .send-info .shipping-cost {
-  }
-
-  .send-info .shipping-cost div h5 {
-    font-size: 1.6rem;
-  }
-
-  .send-info .shipping-cost div span {
-    font-size: 1rem;
-  }
-
-  .send-info .shipping-cost div p {
-    font-size: 1.4rem;
-  }
-
-  .send-info .shipping-cost div h6 {
-    font-size: 2rem;
-  }
-
-  #strike {
-    font-size: 1.4rem;
-    padding-bottom: 1.8rem;
-  }
-}
-
 
 @media (min-width: 700px) {
   #page-cart main {
@@ -321,6 +271,29 @@
     left: -5rem;
   }
 
+  .send-info .shipping-cost {
+  }
+
+  .send-info .shipping-cost div h5 {
+    font-size: 1.6rem;
+  }
+
+  .send-info .shipping-cost div span {
+    font-size: 1rem;
+  }
+
+  .send-info .shipping-cost div p {
+    font-size: 1.4rem;
+  }
+
+  .send-info .shipping-cost div h6 {
+    font-size: 2rem;
+  }
+
+  #strike {
+    font-size: 1.4rem;
+    padding-bottom: 1.8rem;
+  }
 }
 
 @media (min-width: 820px) {
@@ -329,4 +302,25 @@
   }
 }
 
+@media (min-width: 1080px) {
+  .send-info .shipping-cost div h5 {
+    font-size: 1.6rem;
+  }
 
+  .send-info .shipping-cost div span {
+    font-size: 1rem;
+  }
+
+  .send-info .shipping-cost div p {
+    font-size: 1.4rem;
+  }
+
+  .send-info .shipping-cost div h6 {
+    font-size: 2rem;
+  }
+
+  #strike {
+    font-size: 1.4rem;
+    padding-bottom: 1.8rem;
+  }
+}
