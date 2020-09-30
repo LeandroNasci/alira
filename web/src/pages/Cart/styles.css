@@ -179,9 +179,14 @@
   background: var(--color-amarelo-escuro);
 }
 
+
+
+
+
+
 .send-info .shipping-cost {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0.4rem;
   padding: 2.8rem 0 2rem;
@@ -192,25 +197,20 @@
   border-bottom: none
 }
 
-.send-info .shipping-cost div h5 {
+
+.send-info .shipping-cost .correio-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.send-info .shipping-cost .correio-price div h5 {
   font-size: 2rem;
 }
 
-.send-info .shipping-cost div span {
+.send-info .shipping-cost .correio-price div span {
   font: 400 1.4rem Archivo;
-}
-
-.send-info .shipping-cost div p {
-  font: 400 1.8rem Archivo;
-  color: var(--color-rosa-claro);
-  margin-left: 0;
-}
-
-
-.send-info .shipping-cost div h6 {
-  font: 700 2.2rem Arima Madurai;
-  color: var(--color-rosa-claro);
-  text-align: end;
 }
 
 #strike {
@@ -220,24 +220,47 @@
   padding-bottom: 2.4rem;
 }
 
+.send-info .shipping-cost .alira-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1.6rem;
+}
+
+.send-info .shipping-cost .alira-price p {
+  font: 400 1.8rem Archivo;
+  color: var(--color-rosa-claro);
+  margin: 0;
+  align-self: center;
+}
+
+
+.send-info .shipping-cost .alira-price h6 {
+  font: 700 2.6rem Arima Madurai;
+  color: var(--color-rosa-claro);
+}
+
 @media (min-width: 500px) {
   .send-info .shipping-cost {
     margin: 0.4rem 2.4rem;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .send-info .shipping-cost div h5 {
+  .send-info .shipping-cost .correio-price div h5 {
     font-size: 2.2rem;
   }
 
-  .send-info .shipping-cost div span {
+  .send-info .shipping-cost .correio-price div span {
     font-size: 1.4rem;
   }
 
-  .send-info .shipping-cost div p {
+  .send-info .shipping-cost .alira-price p {
     font-size: 2.2rem;
   }
 
-  .send-info .shipping-cost div h6 {
+  .send-info .shipping-cost .alira-price h6 {
     font-size: 2.6rem;
   }
 
@@ -271,28 +294,42 @@
     left: -5rem;
   }
 
-  .send-info .shipping-cost {
+
+  .send-info .shipping-cost .correio-price {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
   }
 
-  .send-info .shipping-cost div h5 {
+
+  .send-info .shipping-cost .correio-price div h5 {
     font-size: 1.6rem;
   }
 
-  .send-info .shipping-cost div span {
+  .send-info .shipping-cost .correio-price div span {
     font-size: 1rem;
   }
 
-  .send-info .shipping-cost div p {
-    font-size: 1.4rem;
+  .send-info .shipping-cost .alira-price {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
-  .send-info .shipping-cost div h6 {
+
+  .send-info .shipping-cost .alira-price p {
+    font-size: 1.4rem;
+    width: 100%;
+    text-align: start;
+  }
+
+  .send-info .shipping-cost .alira-price h6 {
     font-size: 2rem;
+    text-align: end;
   }
 
   #strike {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     padding-bottom: 1.8rem;
+    text-align: end;
   }
 }
 

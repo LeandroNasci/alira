@@ -45,27 +45,47 @@ function Cart() {
               <button>Estimar Frete</button>
             </form>
             <div className="shipping-cost">
-              <div>
-                <h5>PAC</h5>
-                <span>Entrega em até 11 dias úteis</span>
-                <p>Na ALIRA somente por</p>
-              </div>
-              <div>
+
+              <div className="correio-price">
+                <div>
+                  <h5>PAC</h5>
+                  <span>Entrega em até 11 dias úteis</span>
+                </div>
                 <h6 id="strike">R$ 24,30</h6>
+              </div>
+              <div className="alira-price">
+                <p>Na ALIRA somente por</p>
                 <h6>R$ 21,87</h6>
               </div>
+
             </div>
+
+
+
             <div className="shipping-cost">
-              <div>
-                <h5>SEDEX</h5>
-                <span>Entrega em até 6 dias úteis</span>
-                <p>Na ALIRA somente por</p>
-              </div>
-              <div>
+
+              <div className="correio-price">
+                <div>
+                  <h5>SEDEX</h5>
+                  <span>Entrega em até 6 dias úteis</span>
+                </div>
                 <h6 id="strike">R$ 25,80</h6>
+              </div>
+              <div className="alira-price">
+                <p>Na ALIRA somente por</p>
                 <h6>R$ 21,93</h6>
               </div>
+
+
+
             </div>
+
+
+
+
+
+
+
           </div>
         </div>
       </main>
