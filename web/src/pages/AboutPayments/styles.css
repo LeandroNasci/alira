@@ -1,0 +1,72 @@
+#page-about-payments {
+  width: 100vw;
+  height: 100vh;
+}
+
+#page-about-payments .about-payments-content {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+}
+
+#page-about-payments .payments,
+#page-about-payments .shipping {
+  width: 90%;
+  background: var(--color-rosa-fundo);
+  border: 2px solid var(--color-azul-de-fundo);
+  border-radius: 3.2rem;
+  padding: 0.8rem 5vw 2.4rem;
+  margin: 3.2rem 0;
+}
+
+#page-about-payments .payments {
+  align-self: center;
+}
+
+#page-about-payments .shipping {
+  align-self: center;
+}
+
+#page-about-payments .about-payments-content h2{
+  padding: 1.6rem;
+  text-align: center;
+  color: var(--color-rosa-claro);
+  border-bottom: 1px solid var(--color-rosa-claro);
+}
+
+#page-about-payments .about-payments-content p,
+#page-about-payments .about-payments-content ul li{
+  margin: 0.8rem;
+  text-align: justify;
+  font-size: 1.2rem;
+}
+
+#page-about-payments .about-payments-content ul {
+  font: 400 1.2rem Poppins;
+  text-align: left;
+  padding-left: 2.4rem;
+}
+
+#page-about-payments .about-payments-content p em{
+  font: 600 italic 1.2rem Poppins;
+}
+
+#page-about-payments .about-payments-content p b{
+  font: 700 1.2rem Poppins;
+}
+
+#page-about-payments .about-payments-content p.first {
+  padding-top: 1.6rem;
+}
+
+#page-about-payments .about-payments-content img {
+  display: block;
+  width: 75%;
+  margin: 0.4rem auto;
+}
+
+@media (min-width: 700px) {
+  #page-about-payments .about-payments-content {
+    max-width: 70rem;
+  }
+}
