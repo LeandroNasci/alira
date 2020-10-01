@@ -1,0 +1,80 @@
+#page-contact {
+  width: 100vw;
+  height: 100vh;
+}
+
+#page-contact .contact-content {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+}
+
+#page-contact .contact{
+  width: 90%;
+  background: var(--color-rosa-fundo);
+  border: 2px solid var(--color-azul-de-fundo);
+  border-radius: 3.2rem;
+  padding: 0.8rem 5vw 2.4rem;
+  margin: 3.2rem 0;
+  align-self: center;
+}
+
+#page-contact .contact-content h2{
+  padding: 1.6rem;
+  text-align: center;
+  color: var(--color-rosa-claro);
+  border-bottom: 1px solid var(--color-rosa-claro);
+}
+
+#page-contact .contact-content p{
+  margin: 0.8rem;
+  text-align: justify;
+  font-size: 1.2rem;
+}
+
+#page-contact .contact-content em{
+  display: block;
+  margin: 0.8rem;
+  font: 600 italic 1.2rem Poppins;
+  color: var(--color-rosa-claro);
+  text-align: end;
+}
+
+#page-contact .contact-content p b{
+  font: 700 1.2rem Poppins;
+  color: var(--color-rosa-claro);
+}
+
+#page-contact .contact-content p.first {
+  padding-top: 1.6rem;
+}
+
+#page-contact .contact-content p.last {
+  border-top: 1px solid var(--color-rosa-claro);
+  padding-top: 1.6rem;
+}
+
+#page-contact .contact-content h3 {
+  text-align: center;
+  margin: 1.6rem;
+  padding-top: 4.8rem;
+}
+
+#page-contact .contact-content .desktop img {
+  display: block;
+  width: 100%;
+  margin: 0.4rem auto;
+}
+
+#page-contact .contact-content .mobile img {
+  display: block;
+  width: 40%;
+  margin: 0.4rem auto;
+}
+
+
+@media (min-width: 700px) {
+  #page-contact .contact-content {
+    max-width: 70rem;
+  }
+}

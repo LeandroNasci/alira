@@ -1,0 +1,60 @@
+#page-about-exchanges {
+  width: 100vw;
+  height: 100vh;
+}
+
+#page-about-exchanges .about-exchanges-content {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem auto;
+}
+
+#page-about-exchanges .exchanges{
+  width: 90%;
+  background: var(--color-rosa-fundo);
+  border: 2px solid var(--color-azul-de-fundo);
+  border-radius: 3.2rem;
+  padding: 0.8rem 5vw 2.4rem;
+  margin: 3.2rem 0;
+  align-self: center;
+}
+
+#page-about-exchanges .about-exchanges-content h2{
+  padding: 1.6rem;
+  text-align: center;
+  color: var(--color-rosa-claro);
+  border-bottom: 1px solid var(--color-rosa-claro);
+}
+
+#page-about-exchanges .about-exchanges-content p{
+  margin: 0.8rem;
+  text-align: justify;
+  font-size: 1.2rem;
+}
+
+#page-about-exchanges .about-exchanges-content p em{
+  font: 600 italic 1.2rem Poppins;
+  color: var(--color-rosa-claro);
+}
+
+#page-about-exchanges .about-exchanges-content p b{
+  font: 700 1.2rem Poppins;
+  color: var(--color-rosa-claro);
+}
+
+#page-about-exchanges .about-exchanges-content p.first {
+  padding-top: 1.6rem;
+}
+
+#page-about-exchanges .about-exchanges-content img {
+  display: block;
+  width: 75%;
+  margin: 0.4rem auto;
+}
+
+
+@media (min-width: 700px) {
+  #page-about-exchanges .about-exchanges-content {
+    max-width: 70rem;
+  }
+}

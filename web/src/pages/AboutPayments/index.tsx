@@ -3,7 +3,7 @@ import React from 'react';
 import PageHeader from '../../components/PageHeader';
 import Footer from '../../components/Footer';
 
-import moneyImg from '../../assets/images/dinheiro_pagseguro.png'
+import moneyImg from '../../assets/images/dinheiro-pagseguro.png'
 import correiosImg from '../../assets/images/correios.png'
 
 import './styles.css';
@@ -29,8 +29,8 @@ function AboutPayments() {
 
         <div className="shipping">
           <h2>ENVIO DE PRODUTOS</h2>
-          <p className="first">Para que os produtos cheguem até você, nós utilizamos o Envio Fácil, que trata-se de uma parceria do <em>PAGseguro</em> com os <em>Correios</em> e disponibiliza duas formas de envio, ambas com opção de rastreio:</p>
-          <img src={correiosImg} alt="Logo PagSeguro"/>
+          <p className="first">Para que os produtos cheguem até você, nós utilizamos o Envio Fácil, que trata-se de uma parceria do <em>PagSeguro</em> com os <em>Correios</em> e disponibiliza duas formas de envio, ambas com opção de rastreio:</p>
+          <img src={correiosImg} alt="Logo Correios"/>
           <ul>
             <li><b>Sedex:</b> é a entrega expressa  e mais cara dos Correios, no qual, o prazo varia de acordo a localidade de origem e destino de segunda a sábado. Contudo é mais rápido que o PAC.</li>
             <li><b>PAC:</b> é uma entrega mais econômica dos Correios, na qual o prazo também varia de acordo o local de origem e de entrega de segunda a sexta-feira.</li>
