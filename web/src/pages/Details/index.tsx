@@ -11,7 +11,7 @@ import './styles.css';
 function Details() {
   return (
     <div id="page-details" className="container">
-      <PageHeader back/>
+      <PageHeader/>
 
       <main>
         <article className="detail-item">

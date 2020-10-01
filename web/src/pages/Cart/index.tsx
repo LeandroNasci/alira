@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import ProductItem from '../../components/ProductItem';
 import Footer from '../../components/Footer';
@@ -8,9 +9,17 @@ import PageHeader from '../../components/PageHeader';
 import './styles.css';
 
 function Cart() {
+  const history = useHistory();
+
+  function handleGoToSendData () {
+
+    history.push('/send-data');
+  }
+
+
   return (
     <div id="page-cart">
-      <PageHeader back />
+      <PageHeader />
 
       <main>
         <div className="product-list">
@@ -32,7 +41,7 @@ function Cart() {
               <span className="shop-total">R$ 100</span>
             </div>
             <p>Escolha o MODO DE ENVIO e o FRETE nas próximas etapas</p>
-            <button type="button">Vou levar esse carrinho</button>
+            <button type="button" onClick={handleGoToSendData}>Vou levar esse carrinho</button>
           </div>
           <div className="send-info">
             <div className="off">

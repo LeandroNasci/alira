@@ -8,6 +8,7 @@ import Cart from './pages/Cart';
 import Contact from './pages/Contact';
 import Details from './pages/Details';
 import Home from './pages/Home';
+import SendData from './pages/SendData';
 
 function Routes() {
   return (
@@ -15,6 +16,7 @@ function Routes() {
       <Route exact path="/" component={Home} />
       <Route path="/details" component={Details} />
       <Route path="/cart" component={Cart} />
+      <Route path="/send-data" component={SendData} />
 
       <Route path="/about" component={AboutUs} />
       <Route path="/payments" component={AboutPayments} />

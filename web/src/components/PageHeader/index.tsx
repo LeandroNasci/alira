@@ -9,9 +9,11 @@ import './styles.css';
 
 interface PageHeaderProps {
   back?: boolean;
+  compact?: boolean;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
+
   return (
     <header>
       <div className="top-bar-container">
@@ -19,36 +21,46 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
           ?<Link to="/"><FiArrowLeft /><span> Voltar</span></Link>
           :<span />
         }
-        <div className="top-bar-session">
-          {props.children}
-          <Link to="/cart">
-            <span>Carrinho </span>
-            <FiShoppingCart />
-          </Link>
-          <Link to="/login">
-            <span>Login </span>
-            <FiLogIn />
-          </Link>
-        </div>
+        {props.compact
+          ? <div className="top-bar-session"></div>
+          : <div className="top-bar-session">
+              {props.children}
+              <Link to="/cart">
+                <span>Carrinho </span>
+                <FiShoppingCart />
+              </Link>
+              <Link to="/login">
+                <span>Login </span>
+                <FiLogIn />
+              </Link>
+            </div>
+        }
       </div>
 
       <div className="header-content">
-        <img src={notesImg} alt="postite"/>
+        {props.compact
+          ?<img src="" alt=""/>
+          :<img src={notesImg} alt="postite"/>
+        }
+
         <div className="logo-container">
           <h2>Sua vida mais planejada com fofuras</h2>
           <img src={logoImg} alt="Alira Notes"/>
         </div>
       </div>
 
-      <nav className="nav-bar-container">
-          <Link to="/">Início</Link>
-          <Link to="/">Bloquinhos</Link>
-          <Link to="/">Cadernos</Link>
-          <Link to="/">Postits</Link>
-          <Link to="/">Canetas</Link>
-          <Link to="/">Borrachas</Link>
-          <Link to="/about">Quem Somos</Link>
-      </nav>
+      {props.compact
+        ? <nav className="nav-bar-container"></nav>
+        : <nav className="nav-bar-container">
+            <Link to="/">Início</Link>
+            <Link to="/">Bloquinhos</Link>
+            <Link to="/">Cadernos</Link>
+            <Link to="/">Postits</Link>
+            <Link to="/">Canetas</Link>
+            <Link to="/">Borrachas</Link>
+            <Link to="/about">Quem Somos</Link>
+          </nav>
+      }
     </header>
   );
 }

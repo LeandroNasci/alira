@@ -11,7 +11,7 @@ import './styles.css';
 function AboutPayments() {
   return (
     <div id="page-about-payments">
-      <PageHeader back/>
+      <PageHeader/>
 
       <div className="about-payments-content">
 

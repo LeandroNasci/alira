@@ -11,7 +11,7 @@ import './styles.css';
 function Contact() {
   return (
     <div id="page-contact">
-      <PageHeader back/>
+      <PageHeader/>
 
       <div className="contact-content">
 
