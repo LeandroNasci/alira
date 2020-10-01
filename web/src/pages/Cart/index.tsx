@@ -31,7 +31,7 @@ function Cart() {
               <div>Valor total</div>
               <span className="shop-total">R$ 100</span>
             </div>
-            <p>Escolha o modo de envio e o FRETE nas próximas etapas</p>
+            <p>Escolha o MODO DE ENVIO e o FRETE nas próximas etapas</p>
             <button type="button">Vou levar esse carrinho</button>
           </div>
           <div className="send-info">

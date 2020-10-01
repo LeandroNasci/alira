@@ -33,6 +33,10 @@
   cursor: pointer;
 }
 
+.product-list > button:hover {
+  background: var(--color-amarelo-escuro);
+}
+
 .cart-bar {
   width: 100%;
   min-width: 25rem;
@@ -84,8 +88,9 @@
 
 .cart-info p {
   font: 400 1.2rem Poppins;
+  color: var(--color-rosa-claro);
+  width: 22rem;
 }
-
 .cart-info button {
   width: 100%;
   height: 4rem;
@@ -294,6 +299,9 @@
     left: -5rem;
   }
 
+  .cart-info p {
+    width: 100%;
+  }
 
   .send-info .shipping-cost .correio-price {
     display: grid;
@@ -360,4 +368,5 @@
     font-size: 1.4rem;
     padding-bottom: 1.8rem;
   }
+
 }
