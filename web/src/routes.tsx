@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Details from './pages/Details';
 import Home from './pages/Home';
 import SendData from './pages/SendData';
+import ShippingSelect from './pages/ShippingSelect';
 
 function Routes() {
   return (
@@ -17,6 +18,7 @@ function Routes() {
       <Route path="/details" component={Details} />
       <Route path="/cart" component={Cart} />
       <Route path="/send-data" component={SendData} />
+      <Route path="/shipping-select" component={ShippingSelect} />
 
       <Route path="/about" component={AboutUs} />
       <Route path="/payments" component={AboutPayments} />

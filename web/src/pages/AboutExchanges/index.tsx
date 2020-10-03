@@ -7,7 +7,7 @@ import './styles.css';
 
 function AboutExchanges() {
   return (
-    <div id="page-about-exchanges">
+    <div id="page-about-exchanges" className="container">
       <PageHeader/>
 
       <div className="about-exchanges-content">

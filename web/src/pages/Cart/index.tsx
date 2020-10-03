@@ -18,7 +18,7 @@ function Cart() {
 
 
   return (
-    <div id="page-cart">
+    <div id="page-cart" className="container" >
       <PageHeader />
 
       <main>

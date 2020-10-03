@@ -10,7 +10,7 @@ import './styles.css';
 
 function Contact() {
   return (
-    <div id="page-contact">
+    <div id="page-contact" className="container">
       <PageHeader/>
 
       <div className="contact-content">

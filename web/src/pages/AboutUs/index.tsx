@@ -12,7 +12,7 @@ function AboutUs() {
   const year = now.getFullYear();
 
   return (
-    <div id="page-about-us">
+    <div id="page-about-us" className="container">
       <PageHeader />
       <div className="about-content">
         <img src={jessicaImg} alt="jessica"/>

@@ -10,7 +10,7 @@ import './styles.css';
 
 function AboutPayments() {
   return (
-    <div id="page-about-payments">
+    <div id="page-about-payments" className="container">
       <PageHeader/>
 
       <div className="about-payments-content">

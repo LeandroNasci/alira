@@ -7,8 +7,17 @@ import ImagesCarousel from '../../components/ImagesCarousel';
 import aliraNotesIcon from '../../assets/images/icons/cat.svg';
 
 import './styles.css';
+import { useHistory } from 'react-router-dom';
 
 function Details() {
+
+  const history = useHistory();
+
+  function handleWantProduct () {
+
+    history.push('/cart');
+  }
+
   return (
     <div id="page-details" className="container">
       <PageHeader/>
@@ -57,7 +66,7 @@ function Details() {
           </div>
 
           <footer>
-            <button type="button">
+            <button type="button" onClick={handleWantProduct}>
               Eu quero :)
             </button>
           </footer>
