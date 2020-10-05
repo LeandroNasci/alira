@@ -13,7 +13,7 @@ import './styles.css';
 
 function SendData() {
   const [isDeliveryVisible,setIsDeliveryVisible] = useState(true);
-  const [isInvoiceAdressEqual,setisInvoiceAdressEqual] = useState(false);
+  const [isInvoiceAdressEqual,setIsInvoiceAdressEqual] = useState(false);
 
   const history = useHistory()
 
@@ -29,10 +29,11 @@ function SendData() {
     const state = parseStringAsBoolean(value);
 
     setIsDeliveryVisible( Boolean(state) );
+    setIsInvoiceAdressEqual(false);
   }
 
   function handleToggleInvoiceForm () {
-    setisInvoiceAdressEqual(!isInvoiceAdressEqual);
+    setIsInvoiceAdressEqual(!isInvoiceAdressEqual);
   }
 
   return (
@@ -135,9 +136,9 @@ function SendData() {
               <CartItem />
               <CartItem />
 
-              <div className="cart-value"><h5>Valor do Carrinho</h5> <span>R$128,20</span></div>
-              <div className="shipping-value"><h5>Valor do Frete</h5> <span>R$21,93</span></div>
-              <div className="total-value"><h5>Total</h5> <span>R$149,73</span></div>
+              <div className="cart-value"><h5>Valor do Carrinho</h5> <span>R$ 128,20</span></div>
+              <div className="shipping-value"><h5>Valor do Frete</h5> <span>R$ 21,93</span></div>
+              <div className="total-value"><h5>Total</h5> <span>R$ 149,73</span></div>
               <button type="submit" onSubmit={handleContinue} >Continuar</button>
             </div>
 
