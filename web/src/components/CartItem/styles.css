@@ -1,0 +1,40 @@
+#cart-item {
+  display: grid;
+  grid-template-columns: 1fr 2fr 7fr;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+  border-radius: 1.6rem;
+}
+
+
+#cart-item .item-times {
+  font: 700 2.4rem arima madurai;
+  color: var(--color-rosa-claro);
+  justify-self: left;
+}
+
+#cart-item img {
+  width: 90%;
+  border-radius: 0.8rem;
+  justify-self: center;
+}
+
+#cart-item .item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+#cart-item .item-info p {
+  font-size: 1.2rem;
+  margin: 0.8rem;
+  text-align: start;
+
+}
+
+#cart-item .item-info strong {
+  font: 700 1.8rem arima madurai;
+  color: var(--color-rosa-claro);
+  text-align: end;
+  padding-right: 0.8rem;
+}

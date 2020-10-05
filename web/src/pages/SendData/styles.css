@@ -95,12 +95,12 @@ color: var(--color-texto-escuro);
   margin-top: 0;
 }
 
-#page-send-data .form-group div {
+#page-send-data .form-group .checkbox-group {
   display: flex;
   align-items: center;
 }
 
-#page-send-data .form-group div .control {
+#page-send-data .form-group .checkbox-group .control {
   font-size: 1.4rem;
   padding-left: 1.6rem;
   margin: 1.8rem 0;
@@ -123,8 +123,9 @@ color: var(--color-texto-escuro);
   font-size: 1.4rem;
 }
 
-#delivery-adress {
-
+#invoice-adress {
+  flex-direction: column;
+  align-items: unset;
 }
 
 #page-send-data .cart-list {
@@ -158,22 +159,25 @@ color: var(--color-texto-escuro);
 }
 
 #page-send-data .cart-list h5 {
-  font: 600 1.6rem Archivo;
+  align-self: center;
+  font: 600 1.8rem Archivo;
 }
 
 #page-send-data .cart-list span {
-  font: 700 1.6rem Arima Madurai;
+  font: 700 1.8rem Arima Madurai;
   color: var(--color-rosa-claro);
 }
 
-#page-send-data .cart-list div {
+#page-send-data .cart-list .cart-value,
+#page-send-data .cart-list .shipping-value,
+#page-send-data .cart-list .total-value {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
 #page-send-data .cart-list .cart-value {
-  margin-top: 16rem;
+  margin-top: 6rem;
 }
 
 #page-send-data .cart-list .total-value {
@@ -183,13 +187,13 @@ color: var(--color-texto-escuro);
 
 #page-send-data .cart-list .total-value h5,
 #page-send-data .cart-list .total-value span {
-  font-size: 2.2rem;
+  font-size: 2.6rem;
 }
 
 #page-send-data .cart-list button {
   width: 28rem;
   height: 4rem;
-  margin: 1.6rem 0.8rem;
+  margin: 1.6rem auto;
   font: 700 1.6rem Archivo;
   background: var(--color-amarelo-claro);
   border: 0;
@@ -212,15 +216,17 @@ color: var(--color-texto-escuro);
   align-self: flex-start;
 }
 
-#page-send-data .right-bar .link {
+#page-send-data .right-bar > button {
   display: flex;
   align-items: center;
   margin: 4rem auto;
-  text-decoration: none;
-  background: transparent;
-  border: none;
+  background: none;
+  border: 0;
   color: var(--color-amarelo-escuro);
   font: 700 1.6rem Archivo;
+  cursor: pointer;
+  transition: color 0.2s;
+
 }
 
 #page-send-data .right-bar .link svg {
@@ -240,4 +246,24 @@ color: var(--color-texto-escuro);
     margin: 0 4rem;
   }
 
+  #page-send-data .send-type input[type=radio],
+  #page-send-data .form-group input[type=checkbox]{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0;
+  }
+
+}
+
+@media (min-width: 1100px) {
+  #page-send-data .send-type {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    max-width: 74rem;
+  }
+  #page-send-data .send-type div + div {
+    margin-top: 0;
+    margin-right: 3rem;
+  }
 }

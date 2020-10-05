@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Footer from '../../components/Footer';
 import PageHeader from '../../components/PageHeader';
@@ -7,7 +8,6 @@ import ImagesCarousel from '../../components/ImagesCarousel';
 import aliraNotesIcon from '../../assets/images/icons/cat.svg';
 
 import './styles.css';
-import { useHistory } from 'react-router-dom';
 
 function Details() {
 
