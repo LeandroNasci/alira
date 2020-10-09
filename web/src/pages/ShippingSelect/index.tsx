@@ -111,7 +111,7 @@ function ShippingSelect () {
                   <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>
                 </div>
 
-                <div className="box-container" hidden >
+                <div className="box-container">
                   <div className="box">
                     <p><b>Nome:</b> Jessica Lima Brito</p>
                     <br />
