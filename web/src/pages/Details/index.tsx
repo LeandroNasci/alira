@@ -13,7 +13,7 @@ function Details() {
 
   const history = useHistory();
 
-  function handleWantProduct () {
+  function handleWantProduct() {
 
     history.push('/cart');
   }

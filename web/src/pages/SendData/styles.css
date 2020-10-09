@@ -14,17 +14,11 @@
   flex-direction: column;
 }
 
-
-#page-send-data .form-group,
-#page-send-data .field-group {
+#page-send-data .form-group {
   max-width: 74rem;
   margin: 1.6rem;
   padding: 1.6rem;
   overflow: hidden;
-
-}
-
-#page-send-data .form-group {
   background: var(--color-cinza-fundo);
   border: 1px solid var(--color-azul-de-fundo);
   border-radius: 0.8rem;
@@ -36,6 +30,7 @@
 #page-send-data .form-group fieldset {
   min-inline-size: auto;
   border: 0;
+  margin-right: 0.8rem;
 }
 
 #page-send-data .form-group legend {
@@ -56,7 +51,6 @@
   margin-right: 1.6rem;
 }
 
-
 #page-send-data .form-group .input-block input[type=text],
 #page-send-data .form-group .input-block input[type=email],
 #page-send-data .form-group .input-block input[type=tel],
@@ -71,140 +65,19 @@ font-size: 1.4rem;
 color: var(--color-texto-escuro);
 }
 
-
 #page-send-data .send-type {
   margin: 1.6rem 1.6rem 0;
   padding: 1.6rem 1.6rem 0;
 }
 
-#page-send-data .send-type div {
+#page-send-data .send-type .radio-block {
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 
-#page-send-data .send-type div + div {
+#page-send-data .send-type .radio-block + .radio-block {
   margin-top: 4rem;
-}
-
-#page-send-data .send-type input[type=radio],
-#page-send-data .form-group input[type=checkbox]{
-  width: 3rem;
-  height: 3rem;
-  margin-top: 0;
-}
-
-#page-send-data .form-group .checkbox-group {
-  display: flex;
-  align-items: center;
-}
-
-#page-send-data .form-group .checkbox-group .control {
-  font-size: 1.4rem;
-  padding-left: 1.6rem;
-  margin: 1.8rem 0;
-}
-
-
-#page-send-data .send-type label em {
-  font: 700 1.4rem Archivo;
-  color: blue;
-}
-
-#page-send-data .send-type label span {
-  display: block;
-}
-
-
-#page-send-data .control {
-  margin-left: 1.2rem;
-  padding-right: 1rem;
-  font-size: 1.4rem;
-}
-
-#invoice-adress {
-  flex-direction: column;
-  align-items: unset;
-}
-
-#page-send-data .cart-list {
-  background: var(--color-rosa-fundo);
-  border: 1px solid var(--color-azul-de-fundo);
-  margin: 1.6rem;
-  padding: 1.6rem;
-  border-radius: 0.8rem;
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-}
-
-#page-send-data .cart-list header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.6rem;
-}
-
-#page-send-data .cart-list header h4 {
-  font-size: 1.8rem;
-}
-
-#page-send-data .cart-list header svg {
-  width: 2.4rem;
-  height: 2.4rem;
-  margin-right: 1.6rem;
-}
-
-#page-send-data .cart-list h5 {
-  align-self: center;
-  font: 600 1.8rem Archivo;
-}
-
-#page-send-data .cart-list span {
-  font: 700 1.8rem Arima Madurai;
-  color: var(--color-rosa-claro);
-}
-
-#page-send-data .cart-list .cart-value,
-#page-send-data .cart-list .shipping-value,
-#page-send-data .cart-list .total-value {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-#page-send-data .cart-list .cart-value {
-  margin-top: 6rem;
-}
-
-#page-send-data .cart-list .total-value {
-  margin-top: 4rem;
-  align-items: center;
-}
-
-#page-send-data .cart-list .total-value h5,
-#page-send-data .cart-list .total-value span {
-  font-size: 2.6rem;
-}
-
-#page-send-data .cart-list button {
-  width: 28rem;
-  height: 4rem;
-  margin: 1.6rem auto;
-  font: 700 1.6rem Archivo;
-  background: var(--color-amarelo-claro);
-  border: 0;
-  border-radius: 0.6rem;
-  transition: 0.2s;
-  cursor: pointer;
-  display: block;
-}
-
-#page-send-data .cart-list button:hover {
-  background: var(--color-amarelo-escuro);
 }
 
 #page-send-data .right-bar {
@@ -246,13 +119,6 @@ color: var(--color-texto-escuro);
     margin: 0 4rem;
   }
 
-  #page-send-data .send-type input[type=radio],
-  #page-send-data .form-group input[type=checkbox]{
-    width: 1.6rem;
-    height: 1.6rem;
-    margin-top: 0;
-  }
-
 }
 
 @media (min-width: 1100px) {
@@ -262,8 +128,17 @@ color: var(--color-texto-escuro);
     justify-content: space-between;
     max-width: 74rem;
   }
-  #page-send-data .send-type div + div {
+  #page-send-data .send-type .radio-block + .radio-block {
     margin-top: 0;
     margin-right: 3rem;
+  }
+
+  #page-send-data .field-group {
+    display: grid;
+    grid-auto-flow: column;
+  }
+
+  #page-send-data .field-group .input-block + .input-block {
+    margin-left: 1.6rem;
   }
 }

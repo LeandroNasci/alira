@@ -1,0 +1,35 @@
+.checkbox-block {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  align-items: center;
+  justify-content: start;
+  margin: 0 1.4rem;
+}
+
+.checkbox-block input[type=checkbox]{
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0;
+}
+
+.checkbox-block .checkbox-label {
+  font-size: 1.4rem;
+  padding-left: 1rem;
+  margin: 1.8rem 0;
+  text-align: start;
+}
+
+.checkbox-block .checkbox-label em {
+  font-style: italic;
+}
+
+@media (min-width: 700px) {
+  .checkbox-block {
+    grid-template-columns: 1.6rem 1fr;
+  }
+
+  .checkbox-block input[type=checkbox]{
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+}

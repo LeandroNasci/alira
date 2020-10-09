@@ -1,0 +1,78 @@
+.cart-list {
+  background: var(--color-rosa-fundo);
+  border: 1px solid var(--color-azul-de-fundo);
+  margin: 1.6rem;
+  padding: 1.6rem;
+  border-radius: 0.8rem;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-list header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+}
+
+.cart-list header h4 {
+  font-size: 1.8rem;
+}
+
+.cart-list header svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  margin-right: 1.6rem;
+}
+
+.cart-list h5 {
+  align-self: center;
+  font: 600 1.8rem Archivo;
+}
+
+.cart-list span {
+  font: 700 1.8rem Arima Madurai;
+  color: var(--color-rosa-claro);
+}
+
+.cart-list .cart-value,
+.cart-list .shipping-value,
+.cart-list .total-value {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cart-list .cart-value {
+  margin-top: 6rem;
+}
+
+.cart-list .total-value {
+  margin-top: 4rem;
+  align-items: center;
+}
+
+.cart-list .total-value h5,
+.cart-list .total-value span {
+  font-size: 2.6rem;
+}
+
+.cart-list button {
+  width: 28rem;
+  height: 4rem;
+  margin: 1.6rem auto;
+  font: 700 1.6rem Archivo;
+  background: var(--color-amarelo-claro);
+  border: 0;
+  border-radius: 0.6rem;
+  transition: 0.2s;
+  cursor: pointer;
+  display: block;
+}
+
+.cart-list button:hover {
+  background: var(--color-amarelo-escuro);
+}

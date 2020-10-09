@@ -1,0 +1,28 @@
+
+.radio-block input[type=radio]{
+  width: 3rem;
+  height: 3rem;
+  margin-top: 0;
+}
+
+.radio-block .radio-label {
+  padding: 0 1.2rem;
+  font-size: 1.4rem;
+}
+
+.radio-block .radio-label span {
+  display: block;
+}
+
+.radio-block .radio-label em {
+  font: 700 1.4rem Archivo;
+  color: blue;
+}
+
+@media (min-width: 700px) {
+  .radio-block input[type=radio]{
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-top: 0;
+  }
+}

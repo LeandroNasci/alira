@@ -11,7 +11,7 @@ import './styles.css';
 function Cart() {
   const history = useHistory();
 
-  function handleGoToSendData () {
+  function handleGoToSendData() {
 
     history.push('/send-data');
   }

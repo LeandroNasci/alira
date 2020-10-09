@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import { FiMail, FiTruck, FiClipboard, FiShoppingCart, FiArrowLeft } from 'react-icons/fi';
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { FiMail, FiTruck, FiClipboard } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
-import CartItem from '../../components/CartItem';
-import parseStringAsBoolean from '../../utils/parseStringAsBoolean';
+import { CEPInput, CNPJInput, CPFInput, PhoneInput } from '../../components/MaskedInputs';
 
 import progressImg from '../../assets/images/progress1.png';
 
 import './styles.css';
+import CartList from '../../components/CartList';
+import Radio from '../../components/Radio';
+import CheckBox from '../../components/CheckBox';
 
 function SendData() {
   const [isDeliveryVisible,setIsDeliveryVisible] = useState(true);
@@ -17,24 +19,32 @@ function SendData() {
 
   const history = useHistory()
 
-  function handleContinue () {
+  function handleContinue() {
     history.push('/shipping-select');
   }
 
-  function handleGoBack () {
-    history.goBack();
-  }
+  function handleToggleDeliveryVisible (event: ChangeEvent<HTMLInputElement> ) {
 
-  function handleToggleDeliveryVisible (value: string) {
-    const state = parseStringAsBoolean(value);
-
-    setIsDeliveryVisible( Boolean(state) );
+    setIsDeliveryVisible( event.target.value === 'true' ? true : false );
     setIsInvoiceAdressEqual(false);
   }
 
-  function handleToggleInvoiceForm () {
+  function handleToggleInvoiceForm() {
     setIsInvoiceAdressEqual(!isInvoiceAdressEqual);
   }
+
+
+  function handleCopyForm() {
+    console.log('copia as informações');
+  }
+
+  useEffect(() => {
+    if(isInvoiceAdressEqual) {
+      handleCopyForm();
+    }
+
+  },[isInvoiceAdressEqual]);
+
 
   return (
     <div id="page-send-data" className="container">
@@ -46,33 +56,25 @@ function SendData() {
 
         <form action="">
           <main>
-
             <div id="user-contact" className="form-group">
               <fieldset>
                 <legend>
                   <FiMail /><h3>Meus dados para Contato</h3>
                 </legend>
                 <Input required type="email" name="email" placeholder="E-mail: (ex: exemplo@gmail.com)" />
-                <Input required type="tel" name="phone" placeholder="Telefone: (ex: 11 99999-2222)" pattern="[0-9]{2} [0-9]{4}-[0-9]{4}" />
+                <PhoneInput required name="phone" placeholder="Celular" />
               </fieldset>
             </div>
 
             <div className="send-type">
-              <div>
-                <input required type="radio" name="send-type" value="false" onChange={ e => { handleToggleDeliveryVisible(e.target.value)} } />
-                <label className="control" htmlFor="vendedor" >
+                <Radio required name="send-type" value="false" onChange={handleToggleDeliveryVisible}>
                   <b>Retirar os produtos diretamento com o VENDEDOR</b>
                   <span>(Caso resida em São Carlos-SP)</span>
-                </label>
-              </div>
-              <div>
-                <input required type="radio" name="send-type" value="true" onChange={ e => { handleToggleDeliveryVisible(e.target.value) } } />
-                <label className="control" htmlFor="correios" >
+                </Radio>
+                <Radio required name="send-type" value="true" onChange={handleToggleDeliveryVisible}>
                   <b>Receber os produtos em casa pelos </b><em>CORREIOS</em>
                   <span>(Informe o endereço de entrega a seguir)</span>
-                </label>
-              </div>
-
+                </Radio>
             </div>
 
             { isDeliveryVisible && (
@@ -83,14 +85,18 @@ function SendData() {
                   </legend>
                   <Input required type="text" name="name" placeholder="Nome" />
                   <Input required type="text" name="lastname" placeholder="Sobrenome" />
-                  <Input required type="text" name="cep" placeholder="CEP: (ex: 11222-000)" />
-                  <Input required type="text" name="street" placeholder="Endereço" />
-                  <Input required type="text" name="number" placeholder="Número: (ex: 200)" />
+                  <CEPInput required name="cep" placeholder="CEP" />
+                  <div className="field-group">
+                    <Input required type="text" name="street" placeholder="Endereço" />
+                    <Input required type="text" name="number" placeholder="Número" />
+                  </div>
                   <Input required type="text" name="complement" placeholder="Complemento: (ex: casa, apart. nº 3, etc.)" />
                   <Input required type="text" name="neighborhood" placeholder="Bairro" />
-                  <Input required type="text" name="city" placeholder="Cidade" />
-                  <Input required type="text" name="state" placeholder="Estado" />
-                  <Input required type="text" name="country" placeholder="País" />
+                  <div className="field-group">
+                    <Input required type="text" name="city" placeholder="Cidade" />
+                    <Input required type="text" name="state" placeholder="Estado" />
+                    <Input required type="text" name="country" placeholder="País" />
+                  </div>
                 </fieldset>
               </div>
             )}
@@ -101,25 +107,31 @@ function SendData() {
                 <legend>
                   <FiClipboard /><h3>Dados para a Nota Fiscal</h3>
                 </legend>
-                <Input required type="text" name="CPF" placeholder="CPF ou CNPJ" />
+                <div className="field-group">
+                  <CPFInput type="text" name="CPF" placeholder="CPF" />
+                  <CNPJInput type="text" name="CNPJ" placeholder="CNPJ" />
+                </div>
                 { isDeliveryVisible && (
-                  <div className="checkbox-group">
-                    <Input type="checkbox" name="repeat" id="repeat" onClick={ handleToggleInvoiceForm } />
-                    <label className="control" htmlFor="repeat" >Minhas informações da Nota Fiscal e da Entrega são as mesmas</label>
-                  </div>
+                  <CheckBox name="repeat" onChange={ handleToggleInvoiceForm } >
+                    Minhas informações da Nota Fiscal e da Entrega são as mesmas
+                  </CheckBox>
                 )}
                 {!isInvoiceAdressEqual && (
                   <div id="invoice-adress" >
                     <Input required type="text" name="iname" placeholder="Nome" />
                     <Input required type="text" name="ilastname" placeholder="Sobrenome" />
-                    <Input required type="text" name="icep" placeholder="CEP: (ex: 11222-000)" />
-                    <Input required type="text" name="istreet" placeholder="Endereço" />
-                    <Input required type="text" name="inumber" placeholder="Número: (ex: 200)" />
+                    <CEPInput required name="icep" placeholder="CEP" />
+                    <div className="field-group">
+                      <Input required type="text" name="istreet" placeholder="Endereço" />
+                      <Input required type="text" name="inumber" placeholder="Número" />
+                    </div>
                     <Input required type="text" name="icomplement" placeholder="Complemento: (ex: casa, apart. nº 3, fundos, etc.)" />
                     <Input required type="text" name="ineighborhood" placeholder="Bairro" />
-                    <Input required type="text" name="icity" placeholder="Cidade" />
-                    <Input required type="text" name="istate" placeholder="Estado" />
-                    <Input required type="text" name="icountry" placeholder="País" />
+                    <div className="field-group">
+                      <Input required type="text" name="icity" placeholder="Cidade" />
+                      <Input required type="text" name="istate" placeholder="Estado" />
+                      <Input required type="text" name="icountry" placeholder="País" />
+                    </div>
                   </div>
                 )}
               </fieldset>
@@ -128,21 +140,9 @@ function SendData() {
           </main>
 
           <div className="right-bar">
-
-            <div className="cart-list">
-              <header><FiShoppingCart /><h4>Carrinho com seus pedidos</h4></header>
-
-              <CartItem />
-              <CartItem />
-              <CartItem />
-
-              <div className="cart-value"><h5>Valor do Carrinho</h5> <span>R$ 128,20</span></div>
-              <div className="shipping-value"><h5>Valor do Frete</h5> <span>R$ 21,93</span></div>
-              <div className="total-value"><h5>Total</h5> <span>R$ 149,73</span></div>
-              <button type="submit" onSubmit={handleContinue} >Continuar</button>
-            </div>
-
-            <button className="link" type="button" onClick={handleGoBack} ><FiArrowLeft />Voltar para o carrinho</button>
+            <CartList>
+              <button type="submit" onClick={handleContinue} >Continuar</button>
+            </CartList>
           </div>
 
         </form>
