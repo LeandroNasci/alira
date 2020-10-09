@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiMail, FiTruck, FiClipboard, FiPackage, FiArrowLeft } from 'react-icons/fi';
+import { FiMail, FiTruck, FiClipboard, FiPackage, FiArrowLeft, FiUsers } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
@@ -111,7 +111,11 @@ function ShippingSelect () {
                   <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>
                 </div>
 
-                <div className="box-container" hidden >
+                <legend>
+                  <FiUsers /><h3>Dados para Entrega</h3>
+                </legend>
+
+                <div className="box-container">
                   <div className="box">
                     <p><b>Nome:</b> Jessica Lima Brito</p>
                     <br />
