@@ -3,10 +3,11 @@ import Knex from 'knex';
 export async function up(knex: Knex) {
   return knex.schema.createTable('products', table => {
     table.increments('id').primary();
+    table.string('code').notNullable();
     table.string('category').notNullable();
     table.string('name').notNullable();
     table.text('description').notNullable();
-    table.integer('quantity').notNullable();
+    table.integer('stock').notNullable();
     table.decimal('price').notNullable();
     table.decimal('weight').notNullable();
     table.decimal('length').notNullable();
