@@ -8,11 +8,13 @@ yarn.lock
 # testing
 *.sqlite
 /coverage
+/uploads/*
 
 # production
 /build
 
 # misc
+!.gitkeep
 .DS_Store
 .env
 .env.local

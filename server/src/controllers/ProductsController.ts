@@ -1,28 +1,31 @@
 import { Request, Response } from 'express';
 
 import db from '../database/connection';
+import productView from '../views/products_view';
 
 export default {
   async index(request: Request, response: Response) {
     const { type } = request.query;
 
     if(type) {
-      const filteredProducts = await db('products').select('*').where('category', String(type) );
+      const products = await db('products')
+        .select('*')
+        .where('category', String(type) );
       const images = await db('products')
-        .select('code', 'product_id', 'image')
+        .select('*')
         .join('images', 'products.id', '=', 'images.product_id')
         .where('category', String(type));
 
-      return (response.json({filteredProducts, images}));
-    }
-    else {
-      const products = await db('products').select('*');
-      const images = await db('products')
-        .select('code', 'product_id', 'image')
-        .join('images', 'products.id', '=', 'images.product_id');
-      return (response.json({products, images}));
+      return response.json(productView.renderMany(products, images));
     }
 
+    const products = await db('products')
+      .select('*');
+    const images = await db('products')
+      .select('*')
+      .join('images', 'products.id', '=', 'images.product_id');
+
+    return response.json(productView.renderMany(products, images));
   },
 
   async show(request: Request, response: Response) {
@@ -35,11 +38,10 @@ export default {
     }
 
     const images = await db('products')
-        .select('code', 'product_id', 'image')
+        .select('*')
         .join('images', 'products.id', '=', 'images.product_id')
         .where('product_id', id);
 
-
-    return (response.json({...product, images}));
+    return response.json(productView.render(product, images));
   }
 }
