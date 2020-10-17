@@ -9,8 +9,8 @@ export async function up(knex: Knex) {
       .onDelete('CASCADE')
       .primary();
 
+    table.string('code').notNullable().primary();
     table.integer('quantity').notNullable();
-    table.string('code').notNullable();
   });
 }
 
