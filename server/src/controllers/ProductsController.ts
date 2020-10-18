@@ -12,18 +12,16 @@ export default {
         .select('*')
         .where('category', String(type) );
       const images = await db('products')
-        .select('*')
+        .select('images.*')
         .join('images', 'products.id', '=', 'images.product_id')
         .where('category', String(type));
+      console.log(images);
 
       return response.json(productView.renderMany(products, images));
     }
 
-    const products = await db('products')
-      .select('*');
-    const images = await db('products')
-      .select('*')
-      .join('images', 'products.id', '=', 'images.product_id');
+    const products = await db('products').select('*');
+    const images = await db('images').select('*');
 
     return response.json(productView.renderMany(products, images));
   },
