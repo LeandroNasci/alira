@@ -1,15 +1,10 @@
 
 import { Request, Response } from 'express';
+import * as Yup from 'yup';
 
 import db from '../database/connection';
 
-class StockController {
-
-  // Mostrar todo o estoque
-  async index (request: Request, response: Response) {
-
-    return response.json();
-  }
+export default {
 
   // Adicionar novo produto ao estoque
   async create(request: Request, response: Response) {
@@ -18,76 +13,82 @@ class StockController {
       category,
       name,
       description,
-      quantity,
+      stock,
       price,
       weight,
       length,
       width,
       height,
-      images
     } = request.body;
 
-    const trx = await db.transaction();
+     const trx = await db.transaction();
+
+    const data = {
+      code,
+      category,
+      name,
+      description,
+      stock,
+      price,
+      weight,
+      length,
+      width,
+      height
+    };
+
+    const productSchema = Yup.object().shape({
+      code: Yup.string().required(),
+      category: Yup.string().required(),
+      name: Yup.string().required(),
+      description: Yup.string().required(),
+      stock: Yup.number().required(),
+      price: Yup.number().required(),
+      weight: Yup.number().required(),
+      length: Yup.number().required(),
+      width: Yup.number().required(),
+      height: Yup.number().required()
+    });
+
+    await productSchema.validate(data, {
+      abortEarly: false,
+    })
 
     try {
-      const insertedProductsIds = await trx('products').insert({
-        code,
-        category,
-        name,
-        description,
-        quantity,
-        price,
-        weight,
-        length,
-        width,
-        height
-      });
+      const insertedProductsIds = await trx('products').insert(data);
 
       const product_id = insertedProductsIds[0];
 
-      await trx('images').insert([
-        {
-          image: images[0],
-          product_id
-        },
-        {
-          image: images[1],
-          product_id
-        },
-        {
-          image: images[2],
-          product_id
-        },
-      ]);
+      const requestImages = request.files as Express.Multer.File[];
+      const images = requestImages.map(image => {
+        return { path: image.filename, product_id }
+      });
+
+      console.log(images);
+
+      const imageSchema = Yup.array(
+        Yup.object().shape({
+          path: Yup.string().required(),
+          product_id: Yup.number().required()
+        })
+      )
+
+      await imageSchema.validate(images, {
+        abortEarly: false,
+      })
+
+      await trx('images').insert(images);
 
       await trx.commit();
 
       return response.send("done!");
-    } catch (err) {
+    }
+    catch (err) {
       await trx.rollback();
+      console.log(err);
 
       return response.status(400).json({
         error: 'Unexpected error while create new product.'
       })
     }
-
-
-  }
-
-  // Reposicao do estoque
-  async update (request: Request, response: Response) {
-
-
-    return response.json();
-  }
-
-  // Remocao de um produto do estoque
-  async delete (request: Request, response: Response) {
-    const { data } = request.query;
-
-    return response.json();
-  }
-
-}
-
-export default StockController;
+  } //create
+};
