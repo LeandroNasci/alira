@@ -6,11 +6,12 @@ export async function up(knex: Knex) {
       .references('order_id')
       .inTable('orders')
       .onUpdate('CASCADE')
-      .onDelete('CASCADE')
-      .primary();
+      .onDelete('CASCADE');
 
-    table.string('code').notNullable().primary();
+    table.string('code').notNullable();
     table.integer('quantity').notNullable();
+
+    table.primary(['order_id', 'code']);
   });
 }
 
