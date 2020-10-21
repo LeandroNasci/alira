@@ -15,7 +15,7 @@ function Routes() {
   return (
     <BrowserRouter>
       <Route exact path="/" component={Home} />
-      <Route path="/details" component={Details} />
+      <Route path="/details/:id" component={Details} />
       <Route path="/cart" component={Cart} />
       <Route path="/send-data" component={SendData} />
       <Route path="/shipping-select" component={ShippingSelect} />
