@@ -34,8 +34,6 @@ function Details() {
 
   const [product,setProduct] = useState<Product>();
 
-  console.log('product', params);
-
 
   useEffect(() => {
      api.get(`/products/${params.id}`).then(response => {
