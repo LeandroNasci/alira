@@ -7,6 +7,8 @@ import ImagesCarousel from '../../components/ImagesCarousel';
 import Product from '../../components/Product';
 import api from '../../services/api';
 
+import { useShoppingCart } from '../../context/shoppingCart'
+
 import aliraNotesIcon from '../../assets/images/icons/cat.svg';
 
 import './styles.css';
@@ -18,6 +20,10 @@ interface Product {
   description: string;
   stock: number;
   price: number;
+  weight : number;
+  length : number;
+  width : number;
+  height : number;
   images: Array<{
     url: string;
   }>;
@@ -31,6 +37,7 @@ function Details() {
 
   const params = useParams<ProductParams>();
   const history = useHistory();
+  const { createItem, addedItems } = useShoppingCart();
 
   const [product,setProduct] = useState<Product>();
 
@@ -46,7 +53,29 @@ function Details() {
   }
 
   function handleWantProduct() {
-    history.push('/cart');
+    if(product){
+      const addedCode = addedItems.filter(item => item.code === product.code)
+      if(addedCode.length !== 0) {
+        alert('este produto já está no carrinho.')
+        return;
+      }
+
+      const newItem = {
+        code: product.code,
+        name: product.name,
+        price: product.price,
+        quantity: 1,
+        stock: product.stock,
+        weight: product.weight,
+        length: product.length,
+        width: product.width,
+        height: product.height,
+        images: product.images,
+      }
+      createItem(newItem);
+
+      history.push('/cart');
+    }
   }
 
   return (
