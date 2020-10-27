@@ -28,10 +28,9 @@ function Home() {
 
   useEffect(() => {
     api.get('/products').then(response => {
-
       setProducts(response.data);
     });
-  },[products]);
+  },[]);
 
 
   return (
@@ -45,8 +44,8 @@ function Home() {
 
       <div id="page-home-content">
         {products.map(product => {
-          if(product.stock !== 0) {
-            return (
+          return (
+            (product.stock !== 0) && (
               <Link key={product.code} to={`/details/${product.id}`}>
                 <Product
                   image={product.images[0].url}
@@ -54,8 +53,8 @@ function Home() {
                   price={product.price}
                 />
               </Link>
-            );
-          };
+            )
+          );
         })}
       </div>
 

@@ -24,7 +24,7 @@ function ImagesCarousel({ images }: ImageCarouselProps) {
     >
       {images.map((image, index) => {
         return (
-          <div>
+          <div key={image.url}>
             <img src={image.url} alt={`imagem_${index}`}/>
           </div>
         );
