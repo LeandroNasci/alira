@@ -1,0 +1,6 @@
+BASE_URL=http://localhost:3333
+
+PG_HOST="ip_do_dados_do_postgre"
+PG_USER="usuario_do_postgre"
+PG_PASSWORD=docker="senha_do_postgre"
+PG_DATABASE="banco_de_dados_do_postgre"
