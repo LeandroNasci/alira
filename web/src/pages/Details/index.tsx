@@ -61,6 +61,7 @@ function Details() {
       }
 
       const newItem = {
+        id: Number(params.id),
         code: product.code,
         name: product.name,
         price: product.price,
@@ -97,15 +98,14 @@ function Details() {
 
               <div className="detail-background">
                 <p>{product.description}</p>
-                <div>
-                  <img src={aliraNotesIcon} alt="logo"/>
-                  <span>
-                  { Intl.NumberFormat('pt-BR' , {
-                    style: 'currency',
-                    currency: 'BRL'
-                    }).format(product.price) }
-                  </span>
-                </div>
+                <img src={aliraNotesIcon} alt="logo"/>
+                <em>Estoque disponível: {product.stock}</em>
+                <span>
+                { Intl.NumberFormat('pt-BR' , {
+                  style: 'currency',
+                  currency: 'BRL'
+                  }).format(product.price) }
+                </span>
               </div>
 
             </div>

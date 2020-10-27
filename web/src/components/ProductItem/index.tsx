@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import { useShoppingCart } from '../../context/shoppingCart';
 
 import './styles.css';
 
 interface ProductItemProps {
+  id: number;
   code: string;
   name: string;
   price: number;
@@ -16,7 +18,7 @@ interface ProductItemProps {
   };
 }
 
-const ProductItem: React.FC<ProductItemProps> = ({ code, name, price, quantity, stock, image }) => {
+const ProductItem: React.FC<ProductItemProps> = ({id, code, name, price, quantity, stock, image }) => {
   const [counter,setCounter] = useState(quantity);
 
   const shopingCart = useShoppingCart();
@@ -49,7 +51,8 @@ const ProductItem: React.FC<ProductItemProps> = ({ code, name, price, quantity, 
       </div>
 
       <div className="description-container">
-        <strong>{name}</strong>
+        {/* <strong>{name}</strong> */}
+        <strong><Link to={`/details/${id}`}>{name}</Link></strong>
         <span>
           {Intl.NumberFormat('pt-BR' , {
           style: 'currency',

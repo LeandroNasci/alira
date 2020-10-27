@@ -30,11 +30,13 @@
   padding: 0.8rem 0.8rem 0;
 }
 
-#product-item .description-container strong {
+#product-item .description-container strong a {
   font-size: 1.2rem;
   display: block;
   text-align: left;
   margin-bottom: 0.4rem;
+  text-decoration: none;
+  color: var(--color-texto-escuro)
 }
 
 #product-item .description-container span {

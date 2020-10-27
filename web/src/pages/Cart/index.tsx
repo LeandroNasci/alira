@@ -8,7 +8,6 @@ import PageHeader from '../../components/PageHeader';
 import { useShoppingCart } from '../../context/shoppingCart';
 
 import './styles.css';
-const frete = require('frete');
 
 function Cart() {
   const history = useHistory();
@@ -39,6 +38,8 @@ function Cart() {
   function handleCalculateShippingCost(event: FormEvent) {
     event.preventDefault();
 
+    /* Calculo de frete */
+
     setIsShippingVsible(true);
   }
 
@@ -53,6 +54,7 @@ function Cart() {
             return (
               <ProductItem
                 key={item.code}
+                id={item.id}
                 code={item.code}
                 name={item.name}
                 price={item.price}
