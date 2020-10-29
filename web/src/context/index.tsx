@@ -1,11 +1,13 @@
 import React from 'react';
-
+import { ShippingTypeProvider } from './shippingType';
 import { ShoppingCartProvider } from './shoppingCart';
 
 const AppProvider: React.FC = ({children}) => {
   return (
     <ShoppingCartProvider>
-      {children}
+      <ShippingTypeProvider>
+        {children}
+      </ShippingTypeProvider>
     </ShoppingCartProvider>
   );
 }

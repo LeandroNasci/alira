@@ -1,10 +1,11 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { consultarCep, calcularPrecoPrazo, rastrearEncomendas } from 'correios-brasil';
+// import { consultarCep, calcularPrecoPrazo, rastrearEncomendas } from 'correios-brasil';
 
 import ProductItem from '../../components/ProductItem';
 import Footer from '../../components/Footer';
 import PageHeader from '../../components/PageHeader';
+import toReal from '../../utils/toReal';
 
 import { useShoppingCart } from '../../context/shoppingCart';
 
@@ -161,14 +162,7 @@ calcularPrecoPrazo(args).then((response: CalcularPrecoPrazo) => {
             <h3>Valor do carrinho</h3>
             <div className="shop-value">
               <div>Valor total</div>
-              <span className="shop-total">
-                {
-                  Intl.NumberFormat('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                  }).format(amount)
-                }
-              </span>
+              <span className="shop-total">{toReal(amount)}</span>
             </div>
             <p>Escolha o MODO DE ENVIO e o FRETE nas próximas etapas</p>
             <button type="button" onClick={handleGoToSendData}>Vou levar esse carrinho</button>

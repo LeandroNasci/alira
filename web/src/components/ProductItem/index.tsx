@@ -3,6 +3,7 @@ import { FiTrash2, FiPlus, FiMinus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import { useShoppingCart } from '../../context/shoppingCart';
+import toReal from '../../utils/toReal';
 
 import './styles.css';
 
@@ -54,10 +55,7 @@ const ProductItem: React.FC<ProductItemProps> = ({id, code, name, price, quantit
         {/* <strong>{name}</strong> */}
         <strong><Link to={`/details/${id}`}>{name}</Link></strong>
         <span>
-          {Intl.NumberFormat('pt-BR' , {
-          style: 'currency',
-          currency: 'BRL'
-          }).format(price)}
+          {toReal(price)}
         </span>
       </div>
 
@@ -82,12 +80,7 @@ const ProductItem: React.FC<ProductItemProps> = ({id, code, name, price, quantit
 
       <div className="subtotal">
         <h5>Subtotal do produto</h5>
-        <em>
-          {Intl.NumberFormat('pt-BR' , {
-          style: 'currency',
-          currency: 'BRL'
-          }).format(price * counter)}
-        </em>
+        <em>{toReal(price * counter)}</em>
       </div>
     </div>
   );

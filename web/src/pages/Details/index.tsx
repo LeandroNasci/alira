@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageHeader';
 import ImagesCarousel from '../../components/ImagesCarousel';
 import Product from '../../components/Product';
 import api from '../../services/api';
+import toReal from '../../utils/toReal';
 
 import { useShoppingCart } from '../../context/shoppingCart'
 
@@ -101,10 +102,7 @@ function Details() {
                 <img src={aliraNotesIcon} alt="logo"/>
                 <em>Estoque disponível: {product.stock}</em>
                 <span>
-                { Intl.NumberFormat('pt-BR' , {
-                  style: 'currency',
-                  currency: 'BRL'
-                  }).format(product.price) }
+                  {toReal(product.price) }
                 </span>
               </div>
 
