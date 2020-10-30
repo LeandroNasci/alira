@@ -6,6 +6,7 @@ import PageHeader from '../../components/PageHeader';
 import ImagesCarousel from '../../components/ImagesCarousel';
 import Product from '../../components/Product';
 import api from '../../services/api';
+import toReal from '../../utils/toReal';
 
 import { useShoppingCart } from '../../context/shoppingCart'
 
@@ -61,6 +62,7 @@ function Details() {
       }
 
       const newItem = {
+        id: Number(params.id),
         code: product.code,
         name: product.name,
         price: product.price,
@@ -97,15 +99,11 @@ function Details() {
 
               <div className="detail-background">
                 <p>{product.description}</p>
-                <div>
-                  <img src={aliraNotesIcon} alt="logo"/>
-                  <span>
-                  { Intl.NumberFormat('pt-BR' , {
-                    style: 'currency',
-                    currency: 'BRL'
-                    }).format(product.price) }
-                  </span>
-                </div>
+                <img src={aliraNotesIcon} alt="logo"/>
+                <em>Estoque disponível: {product.stock}</em>
+                <span>
+                  {toReal(product.price) }
+                </span>
               </div>
 
             </div>

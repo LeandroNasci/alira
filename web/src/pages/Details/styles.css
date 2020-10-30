@@ -59,33 +59,51 @@
 .detail-item .detail-background {
   display: flex;
   flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr, 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-areas:
+    "description description"
+    "logo quantity"
+    "logo price"
+  ;
+
   background-color: #FFFFFF;
   margin: 0.4rem;
-  padding: 1.6rem 0.8rem 0;
+  padding: 1.6rem 2rem 0;
   border-radius: 0.8rem;
 }
 
 .detail-item .detail-background p {
+  grid-area: description;
   text-align: justify;
   font-size: 1.2rem;
+  margin: 0;
 }
 
-.detail-item .detail-background div {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 2.4rem 1.6rem 0rem;
-}
-
-.detail-item .detail-description div img {
+.detail-item .detail-description img {
+  grid-area:logo;
+  align-self: center;
+  justify-self: self-start;
   width: 5rem;
   color: var(--color-rosa-claro);
 }
 
-.detail-item .detail-description div span {
+.detail-item .detail-description em {
+  grid-area: quantity;
+  justify-self: flex-end;
+  font: 700 1.4rem Arima Madurai;
+  padding-top: 2.4rem;
+  padding-right: 1.6rem;
+  color: var(--color-texto-claro);
+}
+
+.detail-item .detail-description span {
+  grid-area: price;
+  justify-self: end;
   font: 700 3.6rem Arima Madurai;
   color: var(--color-rosa-claro);
+  padding: 0 1.6rem;
 }
 
 .detail-item footer {
@@ -111,15 +129,15 @@
 }
 
 @media (max-width: 350px) {
-  .detail-item .detail-description div {
+  .detail-item .detail-description {
     justify-content: center;
   }
 
-  .detail-item .detail-description div img {
+  .detail-item .detail-description img {
     display: none;
   }
 
-  .detail-item .detail-description div span {
+  .detail-item .detail-description span {
     font: 700 10vw Arima Madurai;
   }
 }
@@ -146,8 +164,8 @@
     margin-bottom: 2.4rem;
   }
 
-.detail-item .detail-description h4 {
-  padding: 3.2rem 0 0.8rem;
-}
+  .detail-item .detail-description h4 {
+    padding: 3.2rem 0 0.8rem;
+  }
 }
 
