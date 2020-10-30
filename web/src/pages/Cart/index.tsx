@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { consultarCep, calcularPrecoPrazo, rastrearEncomendas } from 'correios-brasil';
+import {  calcularPrecoPrazo } from 'correios-brasil';
 
 import ProductItem from '../../components/ProductItem';
 import Footer from '../../components/Footer';
