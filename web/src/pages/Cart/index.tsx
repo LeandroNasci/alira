@@ -92,21 +92,21 @@ function Cart() {
 
 
 
-const  args = {
-  sCepOrigem:  '13561049',
-  sCepDestino:  '14177260',
-  nVlPeso:  '1',
-  nCdFormato:  '1',
-  nVlComprimento:  '20',
-  nVlAltura:  '20',
-  nVlLargura:  '20',
-  nCdServico:  '04510',
-  nVlDiametro:  '0',
-};
+// const  args = {
+//   sCepOrigem:  '13561049',
+//   sCepDestino:  '14177260',
+//   nVlPeso:  '1',
+//   nCdFormato:  '1',
+//   nVlComprimento:  '20',
+//   nVlAltura:  '20',
+//   nVlLargura:  '20',
+//   nCdServico:  '04510',
+//   nVlDiametro:  '0',
+// };
 
-calcularPrecoPrazo(args).then((response: CalcularPrecoPrazo) => {
-  console.log(response);
-});
+// calcularPrecoPrazo(args).then((response: CalcularPrecoPrazo) => {
+//   console.log(response);
+// });
 
 
 
