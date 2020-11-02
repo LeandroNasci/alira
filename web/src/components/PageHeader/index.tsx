@@ -14,7 +14,7 @@ interface PageHeaderProps {
 
 const PageHeader: React.FC<PageHeaderProps> = (props) => {
 
-  return (
+   return (
     <header>
       <div className="top-bar-container">
         {props.back
@@ -53,11 +53,11 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
         ? <nav className="nav-bar-container"></nav>
         : <nav className="nav-bar-container">
             <Link to="/">Início</Link>
-            <Link to="/">Bloquinhos</Link>
-            <Link to="/">Cadernos</Link>
-            <Link to="/">Postits</Link>
-            <Link to="/">Canetas</Link>
-            <Link to="/">Borrachas</Link>
+
+            <Link to="/?type=bloquinhos">Bloquinhos</Link>
+            <Link to="/?type=cadernos">Cadernos</Link>
+            <Link to="/?type=marcadores">Marcadores</Link>
+
             <Link to="/about">Quem Somos</Link>
           </nav>
       }
