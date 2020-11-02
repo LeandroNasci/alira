@@ -1,10 +1,11 @@
 import Image from "../models/Image";
+import 'dotenv/config';
 
 export default {
   render(image: Image) {
     return {
       id: image.id,
-      url: `http://localhost:3333/uploads/${image.path}`,
+      url: `${process.env.BASE_URL}/uploads/${image.path}`,
     };
   },
 

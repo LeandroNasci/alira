@@ -54,7 +54,7 @@ export default {
     })
 
     try {
-      const insertedProductsIds = await trx('products').insert(data);
+      const insertedProductsIds = await trx('products').insert(data).returning('id');
 
       const product_id = insertedProductsIds[0];
 
@@ -76,7 +76,7 @@ export default {
         abortEarly: false,
       })
 
-      await trx('images').insert(images);
+      await trx('images').insert(images).returning('id');
 
       await trx.commit();
 
