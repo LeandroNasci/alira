@@ -61,7 +61,7 @@ export default {
       invoice_city: Yup.string().required(),
       invoice_uf: Yup.string().required().max(2),
       shipping_category: Yup.string().required(),
-      shipping_cost: Yup.string().required(),
+      shipping_cost: Yup.number().required(),
       shipping_name: Yup.string().required(),
       shipping_lastname: Yup.string().required(),
       shipping_cep: Yup.string().required(),
