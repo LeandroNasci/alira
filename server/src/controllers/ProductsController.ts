@@ -4,6 +4,9 @@ import * as Yup from 'yup';
 import db from '../database/connection';
 import productView from '../views/products_view';
 
+import Item from 'src/models/Item';
+import Product from 'src/models/Product';
+
 
 export default {
   // Adicionar novo produto ao estoque
@@ -21,7 +24,7 @@ export default {
       height,
     } = request.body;
 
-     const trx = await db.transaction();
+    const trx = await db.transaction();
 
     const data = {
       code,
@@ -54,7 +57,7 @@ export default {
     })
 
     try {
-      const insertedProductsIds = await trx('products').insert(data);
+      const insertedProductsIds = await trx('products').insert(data).returning('id');
 
       const product_id = insertedProductsIds[0];
 
@@ -62,8 +65,6 @@ export default {
       const images = requestImages.map(image => {
         return { path: image.filename, product_id }
       });
-
-      console.log(images);
 
       const imageSchema = Yup.array(
         Yup.object().shape({
@@ -76,11 +77,11 @@ export default {
         abortEarly: false,
       })
 
-      await trx('images').insert(images);
+      await trx('images').insert(images).returning('id');
 
       await trx.commit();
 
-      return response.send("done!");
+      return response.status(201).json({ message: 'successfully created.'});
     }
     catch (err) {
       await trx.rollback();
@@ -131,6 +132,42 @@ export default {
     return response.json(productView.render(product, images));
   },
 
-  // async update(request: Request, response: Response) {},
-  // async delete(request: Request, response: Response) {},
+  async update(request: Request, response: Response) {
+    const itemsBought: Item[] = request.body;
+
+    itemsBought.map( async(item: Item, index) => {
+      try {
+        const product: Product = await db('products')
+          .select('stock')
+          .where('code', item.code )
+          .first();
+
+        await db('products')
+          .where('code', '=', item.code )
+          .update({
+            stock: product.stock - item.quantity,
+            thisKeyIsSkipped: undefined
+          });
+
+        return response.status(200).json({ message: 'successfully updated.'});
+      }
+      catch (err) {
+        console.log(err);
+
+        return response.status(400).json({
+          error: 'Unexpected error while update stock.'
+        })
+      }
+    })
+  },
+
+  async delete(request: Request, response: Response) {
+    const { id } = request.params;
+
+    db('products')
+      .where('id', '=', id)
+      .del()
+
+    return response.status(200).json({ message: 'successfully deleted.'});
+  },
 }
