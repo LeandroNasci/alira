@@ -6,6 +6,7 @@ import productView from '../views/products_view';
 
 import Item from 'src/models/Item';
 import Product from 'src/models/Product';
+import { File } from 'src/config/multer';
 
 
 export default {
@@ -61,14 +62,22 @@ export default {
 
       const product_id = insertedProductsIds[0];
 
-      const requestImages = request.files as Express.Multer.File[];
+      const requestImages = request.files as File[];
       const images = requestImages.map(image => {
-        return { path: image.filename, product_id }
+        return {
+          name: image.originalname,
+          size: image.size,
+          key: image.key,
+          url: image.location,
+          product_id }
       });
 
       const imageSchema = Yup.array(
         Yup.object().shape({
-          path: Yup.string().required(),
+          name: Yup.string().required(),
+          size: Yup.number().required(),
+          key: Yup.string().required(),
+          url: Yup.string().required(),
           product_id: Yup.number().required()
         })
       )
