@@ -5,7 +5,6 @@ import path from 'path';
 import cors from 'cors';
 import routes from './routes';
 import morgan from 'morgan';
-import mongoose from 'mongoose';
 
 
 import 'express-async-errors'
@@ -13,18 +12,6 @@ import errorHandler from './errors/handler';
 
 const app = express();
 
-/**
- * Database setup
- */
-mongoose.connect(
-  process.env.MONGO_URL || "",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-  }
-);
 
 app.use(cors());
 app.use(express.json());
