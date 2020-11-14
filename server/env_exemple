@@ -4,3 +4,14 @@ PG_HOST="url_base_do_postgre"
 PG_USER="usuario_do_postgre"
 PG_PASSWORD="senha_do_postgre"
 PG_DATABASE="banco_de_dados_do_postgre"
+
+# Pegue esses dados no site S3 AWS
+BUCKET_NAME="nome_do_bucket"
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=
+AWS_REGION=
+
+# s3: para produção
+# local: em desenvolvimento
+# STORAGE_TYPE=s3

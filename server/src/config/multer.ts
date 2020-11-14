@@ -6,6 +6,13 @@ import multerS3 from 'multer-s3';
 
 const MAX_SIZE_TWO_MEGABYTES = 2 * 1024 * 1024;
 
+// const config = new AWS.Config({
+//   accessKeyId: 'ACESSKEY', secretAccessKey: 'SECRETKEY', region: 'us-west-2'
+// });
+
+// new AWS.S3({credentials: config, params: {Bucket: 'stratusview'}});
+
+
 export interface File extends Express.Multer.File {
   location: string;
   key: string;
