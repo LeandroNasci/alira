@@ -6,7 +6,6 @@ import db from '../database/connection';
 import productView from '../views/products_view';
 
 import Item from 'src/models/Item';
-import Product from 'src/models/Product';
 import { File } from 'src/config/multer';
 
 
