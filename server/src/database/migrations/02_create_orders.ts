@@ -22,7 +22,7 @@ export async function up(knex: Knex) {
     table.string('invoice_complement').notNullable();
     table.string('invoice_district').notNullable();
     table.string('invoice_city').notNullable();
-    table.string('invoice_uf', 2).notNullable();
+    table.string('invoice_state', 2).notNullable();
 
     /* entrega */
     table.string('shipping_category').notNullable();
@@ -36,7 +36,7 @@ export async function up(knex: Knex) {
     table.string('shipping_complement');
     table.string('shipping_district');
     table.string('shipping_city');
-    table.string('shipping_uf', 2);
+    table.string('shipping_state', 2);
   });
 }
 
