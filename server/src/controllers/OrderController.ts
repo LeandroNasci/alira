@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import db from '../database/connection';
 import Item from '../models/Item';
 
+import orderView from '../views/order_view';
+
 export default {
   async create(request: Request, response: Response) {
     const {
@@ -16,8 +18,6 @@ export default {
       shipping,
       items
     } = request.body;
-
-    console.log(request.body);
 
     const trx = await db.transaction();
 
@@ -33,7 +33,7 @@ export default {
       invoice_complement: invoice.complement,
       invoice_district: invoice.district,
       invoice_city: invoice.city,
-      invoice_uf: invoice.state,
+      invoice_state: invoice.state,
       shipping_category: shippingCategory,
       shipping_cost: shippingCost,
       shipping_name: shipping.name,
@@ -44,7 +44,7 @@ export default {
       shipping_complement: shipping.complement,
       shipping_district: shipping.district,
       shipping_city: shipping.city,
-      shipping_uf: shipping.state,
+      shipping_state: shipping.state,
     }
 
     const orderSchema = Yup.object().shape({
@@ -59,7 +59,7 @@ export default {
       invoice_complement: Yup.string().required(),
       invoice_district: Yup.string().required(),
       invoice_city: Yup.string().required(),
-      invoice_uf: Yup.string().required().max(2),
+      invoice_state: Yup.string().required().max(2),
       shipping_category: Yup.string().required(),
       shipping_cost: Yup.number().required(),
       shipping_name: Yup.string().required(),
@@ -70,7 +70,7 @@ export default {
       shipping_complement: Yup.string().required(),
       shipping_district: Yup.string().required(),
       shipping_city: Yup.string().required(),
-      shipping_uf: Yup.string().required().max(2)
+      shipping_state: Yup.string().required().max(2)
     });
 
     await orderSchema.validate(data, {
@@ -78,7 +78,7 @@ export default {
     })
 
     try {
-      const insertedOrdersIds = await trx('orders').insert(data);
+      const insertedOrdersIds = await trx('orders').insert(data).returning('order_id');
 
       const order_id = insertedOrdersIds[0];
 
@@ -102,6 +102,13 @@ export default {
       })
     }
 
-  }//create
+  },//create
 
+  async index(request: Request, response: Response) {
+
+    const orders = await db('orders').select('*');
+
+    return response.json(orders);
+    // return response.json(orderView.renderMany(orders));
+  },
 }

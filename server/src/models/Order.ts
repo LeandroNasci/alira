@@ -12,7 +12,7 @@ export default interface Order {
     complement: string;
     district: string;
     city: string;
-    uf: string;
+    state: string;
   };
   shippingCategory: string;
   shippingCost: string;
@@ -25,6 +25,6 @@ export default interface Order {
     complement: string;
     district: string;
     city: string;
-    uf: string;
+    state: string;
   };
 }
