@@ -68,7 +68,7 @@ export default {
           name: image.originalname,
           size: image.size,
           key: image.key,
-          url: image.location || "",
+          url: image.location,
           product_id }
       });
 
