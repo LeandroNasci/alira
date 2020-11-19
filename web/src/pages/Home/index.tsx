@@ -25,11 +25,17 @@ interface Product {
 function Home() {
 
   const [products,setProducts] = useState<Product[]>([]);
+  const [isLoading,setIsLoading] = useState(true);
+
 
   useEffect(() => {
     api.get('/products').then(response => {
       setProducts(response.data);
+      setIsLoading(false)
     });
+    // setTimeout(() => {
+
+    // },1000);
   },[]);
 
 
@@ -51,6 +57,7 @@ function Home() {
                   image={product.images[0].url}
                   name={product.name}
                   price={product.price}
+                  isLoading={isLoading}
                 />
               </Link>
             )
