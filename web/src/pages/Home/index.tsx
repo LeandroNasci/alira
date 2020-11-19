@@ -31,11 +31,10 @@ function Home() {
   useEffect(() => {
     api.get('/products').then(response => {
       setProducts(response.data);
-      setIsLoading(false)
+      setTimeout(() => {
+        setIsLoading(false);
+      },1000);
     });
-    // setTimeout(() => {
-
-    // },1000);
   },[]);
 
 
