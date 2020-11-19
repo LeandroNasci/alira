@@ -36,8 +36,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('../../assets/images/header-bg.png');
-  background-size: cover;
+  background: linear-gradient(0deg, white 5%,  var(--color-rosa-claro) 150%);
 }
 
 .header-content > img {
@@ -46,7 +45,7 @@
 }
 
 .header-content .logo-container {
-  width: 90%;
+  width: 95%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,6 +63,12 @@
 .header-content .logo-container img {
   width: 60%;
   max-width: 28.5rem;
+}
+
+.words {
+  text-align: center;
+  font: 400 2rem Poppins;
+  margin-top: 0.4rem;
 }
 
 .nav-bar-container {
@@ -93,13 +98,40 @@
 }
 
 @media (min-width: 300px) {
+  .header-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+      "img logo"
+      "words words"
+    ;
+  }
 
   .header-content > img {
-    width: 26rem;
+    grid-area: img;
+    margin-left: 0.8rem;
+    width: 100%
+  }
+
+  .header-content .logo-container{
+    grid-area: logo;
+    justify-self: end;
+    padding-right: 1rem;
   }
 
   .header-content .logo-container h2 {
-    font-size:  2.4rem;
+    /* font-size:  1.1rem; */
+    font-size:  2.8vw;
+  }
+
+  .header-content .logo-container img {
+    width:  49vw;
+  }
+
+  .words {
+    grid-area: words;
+    padding: 1.6rem 2.4rem;
   }
 
   .nav-bar-container a {
@@ -112,14 +144,18 @@
 
 }
 
+@media (min-width: 550px) {
+  .header-content .logo-container h2 {
+    font-size:  1.6rem;
+  }
+}
+
 @media (min-width: 750px) {
 
   .header-content {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-image: url('../../assets/images/header-bg.png');
-    background-size: cover;
   }
 
   .header-content > img {
@@ -145,12 +181,15 @@
     max-width: 28.5rem;
   }
 
-  .nav-bar-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+  nav {
     background: var(--color-azul-de-fundo);
-    padding: 0 10vw;
+    padding: 0 calc(50% - 45rem);
+  }
+
+  .nav-bar-container {
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 900px;
   }
 
   .nav-bar-container a {

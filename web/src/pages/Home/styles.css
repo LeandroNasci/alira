@@ -11,7 +11,10 @@
 
 .banner img {
   width: 100%;
-  margin-bottom: 1rem;
+  display: flex;
+  flex: 1;
+  background-size: cover;
+  flex-shrink: 0;
 }
 
 h1 {
@@ -52,4 +55,11 @@ p {
     border-radius: 8px;
   }
 
+}
+
+@media (min-width: 1300px) {
+  #page-home-content {
+    grid-template-columns: repeat(4, 20rem);
+
+  }
 }

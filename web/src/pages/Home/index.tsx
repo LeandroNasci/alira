@@ -9,6 +9,7 @@ import api from '../../services/api';
 import bannerImg from '../../assets/images/banner.png';
 
 import './styles.css';
+import LoadingProduct from '../../components/Shimmer/LoadingProduct';
 
 interface Product {
   id: number;
@@ -29,14 +30,17 @@ function Home() {
 
 
   useEffect(() => {
-    api.get('/products').then(response => {
-      setProducts(response.data);
-      setTimeout(() => {
+      handleLoadProducts();
+    },[]);
+
+
+  async function handleLoadProducts() {
+    const response = await api.get('/products');
+    setProducts(response.data);
+    setTimeout(() => {
         setIsLoading(false);
       },1000);
-    });
-  },[]);
-
+  }
 
   return (
     <div id="page-home" className="container">
@@ -48,20 +52,32 @@ function Home() {
       <h1>PRODUTOS</h1>
 
       <div id="page-home-content">
-        {products.map(product => {
-          return (
-            (product.stock !== 0) && (
-              <Link key={product.code} to={`/details/${product.id}`}>
-                <Product
-                  image={product.images[0].url}
-                  name={product.name}
-                  price={product.price}
-                  isLoading={isLoading}
-                />
-              </Link>
-            )
-          );
-        })}
+        {isLoading ? (
+          <>
+            <LoadingProduct />
+            <LoadingProduct />
+            <LoadingProduct />
+            <LoadingProduct />
+            <LoadingProduct />
+            <LoadingProduct />
+            <LoadingProduct />
+            <LoadingProduct />
+          </>
+        ) : (
+          products.map(product => {
+            return (
+              (product.stock !== 0) && (
+                <Link key={product.code} to={`/details/${product.id}`}>
+                  <Product
+                    image={product.images[0].url}
+                    name={product.name}
+                    price={product.price}
+                  />
+                </Link>
+              )
+            );
+          })
+        )}
       </div>
 
       <Footer />
