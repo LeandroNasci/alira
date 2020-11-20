@@ -1,28 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiMail, FiTruck, FiClipboard, FiPackage, FiArrowLeft, FiUsers } from 'react-icons/fi';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
 import Radio from '../../components/Radio';
+import CartList from '../../components/CartList';
+import CheckBox from '../../components/CheckBox';
+
+import { Costumer } from '../SendData';
 
 import progressImg from '../../assets/images/progress2.png';
 import pagSeguroImg from '../../assets/images/logo-pagseguro.png'
 
 import './styles.css';
-import CartList from '../../components/CartList';
-import CheckBox from '../../components/CheckBox';
+
+
 
 function ShippingSelect () {
 
   const history = useHistory();
+  const location = useLocation();
+
+  const [costumer,setCostumer] = useState<Costumer>();
+
+  useEffect(() => {
+     setCostumer(location.state as Costumer);
+  },[location.state]);
+
+
+
 
   function handleGoBack() {
     history.goBack();
   }
 
   function handleCheckout () {
+    console.log('guarda no banco o pedido');
+
+    // converte para XML
+
     console.log('redireciona para o PagSeguro');
   }
+
 
   return (
     <div id="page-shipping-select" className="container">
@@ -34,43 +53,44 @@ function ShippingSelect () {
 
         <form action="">
           <main>
-
-            <div className="form-group">
-              <fieldset className="send-method" >
-                <legend>
-                  <FiPackage /><h3>Escolha o método de entrega oferecido pelos Correios</h3>
-                </legend>
-                <div>
-                  <Radio required name="send-category" value="PAC" defaultChecked>
-                    <b>PAC</b>
-                    <span>Entrega em até 10 dias úteis</span>
-                  </Radio>
-                  <strong>R$ 21,87</strong>
-                </div>
-                <div>
-                  <Radio required name="send-category" value="SEDEX">
-                    <b>SEDEX</b>
-                    <span>Entrega em até 4 dias úteis</span>
-                  </Radio>
-                  <strong>R$ 21,93</strong>
-                </div>
-              </fieldset>
-            </div>
-
-            <div className="form-group">
-              <fieldset className="send-method" >
-                <legend>
-                  <FiPackage /><h3>Método de entrega dos produtos escolhido</h3>
-                </legend>
-                <div>
-                  <Radio required name="send-category" value="VENDEDOR" defaultChecked>
-                    <b>Retirada dos produtos com o VENDEDOR</b>
-                    <span>(São Carlos - SP)</span>
-                  </Radio>
-                  <strong>Gratuito</strong>
-                </div>
-              </fieldset>
-            </div>
+            {costumer?.shippingType!==3 ? (
+              <div className="form-group">
+                <fieldset className="send-method" >
+                  <legend>
+                    <FiPackage /><h3>Escolha o método de entrega oferecido pelos Correios</h3>
+                  </legend>
+                  <div>
+                    <Radio required name="send-category" value="PAC" defaultChecked>
+                      <b>PAC</b>
+                      <span>Entrega em até 10 dias úteis</span>
+                    </Radio>
+                    <strong>R$ 21,87</strong>
+                  </div>
+                  <div>
+                    <Radio required name="send-category" value="SEDEX">
+                      <b>SEDEX</b>
+                      <span>Entrega em até 4 dias úteis</span>
+                    </Radio>
+                    <strong>R$ 21,93</strong>
+                  </div>
+                </fieldset>
+              </div>
+            ) : (
+              <div className="form-group">
+                <fieldset className="send-method" >
+                  <legend>
+                    <FiPackage /><h3>Método de entrega dos produtos escolhido</h3>
+                  </legend>
+                  <div>
+                    <Radio required name="send-category" value="VENDEDOR" defaultChecked>
+                      <b>Retirada dos produtos com o VENDEDOR</b>
+                      <span>(São Carlos - SP)</span>
+                    </Radio>
+                    <strong>Gratuito</strong>
+                  </div>
+                </fieldset>
+              </div>
+            )}
 
             <div className="form-group">
 
@@ -84,8 +104,8 @@ function ShippingSelect () {
 
                 <div className="box-container">
                   <div className="box">
-                    <p><b>E-mail: </b>aliranotes@gmail.com</p>
-                    <p><b>Telefone: </b>(16) 99555-4343</p>
+                    <p><b>E-mail: </b>{costumer?.email}</p>
+                    <p><b>Telefone: </b>{costumer?.phone}</p>
                   </div>
 
                   <CheckBox required name="st"><em>OK, corretas!</em></CheckBox>
@@ -93,37 +113,44 @@ function ShippingSelect () {
               </fieldset>
 
               <fieldset >
-                <legend>
-                  <FiTruck /><h3>Dados para Entrega</h3>
-                </legend>
+                {costumer?.shippingType!==3 ? (
+                  <>
+                    <legend>
+                      <FiTruck /><h3>Dados para Entrega</h3>
+                    </legend>
 
-                <div className="box-container">
-                  <div className="box">
-                    <p><b>Nome:</b> Jessica Lima Brito</p>
-                    <p><b>CEP: </b>13560-049</p>
-                    <p><b>Endereço: </b>Rua Episcopal, 2827, kitnet nº2</p>
-                    <p><b>Bairro: </b>Jardim Ltfalla</p>
-                    <p><b>Cidade: </b>São Carlos</p>
-                    <p><b>Estado: </b>São Paulo</p>
-                    <p><b>País: </b>Brasil</p>
-                  </div>
+                    <div className="box-container">
+                      <div className="box">
+                        <p><b>Nome:</b>{`${costumer?.firstname} ${costumer?.lastname}`}</p>
+                        <p><b>CEP: </b>{costumer?.cep}</p>
+                        <p><b>Endereço: </b>`${costumer?.street}, ${costumer?.number}, ${costumer?.complement}`</p>
+                        <p><b>Bairro: </b>{costumer?.district}</p>
+                        <p><b>Cidade: </b>{costumer?.city}</p>
+                        <p><b>Estado: </b>{costumer?.state}</p>
+                        <p><b>País: </b>{costumer?.country}</p>
+                      </div>
 
-                  <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>
-                </div>
+                      <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <legend>
+                      <FiUsers /><h3>Dados para Retirada</h3>
+                    </legend>
 
-                <legend>
-                  <FiUsers /><h3>Dados para Entrega</h3>
-                </legend>
+                    <div className="box-container">
+                      <div className="box">
+                        <p><b>Nome: </b>{`${costumer?.iFirstname} ${costumer?.iLastname}`}</p>
+                        <br />
+                        <p>Você escolheu o método de retirada dos produtos diretamente com o vendedor, ou seja, não será cobrado o valor do frete. Você deverá combinar com o vendedor o local e hora de retirada do produto no email: <em>aliranotes@gmail.com</em></p>
+                      </div>
 
-                <div className="box-container">
-                  <div className="box">
-                    <p><b>Nome:</b> Jessica Lima Brito</p>
-                    <br />
-                    <p>Você escolheu o método de retirada dos produtos diretamente com o vendedor, ou seja, não será cobrado o valor do frete. Você deverá combinar com o vendedor o local e hora de retirada do produto no email: <em>aliranotes@gmail.com</em></p>
-                  </div>
+                      <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>
+                    </div>
+                  </>
+                )}
 
-                  <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>
-                </div>
 
               </fieldset>
 
@@ -134,15 +161,15 @@ function ShippingSelect () {
 
                 <div className="box-container">
                   <div className="box">
-                    <p><b>CPF: </b>111.222.333-44</p>
-                    <p hidden ><b>CNPJ: </b>11.222.333/0001-44</p>
-                    <p><b>Nome: </b>Jessica Lima Brito</p>
-                    <p><b>CEP: </b>13560-049</p>
-                    <p><b>Endereço: </b>Rua Episcopal, 2827, kitnet nº2</p>
-                    <p><b>Bairro: </b>Jardim Ltfalla</p>
-                    <p><b>Cidade: </b>São Carlos</p>
-                    <p><b>Estado: </b>São Paulo</p>
-                    <p><b>País: </b>Brasil</p>
+                    <p><b>CPF: </b>{costumer?.cpf}</p>
+                    <p hidden ><b>CNPJ: </b>{costumer?.cnpj}</p>
+                    <p><b>Nome: </b>{`${costumer?.iFirstname} ${costumer?.iLastname}`}</p>
+                    <p><b>CEP: </b>{costumer?.iCep}</p>
+                    <p><b>Endereço: </b>{`${costumer?.iStreet}, ${costumer?.iNumber}, ${costumer?.iComplement}`}</p>
+                    <p><b>Bairro: </b>{costumer?.iDistrict}</p>
+                    <p><b>Cidade: </b>{costumer?.iCity}</p>
+                    <p><b>Estado: </b>{costumer?.iState}</p>
+                    <p><b>País: </b>{costumer?.iCountry}</p>
                   </div>
 
                   <CheckBox required name="rd"><em>OK, corretas!</em></CheckBox>

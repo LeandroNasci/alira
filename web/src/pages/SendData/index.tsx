@@ -13,13 +13,41 @@ import CheckBox from '../../components/CheckBox';
 
 import './styles.css';
 
+export interface Costumer {
+  email: string;
+  phone: string;
+  shippingType: number;
+  cpf: string;
+  cnpj?: string;
+  firstname?: string;
+  lastname?: string;
+  cep?: string;
+  street?: string;
+  number?: string;
+  complement?: string;
+  district?: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  iFirstname: string;
+  iLastname: string;
+  iCep: string;
+  iStreet: string;
+  iNumber: string;
+  iComplement: string;
+  iDistrict: string;
+  iCity: string;
+  iState: string;
+  iCountry: string;
+}
+
 function SendData() {
   const [isDeliveryVisible,setIsDeliveryVisible] = useState(true);
   const [isInvoiceAdressEqual,setIsInvoiceAdressEqual] = useState(false);
 
   const [email,setEmail] = useState('');
   const [phone,setPhone] = useState('');
-  const [shippingType,setShippingType] = useState('1');
+  const [shippingType,setShippingType] = useState(1);
   const [cpf,setCpf] = useState('');
   const [cnpj,setCnpj] = useState('');
 
@@ -50,7 +78,7 @@ function SendData() {
   function handleContinue(event: FormEvent) {
     event.preventDefault();
 
-    const data = {
+    const params = {
       email,
       phone,
       shippingType,
@@ -78,14 +106,14 @@ function SendData() {
       iCountry,
     };
 
-    console.log(data);
-
+    console.log({message: 'parametros do formulario'}, params);
+    history.push("/shipping-select", params);
 
   }
 
   function handleToggleDeliveryVisible (event: ChangeEvent<HTMLInputElement> ) {
     setIsDeliveryVisible( event.target.value === '1' ? true : false );
-    setShippingType(event.target.value);
+    setShippingType(Number(event.target.value));
     setIsInvoiceAdressEqual(false);
   }
 
