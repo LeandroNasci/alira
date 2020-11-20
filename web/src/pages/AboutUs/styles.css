@@ -61,6 +61,7 @@
   }
   #page-about-us .about-content img {
     width: 40%;
+    z-index: 1;
   }
 
 

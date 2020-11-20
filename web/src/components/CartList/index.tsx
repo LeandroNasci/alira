@@ -32,7 +32,7 @@ const CartList: React.FC = ({ children }) => {
 
       {addedItems.map((item) => {
         return (
-          <CartItem item={item}/>
+          <CartItem key={item.id} item={item}/>
         );
       })}
 
