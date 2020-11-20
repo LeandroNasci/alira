@@ -8,40 +8,37 @@ import notesImg from '../../assets/images/notes.png';
 import './styles.css';
 
 interface PageHeaderProps {
-  back?: boolean;
+  showBack?: boolean;
   compact?: boolean;
 }
 
-const PageHeader: React.FC<PageHeaderProps> = (props) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, children }) => {
 
    return (
     <header>
-      <div className="top-bar-container">
-        {props.back
-          ?<Link to="/"><FiArrowLeft /><span> Voltar</span></Link>
-          :<span />
-        }
-        {props.compact
-          ? <div className="top-bar-session"></div>
-          : <div className="top-bar-session">
-              {props.children}
-              <Link to="/cart">
-                <span>Carrinho </span>
-                <FiShoppingCart />
-              </Link>
-              <Link to="/login">
-                <span>Login </span>
-                <FiLogIn />
-              </Link>
-            </div>
-        }
-      </div>
+      {!compact &&
+        <div className="top-bar-container">
+          {showBack
+            ? <Link to="/"><FiArrowLeft /><span> Voltar</span></Link>
+            : <span />
+          }
+
+          <div className="top-bar-session">
+            {children}
+            <Link to="/cart">
+              <span>Carrinho </span>
+              <FiShoppingCart />
+            </Link>
+            <Link to="/login">
+              <span>Login </span>
+              <FiLogIn />
+            </Link>
+          </div>
+        </div>
+      }
 
       <div className="header-content">
-        {props.compact
-          ?<img src="" alt=""/>
-          :<img src={notesImg} alt="postite"/>
-        }
+        <img src={notesImg} alt="postite"/>
 
         <div className="logo-container">
           <h2>Sua vida mais planejada com fofuras</h2>
@@ -52,7 +49,7 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
         </div>
       </div>
 
-      {props.compact
+      {compact
         ? <nav className="nav-bar-container"></nav>
         : <nav>
             <div className="nav-bar-container">
