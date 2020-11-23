@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
 import Product from '../../components/Product';
@@ -25,29 +25,33 @@ interface Product {
 
 function Home() {
 
-  const [products,setProducts] = useState<Product[]>([]);
-  const [isLoading,setIsLoading] = useState(true);
+  const query = new URLSearchParams(useLocation().search);
 
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [type, setType] = useState(query.get("type"));
 
   useEffect(() => {
-      handleLoadProducts();
-    },[]);
+    setType(query.get("type"))
 
+    api.get('/products', {params: type}).then(({ data, config }) => {
+      console.log({ data: data }, { config: config });
 
-  async function handleLoadProducts() {
-    const response = await api.get('/products');
-    setProducts(response.data);
-    setTimeout(() => {
+      setProducts(data);
+      setTimeout(() => {
         setIsLoading(false);
-      },1000);
-  }
+      }, 1000);
+    });
+    if (type === null) {
+    }
+  }, [query, type]);
 
   return (
     <div id="page-home" className="container">
       <PageHeader />
 
       <div className="banner">
-        <img src={bannerImg} alt="banner"/>
+        <img src={bannerImg} alt="banner" />
       </div>
       <h1>PRODUTOS</h1>
 
@@ -64,20 +68,20 @@ function Home() {
             <LoadingProduct />
           </>
         ) : (
-          products.map(product => {
-            return (
-              (product.stock !== 0) && (
-                <Link key={product.code} to={`/details/${product.id}`}>
-                  <Product
-                    image={product.images[0].url}
-                    name={product.name}
-                    price={product.price}
-                  />
-                </Link>
-              )
-            );
-          })
-        )}
+            products.map(product => {
+              return (
+                (product.stock !== 0) && (
+                  <Link key={product.code} to={`/details/${product.id}`}>
+                    <Product
+                      image={product.images[0].url}
+                      name={product.name}
+                      price={product.price}
+                    />
+                  </Link>
+                )
+              );
+            })
+          )}
       </div>
 
       <Footer />

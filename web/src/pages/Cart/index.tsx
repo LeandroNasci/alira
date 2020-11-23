@@ -170,7 +170,7 @@ function Cart() {
           <div className="send-info">
             <div className="off">
               <h4>DESCONTO ALIRA!</h4>
-              <p>Só aqui na Alira você tem <b>15%</b> de desconto no Frete de seus produtos. Confira!</p>
+              <p>Só aqui na Alira você tem <b>10%</b> de desconto no Frete de seus produtos. Confira!</p>
             </div>
             <p>Digite seu CEP no campo abaixo para estimar o frete e saber o prazo de entrega estimados</p>
             <form className="zip-code" onSubmit={handleCalculateShippingCost} >
