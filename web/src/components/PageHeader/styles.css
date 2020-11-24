@@ -71,32 +71,6 @@
   margin-top: 0.4rem;
 }
 
-.nav-bar-container {
-  display: flex;
-  flex-direction: column;
-  background: var(--color-azul-de-fundo);
-}
-
-.nav-bar-container a {
-  width: 100%;
-  height: 4.2rem;
-  padding: 0.8rem;
-  font: 400 1.6rem Archivo;
-  display: flex;
-  justify-content: center;
-  text-decoration: none;
-  text-align: center;
-  color: var(--color-texto-escuro);
-  transition: font-weight 0.2s;
-}
-
-.nav-bar-container a:hover {
-  text-decoration: none;
-  color: var(--color-texto-link);
-  padding: 0.8rem;
-
-}
-
 @media (min-width: 300px) {
   .header-content {
     display: grid;
@@ -134,14 +108,6 @@
     padding: 1.6rem 2.4rem;
   }
 
-  .nav-bar-container a {
-    font-size: 2rem;
-  }
-
-  .nav-bar-container a:hover {
-    font-size: 2rem;
-  }
-
 }
 
 @media (min-width: 550px) {
@@ -153,8 +119,8 @@
 @media (min-width: 750px) {
 
   .header-content > img {
-    max-width: 20rem;
-    margin: 2rem 5rem;
+    max-width: 24rem;
+    margin-top: 3rem;
   }
 
   .header-content .logo-container {
@@ -173,30 +139,30 @@
     max-width: 28.5rem;
   }
 
-  nav {
-    background: var(--color-azul-de-fundo);
-    padding: 0 calc(50% - 46rem);
+  .words {
+    font: 400 2.4vw Poppins;
+  }
+}
+
+@media (min-width: 850px) {
+  .header-content {
+    grid-template-columns: 5fr 9fr 7fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+      "img words logo"
+    ;
   }
 
-  .nav-bar-container {
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 95rem;
+  .header-content > img {
+    padding: 3rem 2rem 5rem;
+    justify-self: center;
   }
 
-  .nav-bar-container a {
-    text-decoration: none;
-    font: 400 1.6rem Archivo;
-    padding: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    color: var(--color-texto-escuro);
-    transition: font-weight 0.2s;
+  .words {
+    grid-area: words;
+    justify-self: center;
+    font: 400 2vw Poppins;
+    padding-top: 9rem ;
   }
 
-  .nav-bar-container a:hover {
-    text-decoration: none;
-    font: 400 1.6rem Archivo;
-  }
 }

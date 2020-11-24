@@ -275,7 +275,7 @@ function SendData() {
 
               <fieldset>
                 <legend>
-                  <FiClipboard /><h3>Dados para a Nota Fnameiscal</h3>
+                  <FiClipboard /><h3>Dados para a Nota Fiscal</h3>
                 </legend>
                 <div className="field-group">
                   <CPFInput

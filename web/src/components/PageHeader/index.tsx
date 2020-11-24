@@ -4,6 +4,8 @@ import { FiArrowLeft, FiLogIn, FiShoppingCart } from 'react-icons/fi';
 
 import logoImg from '../../assets/images/logo.svg';
 import notesImg from '../../assets/images/notes.png';
+import DesktopNavbar from '../DesktopNavbar';
+import MobileNavbar from '../MobileNavbar';
 
 import './styles.css';
 
@@ -45,28 +47,12 @@ const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, chil
           <img src={logoImg} alt="Alira Notes"/>
         </div>
         <div className="words">
-          simplicidade &bull; utilidade &bull; beleza &bull; produtos exclulsivos
+          simplicidade &bull; utilidade &bull; beleza &bull; produtos exclusivos
         </div>
       </div>
 
-      {compact
-        ? <nav className="nav-bar-container"></nav>
-        : <nav>
-            <div className="nav-bar-container">
-              {/* <Link to="/">Menu</Link> */}
-              <Link to="/">Início</Link>
-
-              <Link to="/?type=bloquinhos">Bloquinhos</Link>
-              <Link to="/?type=cadernos">Cadernos</Link>
-              <Link to="/?type=post-its">Post-its</Link>
-              <Link to="/?type=canetas">Canetas</Link>
-              <Link to="/?type=prendedores">Prendedores</Link>
-              <Link to="/?type=kits">Kits</Link>
-
-              <Link to="/about">Quem Somos</Link>
-            </div>
-          </nav>
-      }
+      {/* {!compact && <DesktopNavbar />} */}
+      {!compact && <MobileNavbar />}
     </header>
   );
 }

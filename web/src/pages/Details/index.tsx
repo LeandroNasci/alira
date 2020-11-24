@@ -100,7 +100,7 @@ function Details() {
               <div className="detail-background">
                 <p>{product.description}</p>
                 <img src={aliraNotesIcon} alt="logo"/>
-                <em>Estoque disponível: {product.stock}</em>
+                <em>{/* Estoque disponível: {product.stock} */}</em>
                 <span>
                   {toReal(product.price) }
                 </span>
