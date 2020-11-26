@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import nl2br from 'react-nl2br';
 
 import Footer from '../../components/Footer';
 import PageHeader from '../../components/PageHeader';
@@ -98,7 +99,7 @@ function Details() {
               <h4>DESCRIÇÃO DO PRODUTO</h4>
 
               <div className="detail-background">
-                <p>{product.description}</p>
+                <p>{  nl2br(product.description)  }</p>
                 <img src={aliraNotesIcon} alt="logo"/>
                 <em>{/* Estoque disponível: {product.stock} */}</em>
                 <span>

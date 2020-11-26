@@ -32,12 +32,12 @@ const MobileNavbar: React.FC = () => {
         <div className="nav-bar-container">
           <Link to="/">Início</Link>
 
-          <Link to="/?type=bloquinhos" onClick={handleToggleMenu} >Bloquinhos</Link>
-          <Link to="/?type=cadernos" onClick={handleToggleMenu}>Cadernos</Link>
-          <Link to="/?type=post-its" onClick={handleToggleMenu}>Post-its</Link>
-          <Link to="/?type=canetas" onClick={handleToggleMenu}>Canetas</Link>
-          <Link to="/?type=prendedores" onClick={handleToggleMenu}>Prendedores</Link>
-          <Link to="/?type=kits" onClick={handleToggleMenu}>Kits</Link>
+          <Link to="/?type=bloquinho" onClick={handleToggleMenu} >Bloquinhos</Link>
+          <Link to="/?type=caderno" onClick={handleToggleMenu}>Cadernos</Link>
+          <Link to="/?type=post-it" onClick={handleToggleMenu}>Post-its</Link>
+          <Link to="/?type=caneta" onClick={handleToggleMenu}>Canetas</Link>
+          <Link to="/?type=prendedor" onClick={handleToggleMenu}>Prendedores</Link>
+          <Link to="/?type=kit" onClick={handleToggleMenu}>Kits</Link>
 
           <Link to="/about">Quem Somos</Link>
         </div>
