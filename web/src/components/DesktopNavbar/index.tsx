@@ -10,12 +10,12 @@ const DesktopNavbar: React.FC = () => {
         {/* <Link to="/">Menu</Link> */}
         <Link to="/">Início</Link>
 
-        <Link to="/?type=bloquinhos">Bloquinhos</Link>
-        <Link to="/?type=cadernos">Cadernos</Link>
-        <Link to="/?type=post-its">Post-its</Link>
-        <Link to="/?type=canetas">Canetas</Link>
-        <Link to="/?type=prendedores">Prendedores</Link>
-        <Link to="/?type=kits">Kits</Link>
+        <Link to="/?type=bloquinho">Bloquinhos</Link>
+        <Link to="/?type=caderno">Cadernos</Link>
+        <Link to="/?type=post-it">Post-its</Link>
+        <Link to="/?type=caneta">Canetas</Link>
+        <Link to="/?type=prendedor">Prendedores</Link>
+        <Link to="/?type=kit">Kits</Link>
 
         <Link to="/about">Quem Somos</Link>
       </div>
