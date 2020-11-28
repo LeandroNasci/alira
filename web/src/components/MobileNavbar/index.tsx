@@ -13,7 +13,7 @@ const MobileNavbar: React.FC = () => {
   }
 
   return (
-    <nav>
+    <nav id="mobile-navbar">
       <button type="button" onClick={handleToggleMenu} >
         <HamburgerButton
           open={displayMenu}
@@ -30,9 +30,9 @@ const MobileNavbar: React.FC = () => {
       { displayMenu
         ? (
         <div className="nav-bar-container">
-          <Link to="/">Início</Link>
+          <Link to="/" onClick={handleToggleMenu}>Início</Link>
 
-          <Link to="/?type=bloquinho" onClick={handleToggleMenu} >Bloquinhos</Link>
+          <Link to="/?type=bloquinho" onClick={handleToggleMenu}>Bloquinhos</Link>
           <Link to="/?type=caderno" onClick={handleToggleMenu}>Cadernos</Link>
           <Link to="/?type=post-it" onClick={handleToggleMenu}>Post-its</Link>
           <Link to="/?type=caneta" onClick={handleToggleMenu}>Canetas</Link>

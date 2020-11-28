@@ -51,8 +51,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, chil
         </div>
       </div>
 
-      {/* {!compact && <DesktopNavbar />} */}
       {!compact && <MobileNavbar />}
+      {!compact && <DesktopNavbar />}
     </header>
   );
 }

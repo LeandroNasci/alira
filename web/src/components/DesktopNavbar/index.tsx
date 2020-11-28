@@ -5,7 +5,7 @@ import './styles.css';
 
 const DesktopNavbar: React.FC = () => {
   return (
-    <nav>
+    <nav id="desktop-navbar">
       <div className="nav-bar-container">
         {/* <Link to="/">Menu</Link> */}
         <Link to="/">Início</Link>

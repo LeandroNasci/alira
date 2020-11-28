@@ -1,4 +1,4 @@
-button {
+#mobile-navbar button {
   background: var(--color-azul-de-fundo);
   border: 0;
   display: flex;
@@ -10,19 +10,19 @@ button {
   outline: 0;
 }
 
-button h3 {
+#mobile-navbar button h3 {
   font: 700 2rem Archivo;
   padding-left: 1.6rem;
 }
 
-.nav-bar-container {
+#mobile-navbar .nav-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   background: var(--color-azul-de-fundo);
 }
 
-.nav-bar-container a {
+#mobile-navbar .nav-bar-container a {
   width: 100%;
   height: 4.2rem;
   padding: 0.8rem;
@@ -35,7 +35,7 @@ button h3 {
   transition: font-weight 0.2s;
 }
 
-.nav-bar-container a:hover {
+#mobile-navbar .nav-bar-container a:hover {
   text-decoration: none;
   color: var(--color-texto-link);
   padding: 0.8rem;
@@ -43,11 +43,17 @@ button h3 {
 }
 
 @media (min-width: 300px) {
-  .nav-bar-container a {
+  #mobile-navbar .nav-bar-container a {
     font-size: 2rem;
   }
 
-  .nav-bar-container a:hover {
+  #mobile-navbar .nav-bar-container a:hover {
     font-size: 2rem;
+  }
+}
+
+@media (min-width: 750px) {
+  #mobile-navbar {
+    display: none;
   }
 }

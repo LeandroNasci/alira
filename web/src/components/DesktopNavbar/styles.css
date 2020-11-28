@@ -1,11 +1,15 @@
-.nav-bar-container {
+#desktop-navbar {
+  display: none;
+}
+
+#desktop-navbar .nav-bar-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   background: var(--color-azul-de-fundo);
 }
 
-.nav-bar-container a {
+#desktop-navbar .nav-bar-container a {
   width: 100%;
   height: 4.2rem;
   padding: 0.8rem;
@@ -18,7 +22,7 @@
   transition: font-weight 0.2s;
 }
 
-.nav-bar-container a:hover {
+#desktop-navbar .nav-bar-container a:hover {
   text-decoration: none;
   color: var(--color-texto-link);
   padding: 0.8rem;
@@ -26,28 +30,29 @@
 }
 
 @media (min-width: 300px) {
-  .nav-bar-container a {
+  #desktop-navbar .nav-bar-container a {
     font-size: 2rem;
   }
 
-  .nav-bar-container a:hover {
+  #desktop-navbar .nav-bar-container a:hover {
     font-size: 2rem;
   }
 }
 
 @media (min-width: 750px) {
-  nav {
+  #desktop-navbar {
+    display: block;
     background: var(--color-azul-de-fundo);
     padding: 0 calc(50% - 46rem);
   }
 
-  .nav-bar-container {
+  #desktop-navbar .nav-bar-container {
     flex-direction: row;
     justify-content: space-between;
     max-width: 95rem;
   }
 
-  .nav-bar-container a {
+  #desktop-navbar .nav-bar-container a {
     text-decoration: none;
     font: 400 1.6rem Archivo;
     padding: 0.8rem;
@@ -58,7 +63,7 @@
     transition: font-weight 0.2s;
   }
 
-  .nav-bar-container a:hover {
+  #desktop-navbar .nav-bar-container a:hover {
     text-decoration: none;
     font: 400 1.6rem Archivo;
   }
