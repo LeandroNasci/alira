@@ -2,7 +2,8 @@ export default interface Order {
   order_id: number;
   email: string;
   phone: string;
-  cpf: string;
+  cpf?: string;
+  cnpj?: string;
   invoice_name: string;
   invoice_lastname: string;
   invoice_cep: string;
