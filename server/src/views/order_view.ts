@@ -1,12 +1,14 @@
-import Order from "src/models/Order";
+import Order from 'src/models/Order';
+import Item from 'src/models/Item'
 
 export default {
-  render(order: Order) {
+  render(order: Order, items: Item[]) {
     return {
       order_id: order.order_id,
       email: order.email,
       phone: order.phone,
       cpf: order.cpf,
+      cnpj: order.cnpj,
       invoice: {
         name: order.invoice_name,
         lastname: order.invoice_lastname,
@@ -31,12 +33,18 @@ export default {
         city: order.shipping_city,
         state: order.shipping_state,
       },
+      items: items.map(item => ({
+        code: item.code,
+        quantity: item.quantity,
+      }))
     };
   },
 
-  renderMany(orders: Order[]) {
-    return orders.map(order => {
-        return this.render(order);
+  renderMany(orders: Order[], allItems: Item[]) {
+    return orders.map(
+      order => {
+        const yourItems = allItems.filter(item => item.order_id === order.order_id );
+        return this.render(order, yourItems);
     });
   }
 };

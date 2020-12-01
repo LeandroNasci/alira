@@ -107,8 +107,24 @@ export default {
   async index(request: Request, response: Response) {
 
     const orders = await db('orders').select('*');
+    const items = await db('items').select('*');
 
-    return response.json(orders);
-    // return response.json(orderView.renderMany(orders));
+    return response.json(orderView.renderMany(orders, items));
+  },
+
+  async show(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const order = await db('orders').where('order_id', id).first();
+
+    if (!order) {
+      return response.status(400).json({ message: 'Order not found.' });
+    }
+
+    const items = await db('items')
+        .select('*')
+        .where('order_id', order.order_id);
+
+    return response.json(orderView.render(order, items));
   },
 }

@@ -108,18 +108,19 @@ export default {
     if(type) {
       const products = await db('products')
         .select('*')
-        .where('category', String(type) );
+        .where('category', String(type) )
+        .orderBy('code');
       const images = await db('products')
         .select('images.*')
         .join('images', 'products.id', '=', 'images.product_id')
-        .where('category', String(type));
-      console.log(images);
+        .where('category', String(type))
+        .orderBy('name');
 
       return response.json(productView.renderMany(products, images));
     }
 
-    const products = await db('products').select('*');
-    const images = await db('images').select('*');
+    const products = await db('products').select('*').orderBy('code');
+    const images = await db('images').select('*').orderBy('name');
 
     return response.json(productView.renderMany(products, images));
   },
@@ -136,7 +137,8 @@ export default {
     const images = await db('products')
         .select('*')
         .join('images', 'products.id', '=', 'images.product_id')
-        .where('product_id', id);
+        .where('product_id', id)
+        .orderBy('name');
 
     return response.json(productView.render(product, images));
   },
