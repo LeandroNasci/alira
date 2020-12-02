@@ -134,11 +134,10 @@ export default {
       return response.status(400).json({ message: 'Product not found.' });
     }
 
-    const images = await db('products')
+    const images = await db('images')
         .select('*')
-        .join('images', 'products.id', '=', 'images.product_id')
         .where('product_id', id)
-        .orderBy('name');
+        .orderBy('images.name');
 
     return response.json(productView.render(product, images));
   },
@@ -156,9 +155,6 @@ export default {
           .select('stock')
           .where('code', item.code )
           .first();
-
-          console.log('pr' ,product);
-
 
         await trx('products')
           .where('code', item.code )
