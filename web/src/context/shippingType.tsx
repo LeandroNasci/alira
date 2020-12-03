@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 
-interface Shipping {
+export interface Shipping {
   category: number;
   price: number;
   days: number;

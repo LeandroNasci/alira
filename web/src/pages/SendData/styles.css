@@ -65,6 +65,10 @@ font-size: 1.4rem;
 color: var(--color-texto-escuro);
 }
 
+#page-send-data .form-group .input-block input[readonly] {
+  background: var(--color-cinza-formulario);
+}
+
 #page-send-data .send-type {
   margin: 1.6rem 1.6rem 0;
   padding: 1.6rem 1.6rem 0;

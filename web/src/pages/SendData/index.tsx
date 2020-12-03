@@ -1,53 +1,67 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { FiMail, FiTruck, FiClipboard } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
+import { consultarCep } from 'correios-brasil';
 
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import { CEPInput, CNPJInput, CPFInput, PhoneInput } from '../../components/MaskedInputs';
-
-import progressImg from '../../assets/images/progress1.png';
 import CartList from '../../components/CartList';
 import Radio from '../../components/Radio';
 import CheckBox from '../../components/CheckBox';
+import { useShippingType } from '../../context/shippingType';
+
+import progressImg from '../../assets/images/progress1.png';
 
 import './styles.css';
 
-export interface Costumer {
+export interface FormData {
   email: string;
   phone: string;
-  shippingType: number;
-  cpf: string;
+  cpf?: string;
   cnpj?: string;
-  firstname?: string;
-  lastname?: string;
-  cep?: string;
-  street?: string;
-  number?: string;
-  complement?: string;
-  district?: string;
-  city?: string;
-  state?: string;
-  country?: string;
-  iFirstname: string;
-  iLastname: string;
-  iCep: string;
-  iStreet: string;
-  iNumber: string;
-  iComplement: string;
-  iDistrict: string;
-  iCity: string;
-  iState: string;
-  iCountry: string;
+  invoice: {
+    iFirstname: string;
+    iLastname: string;
+    iCep: string;
+    iStreet: string;
+    iNumber: string;
+    iComplement: string;
+    iDistrict: string;
+    iCity: string;
+    iState: string;
+    iCountry: string;
+  };
+  shippingAddress?: {
+    firstname: string;
+    lastname: string;
+    cep: string;
+    street: string;
+    number: string;
+    complement: string;
+    district: string;
+    city: string;
+    state: string;
+    country: string;
+  };
+}
+
+interface viacepresponse {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
 }
 
 function SendData() {
+
   const [isDeliveryVisible,setIsDeliveryVisible] = useState(true);
   const [isInvoiceAdressEqual,setIsInvoiceAdressEqual] = useState(false);
 
   const [email,setEmail] = useState('');
   const [phone,setPhone] = useState('');
-  const [shippingType,setShippingType] = useState(1);
   const [cpf,setCpf] = useState('');
   const [cnpj,setCnpj] = useState('');
 
@@ -74,46 +88,66 @@ function SendData() {
   const [iCountry,setICountry] = useState('');
 
   const history = useHistory()
+  const { updateShipping } = useShippingType();
+
 
   function handleContinue(event: FormEvent) {
     event.preventDefault();
 
-    const params = {
+    const params: FormData = {
       email,
       phone,
-      shippingType,
       cpf,
       cnpj,
-      firstname,
-      lastname,
-      cep,
-      street,
-      number,
-      complement,
-      district,
-      city,
-      state,
-      country,
-      iFirstname,
-      iLastname,
-      iCep,
-      iStreet,
-      iNumber,
-      iComplement,
-      iDistrict,
-      iCity,
-      iState,
-      iCountry,
+      invoice: {
+        iFirstname,
+        iLastname,
+        iCep,
+        iStreet,
+        iNumber,
+        iComplement,
+        iDistrict,
+        iCity,
+        iState,
+        iCountry,
+      },
+      shippingAddress: {
+        firstname,
+        lastname,
+        cep,
+        street,
+        number,
+        complement,
+        district,
+        city,
+        state,
+        country,
+      },
     };
 
-    console.log({message: 'parametros do formulario'}, params);
     history.push("/shipping-select", params);
-
   }
 
   function handleToggleDeliveryVisible (event: ChangeEvent<HTMLInputElement> ) {
-    setIsDeliveryVisible( event.target.value === '1' ? true : false );
-    setShippingType(Number(event.target.value));
+    if(event.target.value === '1') {
+      setIsDeliveryVisible(true);
+      updateShipping({
+        category: Number(event.target.value),
+        price: 24.30,
+        days: 9
+      });
+    }
+    else {
+      setIsDeliveryVisible(false);
+      updateShipping({
+        category: Number(event.target.value),
+        price: 0,
+        days: 0
+      });
+    }
+
+    //calcular frete
+
     setIsInvoiceAdressEqual(false);
   }
 
@@ -121,17 +155,51 @@ function SendData() {
     setIsInvoiceAdressEqual(!isInvoiceAdressEqual);
   }
 
+  function handleInputShippingAddressCep (event: ChangeEvent<HTMLInputElement>) {
+    if( !event.target.value.includes('_') && event.target.value !=='') {
+      setCep(event.target.value);
 
-  function handleCopyForm() {
-    console.log('copia as informações');
+      consultarCep(event.target.value).then((response: viacepresponse) => {
+        console.log(response);
+        setStreet(response.logradouro);
+        setDistrict(response.bairro);
+        setCity(response.localidade);
+        setState(response.uf);
+        setCountry('Brasil');
+      });
+    }
+  }
+
+  function handleInputInvoiceCep (event: ChangeEvent<HTMLInputElement>) {
+    if( !event.target.value.includes('_') && event.target.value !=='' ) {
+      setICep(event.target.value);
+
+      consultarCep(event.target.value).then((response: viacepresponse) => {
+        console.log(response);
+        setIStreet(response.logradouro);
+        setIDistrict(response.bairro);
+        setICity(response.localidade);
+        setIState(response.uf);
+        setICountry('Brasil');
+      });
+    }
   }
 
   useEffect(() => {
     if(isInvoiceAdressEqual) {
-      handleCopyForm();
+      setIFirstname(firstname);
+      setILastname(lastname);
+      setICep(cep);
+      setIStreet(street);
+      setINumber(number);
+      setIComplement(complement);
+      setIDistrict(district);
+      setICity(city);
+      setIState(state);
+      setICountry(country);
     }
 
-  },[isInvoiceAdressEqual]);
+  },[cep, city, complement, country, district, firstname, isInvoiceAdressEqual, lastname, number, state, street]);
 
 
   return (
@@ -205,7 +273,7 @@ function SendData() {
                     name="cep"
                     placeholder="CEP"
                     value={cep}
-                    onChange={event => setCep(event.target.value)}
+                    onChange={handleInputShippingAddressCep}
                   />
                   <div className="field-group">
                     <Input
@@ -213,6 +281,7 @@ function SendData() {
                       type="text"
                       name="street"
                       placeholder="Endereço"
+                      readOnly
                       value={street}
                       onChange={event => setStreet(event.target.value)}
                     />
@@ -238,6 +307,7 @@ function SendData() {
                     type="text"
                     name="district"
                     placeholder="Bairro"
+                    readOnly
                     value={district}
                     onChange={event => setDistrict(event.target.value)}
                   />
@@ -247,6 +317,7 @@ function SendData() {
                       type="text"
                       name="city"
                       placeholder="Cidade"
+                      readOnly
                       value={city}
                       onChange={event => setCity(event.target.value)}
                     />
@@ -255,6 +326,7 @@ function SendData() {
                       type="text"
                       name="state"
                       placeholder="Estado"
+                      readOnly
                       value={state}
                       onChange={event => setState(event.target.value)}
                     />
@@ -263,6 +335,7 @@ function SendData() {
                       type="text"
                       name="country"
                       placeholder="País"
+                      readOnly
                       value={country}
                       onChange={event => setCountry(event.target.value)}
                     />
@@ -321,7 +394,7 @@ function SendData() {
                       name="icep"
                       placeholder="CEP"
                       value={iCep}
-                      onChange={event => setICep(event.target.value)}
+                      onChange={handleInputInvoiceCep}
                     />
 
                     <div className="field-group">
@@ -330,6 +403,7 @@ function SendData() {
                         type="text"
                         name="istreet"
                         placeholder="Endereço"
+                        readOnly
                         value={iStreet}
                         onChange={event => setIStreet(event.target.value)}
                       />
@@ -355,6 +429,7 @@ function SendData() {
                       type="text"
                       name="idistrict"
                       placeholder="Bairro"
+                      readOnly
                       value={iDistrict}
                       onChange={event => setIDistrict(event.target.value)}
                     />
@@ -364,6 +439,7 @@ function SendData() {
                         type="text"
                         name="icity"
                         placeholder="Cidade"
+                        readOnly
                         value={iCity}
                         onChange={event => setICity(event.target.value)}
                       />
@@ -372,6 +448,7 @@ function SendData() {
                         type="text"
                         name="istate"
                         placeholder="Estado"
+                        readOnly
                         value={iState}
                         onChange={event => setIState(event.target.value)}
                       />
@@ -380,6 +457,7 @@ function SendData() {
                         type="text"
                         name="icountry"
                         placeholder="País"
+                        readOnly
                         value={iCountry}
                         onChange={event => setICountry(event.target.value)}
                       />
