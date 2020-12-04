@@ -5,6 +5,8 @@ import uploadConfig from './config/multer';
 
 import ProductsController from './controllers/ProductsController';
 import OrderController from './controllers/OrderController';
+import ZipCodeController from './controllers/ZipCodeController';
+import ShippingController from './controllers/ShippingController';
 
 const routes = Router();
 const upload = multer(uploadConfig);
@@ -18,5 +20,8 @@ routes.delete('/products/:id', ProductsController.delete);                      
 routes.get('/orders', OrderController.index);                                  //listar pedidos
 routes.get('/orders/:id', OrderController.show);                                  //listar pedidos
 routes.post('/checkout', OrderController.create);                               //finalizar a compra
+
+routes.get('/cep/:cep', ZipCodeController.show);
+routes.get('/preco', ShippingController.index);
 
 export default routes;
