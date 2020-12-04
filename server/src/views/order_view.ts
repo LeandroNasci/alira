@@ -20,7 +20,7 @@ export default {
         city: order.invoice_city,
         state: order.invoice_state,
       },
-      shippingCategory: order.shipping_category,
+      shippingType: order.shipping_type,
       shippingCost: order.shipping_cost,
       shipping: {
         name: order.shipping_name,

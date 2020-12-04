@@ -25,7 +25,7 @@ export async function up(knex: Knex) {
     table.string('invoice_state', 2).notNullable();
 
     /* entrega */
-    table.string('shipping_category').notNullable();
+    table.string('shipping_type').notNullable();
     table.decimal('shipping_cost').notNullable(); /* frete */
 
     table.string('shipping_name');

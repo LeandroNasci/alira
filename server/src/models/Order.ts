@@ -13,7 +13,7 @@ export default interface Order {
   invoice_district: string;
   invoice_city: string;
   invoice_state: string;
-  shipping_category: string;
+  shipping_type: string;
   shipping_cost: string;
   shipping_name: string;
   shipping_lastname: string;
