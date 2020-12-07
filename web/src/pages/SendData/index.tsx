@@ -1,7 +1,12 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { FiMail, FiTruck, FiClipboard } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
-import { consultarCep } from 'correios-brasil';
+
+import { useShippingType } from '../../context/shippingType';
+import { useShoppingCart } from '../../context/shoppingCart';
+import { useFormData, FormData } from '../../context/formData';
+import api from '../../services/api';
+import sanitization from '../../utils/sanatization';
 
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
@@ -9,86 +14,70 @@ import { CEPInput, CNPJInput, CPFInput, PhoneInput } from '../../components/Mask
 import CartList from '../../components/CartList';
 import Radio from '../../components/Radio';
 import CheckBox from '../../components/CheckBox';
-import { useShippingType } from '../../context/shippingType';
 
 import progressImg from '../../assets/images/progress1.png';
 
 import './styles.css';
 
-export interface FormData {
-  email: string;
-  phone: string;
-  cpf?: string;
-  cnpj?: string;
-  invoice: {
-    iFirstname: string;
-    iLastname: string;
-    iCep: string;
-    iStreet: string;
-    iNumber: string;
-    iComplement: string;
-    iDistrict: string;
-    iCity: string;
-    iState: string;
-    iCountry: string;
-  };
-  shippingAddress?: {
-    firstname: string;
-    lastname: string;
-    cep: string;
-    street: string;
-    number: string;
-    complement: string;
-    district: string;
-    city: string;
-    state: string;
-    country: string;
-  };
-}
-
-interface viacepresponse {
-  cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-}
-
 function SendData() {
+  //hocks
+  const history = useHistory();
+  const { formData, updateFormData } = useFormData();
+  const { shipping, updateShipping } = useShippingType();
+  const { calcCartSize, cartLength, cartWidth, cartHeight, cartWeight } = useShoppingCart();
 
-  const [isDeliveryVisible,setIsDeliveryVisible] = useState(true);
-  const [isInvoiceAdressEqual,setIsInvoiceAdressEqual] = useState(false);
+  //states
+  const [frete, setFrete] = useState(shipping.price);
+  const [prasoFrete, setPrasoFrete] = useState(0);
+  const [isDeliveryVisible, setIsDeliveryVisible] = useState(true);
+  const [isInvoiceAdressEqual, setIsInvoiceAdressEqual] = useState(false);
 
-  const [email,setEmail] = useState('');
-  const [phone,setPhone] = useState('');
-  const [cpf,setCpf] = useState('');
-  const [cnpj,setCnpj] = useState('');
+  const [email, setEmail] = useState(formData.email);
+  const [phone, setPhone] = useState(formData.phone);
+  const [cpf, setCpf] = useState(formData.cpf);
+  const [cnpj, setCnpj] = useState(formData.cnpj);
 
-  const [firstname,setFirstname] = useState('');
-  const [lastname,setLastname] = useState('');
-  const [cep,setCep] = useState('');
-  const [street,setStreet] = useState('');
-  const [number,setNumber] = useState('');
-  const [complement,setComplement] = useState('');
-  const [district,setDistrict] = useState('');
-  const [city,setCity] = useState('');
-  const [state,setState] = useState('');
-  const [country,setCountry] = useState('');
+  const [firstname, setFirstname] = useState(formData.shippingAddress.firstname);
+  const [lastname, setLastname] = useState(formData.shippingAddress.lastname);
+  const [cep, setCep] = useState(formData.shippingAddress.cep);
+  const [street, setStreet] = useState(formData.shippingAddress.street);
+  const [number, setNumber] = useState(formData.shippingAddress.number);
+  const [complement, setComplement] = useState(formData.shippingAddress.complement);
+  const [district, setDistrict] = useState(formData.shippingAddress.district);
+  const [city, setCity] = useState(formData.shippingAddress.city);
+  const [state, setState] = useState(formData.shippingAddress.state);
+  const [country, setCountry] = useState(formData.shippingAddress.country);
 
-  const [iFirstname,setIFirstname] = useState('');
-  const [iLastname,setILastname] = useState('');
-  const [iCep,setICep] = useState('');
-  const [iStreet,setIStreet] = useState('');
-  const [iNumber,setINumber] = useState('');
-  const [iComplement,setIComplement] = useState('');
-  const [iDistrict,setIDistrict] = useState('');
-  const [iCity,setICity] = useState('');
-  const [iState,setIState] = useState('');
-  const [iCountry,setICountry] = useState('');
+  const [iFirstname, setIFirstname] = useState(formData.invoice.iFirstname);
+  const [iLastname, setILastname] = useState(formData.invoice.iLastname);
+  const [iCep, setICep] = useState(formData.invoice.iCep);
+  const [iStreet, setIStreet] = useState(formData.invoice.iStreet);
+  const [iNumber, setINumber] = useState(formData.invoice.iNumber);
+  const [iComplement, setIComplement] = useState(formData.invoice.iComplement);
+  const [iDistrict, setIDistrict] = useState(formData.invoice.iDistrict);
+  const [iCity, setICity] = useState(formData.invoice.iCity);
+  const [iState, setIState] = useState(formData.invoice.iState);
+  const [iCountry, setICountry] = useState(formData.invoice.iCountry);
 
-  const history = useHistory()
-  const { updateShipping } = useShippingType();
+
+  useEffect(() => {
+    if (isInvoiceAdressEqual) {
+      setIFirstname(firstname);
+      setILastname(lastname);
+      setICep(cep);
+      setIStreet(street);
+      setINumber(number);
+      setIComplement(complement);
+      setIDistrict(district);
+      setICity(city);
+      setIState(state);
+      setICountry(country);
+    }
+  }, [cep, city, complement, country, district, firstname, isInvoiceAdressEqual, lastname, number, state, street]);
+
+  useEffect(() => {
+    calcCartSize();
+  }, [calcCartSize]);
 
 
   function handleContinue(event: FormEvent) {
@@ -125,28 +114,28 @@ function SendData() {
       },
     };
 
-    history.push("/shipping-select", params);
+    updateFormData(params);
+    history.push("/shipping-select");
   }
 
-  function handleToggleDeliveryVisible (event: ChangeEvent<HTMLInputElement> ) {
-    if(event.target.value === '1') {
+  function handleToggleDeliveryVisible(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.value === '1') { //correios
       setIsDeliveryVisible(true);
       updateShipping({
-        category: Number(event.target.value),
-        price: 24.30,
-        days: 9
+        category: 1,
+        price: frete,
+        days: prasoFrete
       });
     }
-    else {
+    else { //são carlos
       setIsDeliveryVisible(false);
       updateShipping({
         category: Number(event.target.value),
         price: 0,
         days: 0
       });
-    }
 
-    //calcular frete
+    }
 
     setIsInvoiceAdressEqual(false);
   }
@@ -155,58 +144,73 @@ function SendData() {
     setIsInvoiceAdressEqual(!isInvoiceAdressEqual);
   }
 
-  function handleInputShippingAddressCep (event: ChangeEvent<HTMLInputElement>) {
-    if( !event.target.value.includes('_') && event.target.value !=='') {
-      setCep(event.target.value);
-
-      consultarCep(event.target.value).then((response: viacepresponse) => {
-        console.log(response);
-        setStreet(response.logradouro);
-        setDistrict(response.bairro);
-        setCity(response.localidade);
-        setState(response.uf);
-        setCountry('Brasil');
-      });
-    }
-  }
-
-  function handleInputInvoiceCep (event: ChangeEvent<HTMLInputElement>) {
-    if( !event.target.value.includes('_') && event.target.value !=='' ) {
+  async function handleInputInvoiceCep(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.value.includes('_') && event.target.value !== '') {
       setICep(event.target.value);
+      const param = sanitization(event.target.value);
 
-      consultarCep(event.target.value).then((response: viacepresponse) => {
-        console.log(response);
-        setIStreet(response.logradouro);
-        setIDistrict(response.bairro);
-        setICity(response.localidade);
-        setIState(response.uf);
-        setICountry('Brasil');
-      });
+      const response = await api.get(`/cep/${param}`);
+
+      setIStreet(response.data.logradouro);
+      setIDistrict(response.data.bairro);
+      setICity(response.data.localidade);
+      setIState(response.data.uf);
+      setICountry('Brasil');
     }
   }
 
-  useEffect(() => {
-    if(isInvoiceAdressEqual) {
-      setIFirstname(firstname);
-      setILastname(lastname);
-      setICep(cep);
-      setIStreet(street);
-      setINumber(number);
-      setIComplement(complement);
-      setIDistrict(district);
-      setICity(city);
-      setIState(state);
-      setICountry(country);
+  async function handleInputShippingAddressCep(event: ChangeEvent<HTMLInputElement>) {
+
+    if (!event.target.value.includes('_') && event.target.value !== '') {
+      setCep(event.target.value);
+      const cep = sanitization(event.target.value);
+
+      const response = await api.get(`/cep/${cep}`);
+
+      setStreet(response.data.logradouro);
+      setDistrict(response.data.bairro);
+      setCity(response.data.localidade);
+      setState(response.data.uf);
+      setCountry('Brasil');
+
+      handleCalculateShippingCost(cep);
     }
+  }
 
-  },[cep, city, complement, country, district, firstname, isInvoiceAdressEqual, lastname, number, state, street]);
+  async function handleCalculateShippingCost(cep: string) {
+    const args = {
+      sCepOrigem: process.env.REACT_APP_CEP_ORIGEM || '13561000',
+      sCepDestino: sanitization(cep),
+      nVlPeso: cartWeight,
+      nCdFormato: '1',             //1:caixa  2:cilindro
+      nVlComprimento: cartLength,
+      nVlAltura: cartHeight,
+      nVlLargura: cartWidth,
+      nCdServico: ["04510"],       //PAC
+      nVlDiametro: '0',
+    };
 
+    try {
+      const response = await api.post('/preco', args);
+      setFrete(Number(response.data[0].Valor.replace(",", ".")) * 0.9);
+      setPrasoFrete(Number(response.data[0].PrazoEntrega));
+
+      updateShipping({
+        ...shipping,
+        price: Number(response.data[0].Valor.replace(",", ".")) * 0.9,
+        days: Number(response.data[0].PrazoEntrega)
+      });
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div id="page-send-data" className="container">
-      <PageHeader compact/>
+      <PageHeader compact />
 
-      <img className="progress" src={progressImg} alt="Etapa 1 de 3"/>
+      <img className="progress" src={progressImg} alt="Etapa 1 de 3" />
 
       <div className="send-data-content">
 
@@ -236,17 +240,17 @@ function SendData() {
             </div>
 
             <div className="send-type">
-                <Radio required name="send-type" value="3" onChange={handleToggleDeliveryVisible}>
-                  <b>Retirar os produtos diretamento com o VENDEDOR</b>
-                  <span>(Caso resida em São Carlos-SP)</span>
-                </Radio>
-                <Radio required name="send-type" value="1" onChange={handleToggleDeliveryVisible}>
-                  <b>Receber os produtos em casa pelos </b><em>CORREIOS</em>
-                  <span>(Informe o endereço de entrega a seguir)</span>
-                </Radio>
+              <Radio required name="send-type" value="3" onChange={handleToggleDeliveryVisible}>
+                <b>Retirar os produtos diretamento com o VENDEDOR</b>
+                <span>(Caso resida em São Carlos-SP)</span>
+              </Radio>
+              <Radio required name="send-type" value="1" onChange={handleToggleDeliveryVisible}>
+                <b>Receber os produtos em casa pelos </b><em>CORREIOS</em>
+                <span>(Informe o endereço de entrega a seguir)</span>
+              </Radio>
             </div>
 
-            { isDeliveryVisible && (
+            {isDeliveryVisible && (
               <div id="delivery-adress" className="form-group">
                 <fieldset >
                   <legend>
@@ -366,8 +370,8 @@ function SendData() {
                     onChange={event => setCnpj(event.target.value)}
                   />
                 </div>
-                { isDeliveryVisible && (
-                  <CheckBox name="repeat" onChange={ handleToggleInvoiceForm } >
+                {isDeliveryVisible && (
+                  <CheckBox name="repeat" onChange={handleToggleInvoiceForm} >
                     Minhas informações da Nota Fiscal e da Entrega são as mesmas
                   </CheckBox>
                 )}
@@ -478,7 +482,7 @@ function SendData() {
         </form>
 
       </div>
-      <img className="progress" src={progressImg} alt="Etapa 1 de 3"/>
+      <img className="progress" src={progressImg} alt="Etapa 1 de 3" />
 
     </div>
   );

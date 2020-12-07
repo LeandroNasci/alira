@@ -17,16 +17,11 @@ const ShippingTypeContext = createContext<ShippingTypeContext | null>(null);
 
 /* define provider functions  */
 const ShippingTypeProvider: React.FC = ({ children }) => {
-  const [shipping,setShipping] = useState<Shipping>({ category: 1, price: 24.30, days: 9 });
+  const [shipping,setShipping] = useState<Shipping>({ category: 1, price: 1, days: 8 });
 
   const updateShipping = useCallback((object: Shipping) => {
-    setShipping({
-      category: object.category,
-      price: object.price,
-      days: object.days
-    });
+    setShipping( object );
   },[])
-
 
   return (
     <ShippingTypeContext.Provider value={{

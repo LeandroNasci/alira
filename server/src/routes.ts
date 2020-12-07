@@ -22,6 +22,6 @@ routes.get('/orders/:id', OrderController.show);                                
 routes.post('/checkout', OrderController.create);                               //finalizar a compra
 
 routes.get('/cep/:cep', ZipCodeController.show);
-routes.get('/preco', ShippingController.index);
+routes.post('/preco', ShippingController.index);
 
 export default routes;
