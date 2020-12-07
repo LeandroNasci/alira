@@ -35,10 +35,8 @@ const Home: React.FC = () => {
   },[query])
 
   useEffect(() => {
-    api.get('/products', {params: { type: filterType }}).then(({ data, config }) => {
-      console.log( { data: data }, { config: config } );
-
-      setProducts(data);
+    api.get('/products', {params: { type: filterType }}).then(response => {
+      setProducts(response.data);
 
       setTimeout(() => {
         setIsLoading(false);
