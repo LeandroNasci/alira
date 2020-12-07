@@ -9,6 +9,7 @@ import api from '../../services/api';
 import sanitization from '../../utils/sanatization';
 
 import PageHeader from '../../components/PageHeader';
+import Footer from '../../components/Footer';
 import Input from '../../components/Input';
 import { CEPInput, CNPJInput, CPFInput, PhoneInput } from '../../components/MaskedInputs';
 import CartList from '../../components/CartList';
@@ -484,6 +485,7 @@ function SendData() {
       </div>
       <img className="progress" src={progressImg} alt="Etapa 1 de 3" />
 
+      <Footer compact />
     </div>
   );
 }

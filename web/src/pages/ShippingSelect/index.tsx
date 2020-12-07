@@ -3,6 +3,7 @@ import { FiMail, FiTruck, FiClipboard, FiPackage, FiArrowLeft, FiUsers } from 'r
 import { useHistory } from 'react-router-dom';
 
 import PageHeader from '../../components/PageHeader';
+import Footer from '../../components/Footer';
 import Radio from '../../components/Radio';
 import CartList from '../../components/CartList';
 import CheckBox from '../../components/CheckBox';
@@ -245,6 +246,7 @@ function ShippingSelect () {
 
       <img className="progress" src={progressImg} alt="Etapa 2 de 3"/>
 
+      <Footer compact />
     </div>
   );
 }
