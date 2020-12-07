@@ -37,8 +37,22 @@ const CartList: React.FC = ({ children }) => {
       })}
 
       <div className="cart-value"><h5>Valor do Carrinho</h5> <span>{toReal(cartValue)}</span></div>
-      <div className="shipping-value"><h5>Valor do Frete</h5> <span>{toReal(shipping.price)}</span></div>
-      <div className="total-value"><h5>Total</h5> <span>{toReal(cartValue + shipping.price)}</span></div>
+      <div className="shipping-value"><h5>Valor do Frete</h5>
+        <span>
+          { (shipping.price === 1)
+            ? 'R$ --,--'
+            : toReal(shipping.price)
+          }
+        </span>
+      </div>
+      <div className="total-value"><h5>Total</h5>
+        <span>
+          { (shipping.price === 1)
+            ? 'R$ --,--'
+            : toReal(cartValue + shipping.price)
+          }
+        </span>
+      </div>
       {children}
     </div>
   );
