@@ -1,12 +1,15 @@
 import React from 'react';
 import { ShippingTypeProvider } from './shippingType';
 import { ShoppingCartProvider } from './shoppingCart';
+import { FormDataProvider } from './formData';
 
 const AppProvider: React.FC = ({children}) => {
   return (
     <ShoppingCartProvider>
       <ShippingTypeProvider>
-        {children}
+        <FormDataProvider>
+          {children}
+        </FormDataProvider>
       </ShippingTypeProvider>
     </ShoppingCartProvider>
   );
