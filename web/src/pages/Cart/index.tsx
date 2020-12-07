@@ -6,61 +6,23 @@ import ProductItem from '../../components/ProductItem';
 import Footer from '../../components/Footer';
 import PageHeader from '../../components/PageHeader';
 import toReal from '../../utils/toReal';
-
+import sanitization from '../../utils/sanatization';
+import api from '../../services/api';
 import { useShoppingCart } from '../../context/shoppingCart';
 
 import './styles.css';
-
-
-interface ConsultarCep {
-  cep: number;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-  unidade: string;
-  ibge: number;
-  gia: number;
-}
-
-interface CalcularPrecoPrazo {
-  Codigo: number;
-  Valor: number;
-  PrazoEntrega: number;
-  ValorSemAdicionais: number;
-  ValorMaoPropria: number;
-  ValorAvisoRecebimento: number;
-  ValorValorDeclarado: number;
-  EntregaDomiciliar: string;
-  EntregaSabado: string;
-  obsFim: string;
-  Erro: string;
-  MsgErro: string;
-}
-
-interface RastrearEncomendas {
-  data: Array<{
-    status: string;
-    data: string;
-    hora: string;
-    local?: string;
-    origem?: string;
-    destino?: string;
-  }>
-}
-
-
-
-
 
 function Cart() {
   const history = useHistory();
   const { addedItems } = useShoppingCart();
 
   const [amount, setAmount] = useState(0);
-  const [isShippingVisible,setIsShippingVsible] = useState(false);
-
+  const [isShippingVisible,setIsShippingVisible] = useState(false);
+  const [zipCode,setZipCode] = useState('');
+  const [pacCorreios,setPacCorreios] = useState(0);
+  const [sedexCorreios,setSedexCorreios] = useState(0);
+  const [prasoPacCorreios,setPrasoPacCorreios] = useState(0);
+  const [prasoSedexCorreios,setPrasoSedexCorreios] = useState(0);
 
   useEffect(() => {
 
@@ -80,53 +42,32 @@ function Cart() {
     history.push('/');
   }
 
-  function handleCalculateShippingCost(event: FormEvent) {
+  async function handleCalculateShippingCost(event: FormEvent) {
     event.preventDefault();
 
+    const  args = {
+      sCepOrigem:  process.env.REACT_APP_CEP_ORIGEM || '13561000',
+      sCepDestino:  sanitization(zipCode),
+      nVlPeso:  '1',
+      nCdFormato:  '1',
+      nVlComprimento:  '20',
+      nVlAltura:  '20',
+      nVlLargura:  '20',
+      nCdServico:  ["04014", "04510"],
+      nVlDiametro:  '0',
+    };
 
-// const cep = '14177260';
-
-// consultarCep(cep).then((response: ConsultarCep) => {
-//   console.log(response);
-// });
-
-
-
-// const  args = {
-//   sCepOrigem:  '13561049',
-//   sCepDestino:  '14177260',
-//   nVlPeso:  '1',
-//   nCdFormato:  '1',
-//   nVlComprimento:  '20',
-//   nVlAltura:  '20',
-//   nVlLargura:  '20',
-//   nCdServico:  '04510',
-//   nVlDiametro:  '0',
-// };
-
-// calcularPrecoPrazo(args).then((response: CalcularPrecoPrazo) => {
-//   console.log(response);
-// });
-
-
-
-
-
-// const  codRastreio = ['PW639018542BR', 'PW935793588BR'] // array de códigos de rastreios
-
-// rastrearEncomendas(codRastreio).then((response: RastrearEncomendas) => {
-//   console.log(response);
-// });
-
-
-
-
-
-
-
-    /* Calculo de frete */
-
-    setIsShippingVsible(true);
+    try {
+      const response = await api.post('/preco', args);
+      setSedexCorreios( Number(response.data[0].Valor.replace(",", ".")) );
+      setPacCorreios( Number(response.data[1].Valor.replace(",", ".")) );
+      setPrasoSedexCorreios(response.data[0].PrazoEntrega);
+      setPrasoPacCorreios(response.data[1].PrazoEntrega);
+    }
+    catch (err) {
+      console.log(err);
+    }
+    setIsShippingVisible(true);
   }
 
   return (
@@ -151,10 +92,7 @@ function Cart() {
             );
           })}
 
-
-
           <button type="button" onClick={handleGoToHome}>Adicionar outros produtos</button>
-
         </div>
 
         <div className="cart-bar">
@@ -174,7 +112,11 @@ function Cart() {
             </div>
             <p>Digite seu CEP no campo abaixo para estimar o frete e saber o prazo de entrega estimados</p>
             <form className="zip-code" onSubmit={handleCalculateShippingCost} >
-              <input type="text" placeholder="13561-000" />
+              <input
+                type="text"
+                placeholder="13561-000"
+                onChange={ (e) => { setZipCode(e.target.value) } }
+              />
               <button type="submit">Estimar Frete</button>
             </form>
             { isShippingVisible && (
@@ -183,26 +125,26 @@ function Cart() {
                   <div className="correio-price">
                     <div>
                       <h5>PAC</h5>
-                      <span>Entrega em até 11 dias úteis</span>
+                      <span>Entrega em até {prasoPacCorreios} dias úteis</span>
                     </div>
-                    <h6 id="strike">R$ 24,30</h6>
+                    <h6 id="strike">{toReal(pacCorreios)}</h6>
                   </div>
                   <div className="alira-price">
                     <p>Na ALIRA somente por</p>
-                    <h6>R$ 21,87</h6>
+                    <h6>{toReal(pacCorreios * 0.9)}</h6>
                   </div>
                 </div>
                 <div className="shipping-cost">
                   <div className="correio-price">
                     <div>
                       <h5>SEDEX</h5>
-                      <span>Entrega em até 6 dias úteis</span>
+                      <span>Entrega em até {prasoSedexCorreios} dias úteis</span>
                     </div>
-                    <h6 id="strike">R$ 25,80</h6>
+                    <h6 id="strike">{toReal(sedexCorreios)}</h6>
                   </div>
                   <div className="alira-price">
                     <p>Na ALIRA somente por</p>
-                    <h6>R$ 21,93</h6>
+                    <h6>{toReal(sedexCorreios * 0.9)}</h6>
                   </div>
                 </div>
               </div>

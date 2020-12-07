@@ -157,7 +157,7 @@
   max-width: 24rem;
   margin-top: 0.8rem;
   border-radius: 0.6rem;
-  background: var(--color-cinza-formulario);
+  background: var(--color-background);
   border: 2px solid var(--color-texto-escuro);
   outline: 0;
   padding: 0 1.6rem;
