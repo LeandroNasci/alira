@@ -38,7 +38,7 @@ function SendData() {
   const [cpf, setCpf] = useState(formData.cpf);
   const [cnpj, setCnpj] = useState(formData.cnpj);
 
-  const [firstname, setFirstname] = useState(formData.shippingAddress.firstname);
+  const [firstname, setFirstname] = useState(formData.shippingAddress.name);
   const [lastname, setLastname] = useState(formData.shippingAddress.lastname);
   const [cep, setCep] = useState(formData.shippingAddress.cep);
   const [street, setStreet] = useState(formData.shippingAddress.street);
@@ -49,16 +49,16 @@ function SendData() {
   const [state, setState] = useState(formData.shippingAddress.state);
   const [country, setCountry] = useState(formData.shippingAddress.country);
 
-  const [iFirstname, setIFirstname] = useState(formData.invoice.iFirstname);
-  const [iLastname, setILastname] = useState(formData.invoice.iLastname);
-  const [iCep, setICep] = useState(formData.invoice.iCep);
-  const [iStreet, setIStreet] = useState(formData.invoice.iStreet);
-  const [iNumber, setINumber] = useState(formData.invoice.iNumber);
-  const [iComplement, setIComplement] = useState(formData.invoice.iComplement);
-  const [iDistrict, setIDistrict] = useState(formData.invoice.iDistrict);
-  const [iCity, setICity] = useState(formData.invoice.iCity);
-  const [iState, setIState] = useState(formData.invoice.iState);
-  const [iCountry, setICountry] = useState(formData.invoice.iCountry);
+  const [iFirstname, setIFirstname] = useState(formData.invoice.name);
+  const [iLastname, setILastname] = useState(formData.invoice.lastname);
+  const [iCep, setICep] = useState(formData.invoice.cep);
+  const [iStreet, setIStreet] = useState(formData.invoice.street);
+  const [iNumber, setINumber] = useState(formData.invoice.number);
+  const [iComplement, setIComplement] = useState(formData.invoice.complement);
+  const [iDistrict, setIDistrict] = useState(formData.invoice.district);
+  const [iCity, setICity] = useState(formData.invoice.city);
+  const [iState, setIState] = useState(formData.invoice.state);
+  const [iCountry, setICountry] = useState(formData.invoice.country);
 
 
   useEffect(() => {
@@ -90,19 +90,19 @@ function SendData() {
       cpf,
       cnpj,
       invoice: {
-        iFirstname,
-        iLastname,
-        iCep,
-        iStreet,
-        iNumber,
-        iComplement,
-        iDistrict,
-        iCity,
-        iState,
-        iCountry,
+        name: iFirstname,
+        lastname: iLastname,
+        cep: iCep,
+        street: iStreet,
+        number: iNumber,
+        complement: iComplement,
+        district: iDistrict,
+        city: iCity,
+        state: iState,
+        country: iCountry,
       },
       shippingAddress: {
-        firstname,
+        name: firstname,
         lastname,
         cep,
         street,

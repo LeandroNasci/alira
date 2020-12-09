@@ -6,19 +6,19 @@ export interface FormData {
   cpf?: string;
   cnpj?: string;
   invoice: {
-    iFirstname: string;
-    iLastname: string;
-    iCep: string;
-    iStreet: string;
-    iNumber: string;
-    iComplement: string;
-    iDistrict: string;
-    iCity: string;
-    iState: string;
-    iCountry: string;
+    name: string;
+    lastname: string;
+    cep: string;
+    street: string;
+    number: string;
+    complement: string;
+    district: string;
+    city: string;
+    state: string;
+    country: string;
   };
   shippingAddress: {
-    firstname: string;
+    name: string;
     lastname: string;
     cep: string;
     street: string;
@@ -49,19 +49,19 @@ const FormDataProvider: React.FC = ({ children }) => {
     cpf: '',
     cnpj: '',
     invoice: {
-      iFirstname: '',
-      iLastname: '',
-      iCep: '',
-      iStreet: '',
-      iNumber: '',
-      iComplement: '',
-      iDistrict: '',
-      iCity: '',
-      iState: '',
-      iCountry: '',
+      name: '',
+      lastname: '',
+      cep: '',
+      street: '',
+      number: '',
+      complement: '',
+      district: '',
+      city: '',
+      state: '',
+      country: '',
     },
     shippingAddress: {
-      firstname: '',
+      name: '',
       lastname: '',
       cep: '',
       street: '',

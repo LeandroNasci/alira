@@ -34,6 +34,9 @@ function ShippingSelect () {
   const [sedexValues,setSedexValues] = useState<Shipping>({ category: 2, price: 24.93, days: 3 });
 
   useEffect(() => {
+    if(!formData.shippingAddress.cep){
+      return;
+    }
     const args = {
       sCepOrigem: process.env.REACT_APP_CEP_ORIGEM || '13561000',
       sCepDestino: sanitization(formData.shippingAddress.cep),
@@ -77,11 +80,32 @@ function ShippingSelect () {
     }
   }
 
-  function handleCheckout (event: FormEvent) {
+  async function handleCheckout (event: FormEvent) {
     event.preventDefault();
 
-    console.log( { shipping },{formData }, { addedItems });
-    console.log('guarda no banco o pedido');
+    const serializedOrder = {
+      email: formData.email,
+      phone: formData.phone,
+      cpf: formData.cpf,
+      invoice: formData.invoice,
+      shippingType: shipping.category,
+      shippingCost: shipping.price,
+      shipping: formData.shippingAddress,
+      items: addedItems,
+    }
+    try {
+      const response = await api.post('/checkout', serializedOrder
+        // , { headers: { 'Access-Control-Allow-Origin': '*' }}
+      );
+
+        console.log(response);
+
+      } catch (error) {
+      console.log(error);
+    }
+
+    console.log({serializedOrder});
+
     console.log('converte para XML');
     console.log('redireciona para o PagSeguro');
   }
@@ -168,13 +192,13 @@ function ShippingSelect () {
 
                     <div className="box-container">
                       <div className="box">
-                        <p><b>Nome:</b>{`${formData.shippingAddress?.firstname} ${formData.shippingAddress?.lastname}`}</p>
-                        <p><b>CEP: </b>{formData.shippingAddress?.cep}</p>
-                        <p><b>Endereço: </b>{`${formData.shippingAddress?.street}, ${formData.shippingAddress?.number}, ${formData.shippingAddress?.complement}`}</p>
-                        <p><b>Bairro: </b>{formData.shippingAddress?.district}</p>
-                        <p><b>Cidade: </b>{formData.shippingAddress?.city}</p>
-                        <p><b>Estado: </b>{formData.shippingAddress?.state}</p>
-                        <p><b>País: </b>{formData.shippingAddress?.country}</p>
+                        <p><b>Nome:</b>{`${formData.shippingAddress.name} ${formData.shippingAddress.lastname}`}</p>
+                        <p><b>CEP: </b>{formData.shippingAddress.cep}</p>
+                        <p><b>Endereço: </b>{`${formData.shippingAddress.street}, ${formData.shippingAddress.number}, ${formData.shippingAddress.complement}`}</p>
+                        <p><b>Bairro: </b>{formData.shippingAddress.district}</p>
+                        <p><b>Cidade: </b>{formData.shippingAddress.city}</p>
+                        <p><b>Estado: </b>{formData.shippingAddress.state}</p>
+                        <p><b>País: </b>{formData.shippingAddress.country}</p>
                       </div>
 
                       <CheckBox required name="nd"><em>OK, corretas!</em></CheckBox>  {/* Check delivery */}
@@ -188,7 +212,7 @@ function ShippingSelect () {
 
                     <div className="box-container">
                       <div className="box">
-                        <p><b>Nome: </b>{`${formData.invoice?.iFirstname} ${formData.invoice?.iLastname}`}</p>
+                        <p><b>Nome: </b>{`${formData.invoice.name} ${formData.invoice?.lastname}`}</p>
                         <br />
                         <p>Você escolheu o método de retirada dos produtos diretamente com o vendedor, ou seja, não será cobrado o valor do frete. Você deverá combinar com o vendedor o local e hora de retirada do produto no email: <em>aliranotes@gmail.com</em></p>
                       </div>
@@ -210,13 +234,13 @@ function ShippingSelect () {
                   <div className="box">
                     <p><b>CPF: </b>{formData?.cpf}</p>
                     <p hidden ><b>CNPJ: </b>{formData?.cnpj}</p>
-                    <p><b>Nome: </b>{`${formData.invoice?.iFirstname} ${formData.invoice?.iLastname}`}</p>
-                    <p><b>CEP: </b>{formData.invoice?.iCep}</p>
-                    <p><b>Endereço: </b>{`${formData.invoice?.iStreet}, ${formData.invoice?.iNumber}, ${formData.invoice?.iComplement}`}</p>
-                    <p><b>Bairro: </b>{formData.invoice?.iDistrict}</p>
-                    <p><b>Cidade: </b>{formData.invoice?.iCity}</p>
-                    <p><b>Estado: </b>{formData.invoice?.iState}</p>
-                    <p><b>País: </b>{formData.invoice?.iCountry}</p>
+                    <p><b>Nome: </b>{`${formData.invoice.name} ${formData.invoice.lastname}`}</p>
+                    <p><b>CEP: </b>{formData.invoice.cep}</p>
+                    <p><b>Endereço: </b>{`${formData.invoice.street}, ${formData.invoice.number}, ${formData.invoice.complement}`}</p>
+                    <p><b>Bairro: </b>{formData.invoice.district}</p>
+                    <p><b>Cidade: </b>{formData.invoice.city}</p>
+                    <p><b>Estado: </b>{formData.invoice.state}</p>
+                    <p><b>País: </b>{formData.invoice.country}</p>
                   </div>
 
                   <CheckBox required name="rd"><em>OK, corretas!</em></CheckBox>  {/* Check invoice */}
