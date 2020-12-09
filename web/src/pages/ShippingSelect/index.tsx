@@ -83,6 +83,7 @@ function ShippingSelect () {
   async function handleCheckout (event: FormEvent) {
     event.preventDefault();
 
+    //armazenamento no banco de dados
     const serializedOrder = {
       email: formData.email,
       phone: formData.phone,
@@ -94,18 +95,14 @@ function ShippingSelect () {
       items: addedItems,
     }
     try {
-      const response = await api.post('/checkout', serializedOrder
-        // , { headers: { 'Access-Control-Allow-Origin': '*' }}
-      );
-
-        console.log(response);
-
-      } catch (error) {
+      const response = await api.post('/checkout', serializedOrder);
+      console.log(response.data);
+    }
+    catch (error) {
       console.log(error);
     }
 
-    console.log({serializedOrder});
-
+    //redirecionamento pagseguro
     console.log('converte para XML');
     console.log('redireciona para o PagSeguro');
   }
