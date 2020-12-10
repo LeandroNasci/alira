@@ -64,15 +64,15 @@ export default {
         invoice_state: Yup.string().required().max(2),
         shipping_type: Yup.number().required(),
         shipping_cost: Yup.number().required(),
-        shipping_name: Yup.string().required(),
-        shipping_lastname: Yup.string().required(),
-        shipping_cep: Yup.string().required(),
-        shipping_street: Yup.string().required(),
-        shipping_number: Yup.string().required(),
-        shipping_complement: Yup.string().required(),
-        shipping_district: Yup.string().required(),
-        shipping_city: Yup.string().required(),
-        shipping_state: Yup.string().required().max(2)
+        shipping_name: Yup.string(),
+        shipping_lastname: Yup.string(),
+        shipping_cep: Yup.string(),
+        shipping_street: Yup.string(),
+        shipping_number: Yup.string(),
+        shipping_complement: Yup.string(),
+        shipping_district: Yup.string(),
+        shipping_city: Yup.string(),
+        shipping_state: Yup.string().max(2)
       });
 
       const imageSchema = Yup.object().shape({
