@@ -104,7 +104,11 @@ export default {
       );
 
       await trx.commit();
-      return response.send("Order created!");
+
+      return response.status(201).json({
+        message: 'Order created!',
+        orderId: order_id,
+      });
     }
     catch (err) {
       await trx.rollback();
