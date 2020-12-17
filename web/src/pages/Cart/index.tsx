@@ -6,7 +6,7 @@ import ProductItem from '../../components/ProductItem';
 import Footer from '../../components/Footer';
 import PageHeader from '../../components/PageHeader';
 import toReal from '../../utils/toReal';
-import sanitization from '../../utils/sanatization';
+import { cepSanitization } from '../../utils/sanatizations';
 import api from '../../services/api';
 import { useShoppingCart } from '../../context/shoppingCart';
 
@@ -47,7 +47,7 @@ function Cart() {
 
     const  args = {
       sCepOrigem:  process.env.REACT_APP_CEP_ORIGEM || '13561000',
-      sCepDestino:  sanitization(zipCode),
+      sCepDestino:  cepSanitization(zipCode),
       nVlPeso:  '1',
       nCdFormato:  '1',
       nVlComprimento:  '20',

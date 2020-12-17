@@ -9,8 +9,9 @@ import CartList from '../../components/CartList';
 import CheckBox from '../../components/CheckBox';
 
 import api from '../../services/api';
-import sanitization from '../../utils/sanatization';
+import { cepSanitization } from '../../utils/sanatizations';
 import toReal from '../../utils/toReal';
+
 import { Shipping, useShippingType } from '../../context/shippingType';
 import { useShoppingCart } from '../../context/shoppingCart';
 import { useFormData } from '../../context/formData';
@@ -19,6 +20,7 @@ import progressImg from '../../assets/images/progress2.png';
 import pagSeguroImg from '../../assets/images/logo-pagseguro.png'
 
 import './styles.css';
+import serializeCheckout from '../../utils/serializeCheckout';
 
 
 
@@ -39,7 +41,7 @@ function ShippingSelect () {
     }
     const args = {
       sCepOrigem: process.env.REACT_APP_CEP_ORIGEM || '13561000',
-      sCepDestino: sanitization(formData.shippingAddress.cep),
+      sCepDestino: cepSanitization(formData.shippingAddress.cep),
       nVlPeso: cartWeight,
       nCdFormato: '1',             //1:caixa  2:cilindro
       nVlComprimento: cartLength,
@@ -83,7 +85,7 @@ function ShippingSelect () {
   async function handleCheckout (event: FormEvent) {
     event.preventDefault();
 
-    //armazenamento no banco de dados
+    // armazenamento no banco de dados
     const serializedOrder = {
       email: formData.email,
       phone: formData.phone,
@@ -95,16 +97,22 @@ function ShippingSelect () {
       items: addedItems,
     }
     try {
-      const response = await api.post('/checkout', serializedOrder);
-      console.log(response.data);
+      const orderResponse = await api.post('/orders', serializedOrder);
+
+      console.log(orderResponse.data);
+      const { orderId } = orderResponse.data;
+
+      // redirecionamento pagseguro
+      const compactJson = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId });
+
+      await api.post('/checkout', compactJson);
+
     }
     catch (error) {
       console.log(error);
     }
 
-    //redirecionamento pagseguro
-    console.log('converte para XML');
-    console.log('redireciona para o PagSeguro');
+
   }
 
   function handleGoBack() {

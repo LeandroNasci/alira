@@ -6,7 +6,7 @@ import { useShippingType } from '../../context/shippingType';
 import { useShoppingCart } from '../../context/shoppingCart';
 import { useFormData, FormData } from '../../context/formData';
 import api from '../../services/api';
-import sanitization from '../../utils/sanatization';
+import { cepSanitization } from '../../utils/sanatizations';
 
 import PageHeader from '../../components/PageHeader';
 import Footer from '../../components/Footer';
@@ -148,7 +148,7 @@ function SendData() {
   async function handleInputInvoiceCep(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value.includes('_') && event.target.value !== '') {
       setICep(event.target.value);
-      const param = sanitization(event.target.value);
+      const param = cepSanitization(event.target.value);
 
       const response = await api.get(`/cep/${param}`);
 
@@ -164,7 +164,7 @@ function SendData() {
 
     if (!event.target.value.includes('_') && event.target.value !== '') {
       setCep(event.target.value);
-      const cep = sanitization(event.target.value);
+      const cep = cepSanitization(event.target.value);
 
       const response = await api.get(`/cep/${cep}`);
 
@@ -181,7 +181,7 @@ function SendData() {
   async function handleCalculateShippingCost(cep: string) {
     const args = {
       sCepOrigem: process.env.REACT_APP_CEP_ORIGEM || '13561000',
-      sCepDestino: sanitization(cep),
+      sCepDestino: cepSanitization(cep),
       nVlPeso: cartWeight,
       nCdFormato: '1',             //1:caixa  2:cilindro
       nVlComprimento: cartLength,
