@@ -6,15 +6,17 @@ import { useShippingType } from '../../context/shippingType';
 import { useShoppingCart } from '../../context/shoppingCart';
 import { useFormData, FormData } from '../../context/formData';
 import api from '../../services/api';
-import { cepSanitization } from '../../utils/sanatizations';
+import { cepSanitization, cpfSanitization } from '../../utils/sanatizations';
+import { cpfValidation } from '../../utils/validations';
 
 import PageHeader from '../../components/PageHeader';
 import Footer from '../../components/Footer';
 import Input from '../../components/Input';
-import { CEPInput, CNPJInput, CPFInput, PhoneInput } from '../../components/MaskedInputs';
+import { CEPInput, CPFInput, PhoneInput } from '../../components/MaskedInputs';
 import CartList from '../../components/CartList';
 import Radio from '../../components/Radio';
 import CheckBox from '../../components/CheckBox';
+// import ToggleSwitch from '../../components/ToggleSwitch';
 
 import progressImg from '../../assets/images/progress1.png';
 
@@ -31,6 +33,7 @@ function SendData() {
   const [frete, setFrete] = useState(shipping.price);
   const [prasoFrete, setPrasoFrete] = useState(0);
   const [isDeliveryVisible, setIsDeliveryVisible] = useState(true);
+  // const [isCnpjVisible, setIsCnpjVisible] = useState(false);
   const [isInvoiceAdressEqual, setIsInvoiceAdressEqual] = useState(false);
 
   const [email, setEmail] = useState(formData.email);
@@ -141,9 +144,42 @@ function SendData() {
     setIsInvoiceAdressEqual(false);
   }
 
-  function handleToggleInvoiceForm() {
-    setIsInvoiceAdressEqual(!isInvoiceAdressEqual);
+  function handleToggleInvoiceForm(event: ChangeEvent<HTMLInputElement>) {
+    setIsInvoiceAdressEqual(event.target.checked);
   }
+
+  function handleValidateCpf(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.value.includes('_') && event.target.value !== '') {
+      setCpf(event.target.value);
+      setCnpj(''); //desativado
+
+      if (cpfValidation( cpfSanitization(event.target.value) )) {
+        event.target.setCustomValidity('');
+      }
+      else {
+        event.target.setCustomValidity('CPF inválido');
+      }
+    }
+  }
+
+  // function handleToggleDocumentType() {
+  //   setIsCnpjVisible(event.target.checked);
+  // }
+
+  // function handleValidateCnpj(event: ChangeEvent<HTMLInputElement>) {
+  //   if (!event.target.value.includes('_') && event.target.value !== '') {
+  //     const b = cnpjValidation( cnpjSanitization(event.target.value) )
+
+  //     if(b) {
+  //       setCnpj(event.target.value);
+  //       event.target.setCustomValidity('');
+  //     }
+  //     else {
+  //       event.target.setCustomValidity('CPF inválido');
+  //     }
+
+  //   }
+  // }
 
   async function handleInputInvoiceCep(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value.includes('_') && event.target.value !== '') {
@@ -355,21 +391,36 @@ function SendData() {
                 <legend>
                   <FiClipboard /><h3>Dados para a Nota Fiscal</h3>
                 </legend>
-                <div className="field-group">
+                <div className="toggle-group">
                   <CPFInput
+                    required
                     type="text"
                     name="CPF"
                     placeholder="CPF"
                     value={cpf}
-                    onChange={event => setCpf(event.target.value)}
-                  />
-                  <CNPJInput
+                    onChange={handleValidateCpf}
+                    />
+                   {/*!isCnpjVisible ? (
+                    <CPFInput
+                    required
+                    type="text"
+                    name="CPF"
+                    placeholder="CPF"
+                    value={cpf}
+                    onChange={handleValidateCpf}
+                    />
+                  ) : (
+                    <CNPJInput
+                    required
                     type="text"
                     name="CNPJ"
                     placeholder="CNPJ"
                     value={cnpj}
-                    onChange={event => setCnpj(event.target.value)}
-                  />
+                    onChange={handleValidateCnpj}
+                    />
+                  )*/}
+                  {/* <ToggleSwitch name="doc" onChange={handleToggleDocumentType} /> */}
+                  {/* <i>CPF<br/>CNPJ</i> */}
                 </div>
                 {isDeliveryVisible && (
                   <CheckBox name="repeat" onChange={handleToggleInvoiceForm} >

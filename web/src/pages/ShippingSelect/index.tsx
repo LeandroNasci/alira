@@ -99,13 +99,18 @@ function ShippingSelect () {
     try {
       const orderResponse = await api.post('/orders', serializedOrder);
 
-      console.log(orderResponse.data);
       const { orderId } = orderResponse.data;
+
+      //diminuir o estoque
+      // await api.put('/products', addedItems);
 
       // redirecionamento pagseguro
       const compactJson = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId });
 
-      await api.post('/checkout', compactJson);
+      const checkoutResponse = await api.post('/checkout', compactJson);
+      const code = checkoutResponse.data.checkout.code._text;
+
+      window.location.replace(`https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`);
 
     }
     catch (error) {
