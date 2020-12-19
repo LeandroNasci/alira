@@ -32,6 +32,8 @@ function SendData() {
   //states
   const [frete, setFrete] = useState(shipping.price);
   const [prasoFrete, setPrasoFrete] = useState(0);
+  const [incompleteInvoiceCep,setIncompleteInvoiceCep] = useState(false);
+  const [incompleteShippingCep,setIncompleteShippingCep] = useState(false);
   const [isDeliveryVisible, setIsDeliveryVisible] = useState(true);
   // const [isCnpjVisible, setIsCnpjVisible] = useState(false);
   const [isInvoiceAdressEqual, setIsInvoiceAdressEqual] = useState(false);
@@ -188,6 +190,9 @@ function SendData() {
 
       const response = await api.get(`/cep/${param}`);
 
+      if(response.data.logradouro === "" || response.data.bairro === "" ) {
+        setIncompleteInvoiceCep(true);
+      }
       setIStreet(response.data.logradouro);
       setIDistrict(response.data.bairro);
       setICity(response.data.localidade);
@@ -204,6 +209,9 @@ function SendData() {
 
       const response = await api.get(`/cep/${cep}`);
 
+      if(response.data.logradouro === "" || response.data.bairro === "" ) {
+        setIncompleteShippingCep(true);
+      }
       setStreet(response.data.logradouro);
       setDistrict(response.data.bairro);
       setCity(response.data.localidade);
@@ -322,7 +330,7 @@ function SendData() {
                       type="text"
                       name="street"
                       placeholder="Endereço"
-                      readOnly
+                      readOnly={!incompleteShippingCep}
                       value={street}
                       onChange={event => setStreet(event.target.value)}
                     />
@@ -348,7 +356,7 @@ function SendData() {
                     type="text"
                     name="district"
                     placeholder="Bairro"
-                    readOnly
+                    readOnly={!incompleteShippingCep}
                     value={district}
                     onChange={event => setDistrict(event.target.value)}
                   />
@@ -358,7 +366,7 @@ function SendData() {
                       type="text"
                       name="city"
                       placeholder="Cidade"
-                      readOnly
+                      readOnly={!incompleteShippingCep}
                       value={city}
                       onChange={event => setCity(event.target.value)}
                     />
@@ -367,7 +375,7 @@ function SendData() {
                       type="text"
                       name="state"
                       placeholder="Estado"
-                      readOnly
+                      readOnly={!incompleteShippingCep}
                       value={state}
                       onChange={event => setState(event.target.value)}
                     />
@@ -376,7 +384,7 @@ function SendData() {
                       type="text"
                       name="country"
                       placeholder="País"
-                      readOnly
+                      readOnly={!incompleteShippingCep}
                       value={country}
                       onChange={event => setCountry(event.target.value)}
                     />
@@ -459,7 +467,7 @@ function SendData() {
                         type="text"
                         name="istreet"
                         placeholder="Endereço"
-                        readOnly
+                        readOnly={!incompleteInvoiceCep}
                         value={iStreet}
                         onChange={event => setIStreet(event.target.value)}
                       />
@@ -485,7 +493,7 @@ function SendData() {
                       type="text"
                       name="idistrict"
                       placeholder="Bairro"
-                      readOnly
+                      readOnly={!incompleteInvoiceCep}
                       value={iDistrict}
                       onChange={event => setIDistrict(event.target.value)}
                     />
@@ -495,7 +503,7 @@ function SendData() {
                         type="text"
                         name="icity"
                         placeholder="Cidade"
-                        readOnly
+                        readOnly={!incompleteInvoiceCep}
                         value={iCity}
                         onChange={event => setICity(event.target.value)}
                       />
@@ -504,7 +512,7 @@ function SendData() {
                         type="text"
                         name="istate"
                         placeholder="Estado"
-                        readOnly
+                        readOnly={!incompleteInvoiceCep}
                         value={iState}
                         onChange={event => setIState(event.target.value)}
                       />
@@ -513,7 +521,7 @@ function SendData() {
                         type="text"
                         name="icountry"
                         placeholder="País"
-                        readOnly
+                        readOnly={!incompleteInvoiceCep}
                         value={iCountry}
                         onChange={event => setICountry(event.target.value)}
                       />
