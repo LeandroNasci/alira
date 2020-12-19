@@ -143,13 +143,17 @@ export default {
   },
 
   async update(request: Request, response: Response) {
-    const itemsBought: Item[] = request.body;
+    const { orderId } = request.body;
 
     const trx = await db.transaction();
 
     try {
-      itemsBought.forEach( async(item: Item, index) => {
 
+      const itemsBought = await trx('items')
+        .select('*')
+        .where('order_id', orderId)
+
+      itemsBought.forEach( async(item: Item, index) => {
 
         const product = await trx('products')
           .select('stock')
@@ -163,7 +167,7 @@ export default {
             thisKeyIsSkipped: undefined
           });
 
-          await trx.commit();
+        await trx.commit();
       })
 
     }
