@@ -30,13 +30,14 @@ export default function serializeCheckout (props: Checkout) {
                   .split(") ")
                   .map(element => element.replace(new RegExp(/[()-]/g, ""), ""));
 
-  const postalcode = cepSanitization(formData.shippingAddress.cep);
-  const cpfNumber = cpfSanitization(formData.cpf || '');
+  const cpfNumber = cpfSanitization(formData.cpf);
   // const cnpjNumber = cnpjSanitization(formData.cnpj || '');
 
   let shippingData;
+  let postalcode
 
   if(shipping.category === 3){
+    postalcode = '';
     shippingData = {
       addressRequired: { _text: "false" },
       type: { _text: String(shipping.category) },                               // Tipo envio (PAC SEDEX OUTROS)
@@ -44,6 +45,7 @@ export default function serializeCheckout (props: Checkout) {
     };
   }
   else {
+    postalcode = cepSanitization(formData.shippingAddress.cep);
     shippingData = {
       addressRequired: { _text: "true" },
       address: {                                                                // Endereco envio
@@ -94,7 +96,7 @@ export default function serializeCheckout (props: Checkout) {
         }
       },
       reference: { _text: `Pedido ${String(orderId)}` },                        // ID da compra
-      redirectURL: { _text: "http://localhost:3000/about" },
+      redirectURL: { _text: `http://localhost:3000/about?order=${String(orderId)}` },
       receiver: {
         email: { _text: "aliranotes@gmail.com" }                                // Email vendedor
       },

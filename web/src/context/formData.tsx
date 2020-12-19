@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 export interface FormData {
   email: string;
   phone: string;
-  cpf?: string;
+  cpf: string;
   cnpj?: string;
   invoice: {
     name: string;

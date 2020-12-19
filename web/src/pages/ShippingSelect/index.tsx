@@ -102,7 +102,8 @@ function ShippingSelect () {
       const { orderId } = orderResponse.data;
 
       //diminuir o estoque
-      // await api.put('/products', addedItems);
+      // await api.put('/products', {orderId});
+
 
       // redirecionamento pagseguro
       const compactJson = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId });
