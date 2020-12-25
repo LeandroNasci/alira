@@ -4,7 +4,7 @@ import { calcularPrecoPrazo } from 'correios-brasil';
 
 export default {
 
-  async index (request: Request, response: Response) {
+  async show (request: Request, response: Response) {
     try {
       const shippingData = await calcularPrecoPrazo(request.body)
 

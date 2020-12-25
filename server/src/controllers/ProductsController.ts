@@ -8,8 +8,49 @@ import productView from '../views/products_view';
 import Item from 'src/models/Item';
 import { File } from 'src/config/multer';
 
-
 export default {
+
+  // Mostrar todo o estoque
+  async index(request: Request, response: Response) {
+    const { type } = request.query;
+
+    if(type) {
+      const products = await db('products')
+        .select('*')
+        .where('category', String(type) )
+        .orderBy('code');
+      const images = await db('products')
+        .select('images.*')
+        .join('images', 'products.id', '=', 'images.product_id')
+        .where('category', String(type))
+        .orderBy('name');
+
+      return response.json(productView.renderMany(products, images));
+    }
+
+    const products = await db('products').select('*').orderBy('code');
+    const images = await db('images').select('*').orderBy('name');
+
+    return response.json(productView.renderMany(products, images));
+  },
+
+  async show(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const product = await db('products').where('id', id).first();
+
+    if (!product) {
+      return response.status(400).json({ message: 'Product not found.' });
+    }
+
+    const images = await db('images')
+        .select('*')
+        .where('product_id', id)
+        .orderBy('images.name');
+
+    return response.json(productView.render(product, images));
+  },
+
   // Adicionar novo produto ao estoque
   async create(request: Request, response: Response) {
     const {
@@ -68,7 +109,7 @@ export default {
           name: image.originalname,
           size: image.size,
           key: image.key,
-          url: image.location,
+          url: image.location || "",
           product_id }
       });
 
@@ -90,7 +131,7 @@ export default {
 
       await trx.commit();
 
-      return response.status(201).json({ message: 'successfully created.'});
+      return response.status(201).json({ message: 'product successfully created.'});
     }
     catch (err) {
       await trx.rollback();
@@ -100,55 +141,14 @@ export default {
         error: 'Unexpected error while create new product.'
       })
     }
-  }, //create
-
-  async index(request: Request, response: Response) {
-    const { type } = request.query;
-
-    if(type) {
-      const products = await db('products')
-        .select('*')
-        .where('category', String(type) )
-        .orderBy('code');
-      const images = await db('products')
-        .select('images.*')
-        .join('images', 'products.id', '=', 'images.product_id')
-        .where('category', String(type))
-        .orderBy('name');
-
-      return response.json(productView.renderMany(products, images));
-    }
-
-    const products = await db('products').select('*').orderBy('code');
-    const images = await db('images').select('*').orderBy('name');
-
-    return response.json(productView.renderMany(products, images));
   },
 
-  async show(request: Request, response: Response) {
-    const { id } = request.params;
-
-    const product = await db('products').where('id', id).first();
-
-    if (!product) {
-      return response.status(400).json({ message: 'Product not found.' });
-    }
-
-    const images = await db('images')
-        .select('*')
-        .where('product_id', id)
-        .orderBy('images.name');
-
-    return response.json(productView.render(product, images));
-  },
-
-  async update(request: Request, response: Response) {
+  async update (request: Request, response: Response) {
     const { orderId } = request.body;
 
     const trx = await db.transaction();
 
     try {
-
       const itemsBought = await trx('items')
         .select('*')
         .where('order_id', orderId)
@@ -169,7 +169,6 @@ export default {
 
         await trx.commit();
       })
-
     }
     catch (err) {
       await trx.rollback();
@@ -180,11 +179,10 @@ export default {
       })
     }
 
-
     return response.status(200).json({ message: 'successfully updated.'});
   },
 
-  async delete(request: Request, response: Response) {
+  async delete (request: Request, response: Response) {
     const { id } = request.params;
 
     const trx = await db.transaction();

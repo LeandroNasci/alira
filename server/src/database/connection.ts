@@ -2,11 +2,9 @@ import knex from 'knex';
 import path from 'path';
 import 'dotenv/config'
 
-let db: knex<any, unknown[]>
-
 switch (process.env.NODE_ENV) {
   case 'development':
-    db = knex({
+    var db = knex({
       client: 'pg',
       connection: {
         host : process.env.PG_HOST,
@@ -19,7 +17,7 @@ switch (process.env.NODE_ENV) {
     break;
 
  case 'test':
-    db = knex({
+    var db = knex({
       client: 'sqlite3',
       connection: {
         filename: path.resolve(__dirname, 'teste.sqlite')
@@ -30,7 +28,7 @@ switch (process.env.NODE_ENV) {
 
   case 'production':
   default:
-    db = knex({
+    var db = knex({
       client: 'pg',
       connection: {
         host : process.env.PG_HOST,
@@ -41,7 +39,6 @@ switch (process.env.NODE_ENV) {
       useNullAsDefault: true
     })
     break;
-
 }
 
 export default db;

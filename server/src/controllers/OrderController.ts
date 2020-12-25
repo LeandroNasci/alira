@@ -8,7 +8,6 @@ import orderView from '../views/order_view';
 
 export default {
   async create(request: Request, response: Response) {
-
     const {
       email,
       phone,
