@@ -95,8 +95,7 @@ export default function serializeCheckout (props: Checkout) {
           }
         }
       },
-      reference: { _text: `Pedido ${String(orderId)}` },                        // ID da compra
-      redirectURL: { _text: `http://localhost:3000/about?order=${String(orderId)}` },
+      reference: { _text: `orderId=${String(orderId)}` },                        // ID da compra
       receiver: {
         email: { _text: "aliranotes@gmail.com" }                                // Email vendedor
       },

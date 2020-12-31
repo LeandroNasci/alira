@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { FiArrowLeft, FiLogIn, FiShoppingCart } from 'react-icons/fi';
 
 import logoImg from '../../assets/images/logo.svg';
+import cartFull from '../../assets/images/icons/shopping-cart-full.svg'
 import notesImg from '../../assets/images/notes.png';
 import DesktopNavbar from '../DesktopNavbar';
 import MobileNavbar from '../MobileNavbar';
+
+import { useShoppingCart } from '../../context/shoppingCart';
 
 import './styles.css';
 
@@ -16,7 +19,9 @@ interface PageHeaderProps {
 
 const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, children }) => {
 
-   return (
+  const { addedItems } = useShoppingCart();
+
+  return (
     <header>
       {!compact &&
         <div className="top-bar-container">
@@ -29,12 +34,13 @@ const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, chil
             {children}
             <Link to="/cart">
               <span>Carrinho </span>
-              <FiShoppingCart />
+              {addedItems.length !== 0 ? <img src={cartFull} alt="carrinho"/> : <FiShoppingCart />}
+
             </Link>
-            <Link to="/login">
+            {/* <Link to="/login">
               <span>Login </span>
               <FiLogIn />
-            </Link>
+            </Link> */}
           </div>
         </div>
       }
