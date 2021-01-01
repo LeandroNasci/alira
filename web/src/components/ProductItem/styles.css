@@ -58,6 +58,7 @@
   border: 0;
   border-radius: 50%;
   margin: 0.4rem;
+  padding: 0.7rem;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -86,6 +87,9 @@
 }
 
 #product-item .quantity button {
+  display: flex;
+  align-items: center;
+  justify-content:center;
   width: 2.4rem;
   height: 2.4rem;
   background: var(--color-amarelo-claro);

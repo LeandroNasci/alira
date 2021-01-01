@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="24"
    height="24"
    viewBox="0 0 24 24"
@@ -15,53 +9,8 @@
    stroke-width="2"
    stroke-linecap="round"
    stroke-linejoin="round"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="shopping-cart-full_le.svg"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
-  <metadata
-     id="metadata10">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs8" />
-  <g
-     id="g855" />
-  <g
-     id="g872">
-    <path
-       d="m 1,1 h 4 l 2.68,13.39 c 0.188737,0.950232 1.0313839,1.628562 2,1.61 h 9.72 c 0.968616,0.01856 1.811263,-0.659768 2,-1.61 L 23,6 H 6 m 15,15 c 0,0.552285 -0.447715,1 -1,1 -0.552285,0 -1,-0.447715 -1,-1 0,-0.552285 0.447715,-1 1,-1 0.552285,0 1,0.447715 1,1 z m -11,0 c 0,0.552285 -0.4477153,1 -1,1 -0.5522847,0 -1,-0.447715 -1,-1 0,-0.552285 0.4477153,-1 1,-1 0.5522847,0 1,0.447715 1,1 z"
-       id="path2"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccccccccssssssssss"
-       style="" />
-    <rect
-       style="fill:#404040;fill-opacity:0;stroke:#fa0000;stroke-width:5.9768405;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="rect16"
-       width="6.0231595"
-       height="6.0231595"
-       x="11.48842"
-       y="4.9884205"
-       ry="0" />
-    <g
-       id="text859"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58088589px;line-height:1.25;font-family:'Hobo Medium';-inkscape-font-specification:'Hobo Medium, ';letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;fill:#0c0c0c;fill-opacity:0;stroke:#000000;stroke-width:0.56;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       transform="rotate(-90)"
-       aria-label="!">
-      <path
-         sodipodi:nodetypes="cccsccccccccccccccccccccccccccccscccccccccccccccc"
-         inkscape:connector-curvature="0"
-         id="path861"
-         d="m -10.678615,13.356728 c -0.358411,0.0042 -0.691324,0.13859 -0.939453,0.386719 -0.0013,0.0013 -0.0026,0.0026 -0.0039,0.0039 -0.242461,0.250969 -0.373047,0.580939 -0.373047,0.933594 0,0.353765 0.135253,0.68408 0.382813,0.93164 6.46e-4,6.7e-4 0.0013,0.0013 0.002,0.002 0.250576,0.246301 0.579882,0.380554 0.935547,0.384766 0.0026,3.6e-5 0.0052,3.6e-5 0.0078,0 0.353198,-0.0042 0.6813527,-0.142942 0.9277338,-0.392578 l 0.00195,-0.002 c 0.2457955,-0.246775 0.3805712,-0.573695 0.3847656,-0.925782 2.07e-5,-0.002 2.07e-5,-0.0039 0,-0.0059 -0.0042,-0.352972 -0.1389895,-0.681627 -0.3847656,-0.931641 -6.467e-4,-6.7e-4 -0.0013,-0.0013 -0.00195,-0.002 -0.2481289,-0.248129 -0.5810478,-0.382812 -0.9374998,-0.382812 -6.5e-4,-2e-6 -0.0013,-2e-6 -0.002,0 z m 5.435547,0.04102 c -0.3239458,-0.0033 -0.6538993,0.01574 -0.9902344,0.05469 -0.4085711,0.03899 -0.7984776,0.100279 -1.1679687,0.185547 l -0.7519531,0.164062 c -0.2945881,0.06395 -0.4981825,0.120463 -0.6601563,0.208985 -0.2704248,0.14561 -0.4164492,0.456419 -0.4121094,0.777343 -2.4e-6,6.67e-4 -2.4e-6,0.0013 0,0.002 0.00205,0.110943 0.012294,0.208758 0.044922,0.306641 0.032628,0.09788 0.097064,0.206411 0.2109375,0.271485 0.027218,0.01594 0.056933,0.02716 0.087891,0.0332 l 0.056641,0.0098 c 0.022541,0.0041 0.045499,0.0054 0.068359,0.0039 l 0.082031,-0.0059 c 0.00588,-4.81e-4 0.011741,-0.0011 0.017578,-0.002 0.3018895,-0.03731 0.5539003,-0.06048 0.7539063,-0.07031 0.2091912,-0.01012 0.4151964,-0.01367 0.6171874,-0.01367 0.7157502,0 1.4573718,0.133 2.2304688,0.40625 0.00195,6.88e-4 0.0039,0.0014 0.00586,0.002 0.2345778,0.07819 0.4327278,0.149697 0.5957031,0.21289 0.00388,0.0014 0.00778,0.0027 0.011719,0.0039 0.1376176,0.04715 0.2631479,0.07698 0.3886719,0.08203 0.010409,5.82e-4 0.020841,5.82e-4 0.03125,0 0.1303778,-0.0091 0.2841189,-0.07461 0.3710938,-0.197266 0.086975,-0.122657 0.09969,-0.260665 0.089844,-0.388672 v -1.234375 c 5.72e-5,-0.0033 5.72e-5,-0.0065 0,-0.0098 l -0.00391,-0.144531 c 2.07e-5,-0.002 2.07e-5,-0.0039 0,-0.0059 -0.00906,-0.160005 -0.094502,-0.325368 -0.2226563,-0.423828 -0.1269824,-0.09756 -0.2768088,-0.140832 -0.4414062,-0.162109 -0.3233661,-0.04673 -0.6591692,-0.0697 -1.0078125,-0.06641 z"
-         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1.25;font-family:'Hobo Medium';-inkscape-font-specification:'Hobo Medium, ';font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:0px;word-spacing:0px;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.56;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate" />
-    </g>
-  </g>
+>
+   <path d="m 11,10 0.497683,2 h 6 L 18,10 H 11 M 1,1 h 4 l 2.68,13.39 a 2,2 0 0 0 2,1.61 h 9.72 a 2,2 0 0 0 2,-1.61 L 23,6 H 6 m 15,15 a 1,1 0 0 1 -1,1 1,1 0 0 1 -1,-1 1,1 0 0 1 1,-1 1,1 0 0 1 1,1 z m -11,0 a 1,1 0 0 1 -1,1 1,1 0 0 1 -1,-1 1,1 0 0 1 1,-1 1,1 0 0 1 1,1 z"
+    style="stroke:#e33d3d;stroke-opacity:1"
+   />
 </svg>

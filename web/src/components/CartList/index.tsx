@@ -28,7 +28,7 @@ const CartList: React.FC = ({ children }) => {
 
   return (
     <div className="cart-list">
-      <header><FiShoppingCart /><h4>Carrinho com seus pedidos</h4></header>
+      <header><FiShoppingCart size={24} /><h4>Carrinho com seus pedidos</h4></header>
 
       {addedItems.map((item) => {
         return (

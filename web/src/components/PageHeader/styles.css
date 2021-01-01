@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 0.8rem 1.6rem;
+  padding: 0.8rem 2.4rem;
   background: var(--color-azul-de-fundo);
 }
 
@@ -22,7 +22,7 @@
 
 .top-bar-session a {
   text-decoration: none;
-  font-size: 2rem;
+  font-size: 2.4rem;
   color: var(--color-texto-escuro);
   padding-left: 3.2rem;
 }
@@ -31,6 +31,9 @@
   color: var(--color-texto-link);
 }
 
+/* .top-bar-session a img { */
+  /* height: 24px; */
+/* } */
 
 .header-content {
   display: flex;

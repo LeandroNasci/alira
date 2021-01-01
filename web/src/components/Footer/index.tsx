@@ -32,7 +32,7 @@ const Footer: React.FC<FooterProps> = ({compact = false}) => {
       }
       <div className="lower-footer">
         <p>Alira notes - papelaria criativa<br />
-        CNPJ: 11.222.333/0001-44<br />
+        CNPJ: 10.123.456/0001-00<br />
         São Carlos - SP - 2020</p>
       </div>
     </footer>

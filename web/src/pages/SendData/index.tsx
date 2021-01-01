@@ -264,7 +264,7 @@ function SendData() {
             <div id="user-contact" className="form-group">
               <fieldset>
                 <legend>
-                  <FiMail /><h3>Meus dados para Contato</h3>
+                  <FiMail size={24} /><h3>Meus dados para Contato</h3>
                 </legend>
                 <Input
                   required
@@ -299,7 +299,7 @@ function SendData() {
               <div id="delivery-adress" className="form-group">
                 <fieldset >
                   <legend>
-                    <FiTruck /><h3>Nome e Endereço de Entrega</h3>
+                    <FiTruck size={24} /><h3>Nome e Endereço de Entrega</h3>
                   </legend>
                   <Input
                     required
@@ -397,7 +397,7 @@ function SendData() {
 
               <fieldset>
                 <legend>
-                  <FiClipboard /><h3>Dados para a Nota Fiscal</h3>
+                  <FiClipboard size={24} /><h3>Dados para a Nota Fiscal</h3>
                 </legend>
                 <div className="toggle-group">
                   <CPFInput

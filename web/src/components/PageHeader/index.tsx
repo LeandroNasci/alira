@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiArrowLeft, FiLogIn, FiShoppingCart } from 'react-icons/fi';
+import { FiArrowLeft, FiShoppingCart } from 'react-icons/fi';
 
 import logoImg from '../../assets/images/logo.svg';
-import cartFull from '../../assets/images/icons/shopping-cart-full.svg'
+import ShoppingCartFull from '../../assets/images/icons/shopping-cart-full.svg'
 import notesImg from '../../assets/images/notes.png';
 import DesktopNavbar from '../DesktopNavbar';
 import MobileNavbar from '../MobileNavbar';
@@ -26,7 +26,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, chil
       {!compact &&
         <div className="top-bar-container">
           {showBack
-            ? <Link to="/"><FiArrowLeft /><span> Voltar</span></Link>
+            ? <Link to="/"><FiArrowLeft size={24} /><span> Voltar</span></Link>
             : <span />
           }
 
@@ -34,7 +34,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({ compact = false, showBack, chil
             {children}
             <Link to="/cart">
               <span>Carrinho </span>
-              {addedItems.length !== 0 ? <img src={cartFull} alt="carrinho"/> : <FiShoppingCart />}
+              {addedItems.length !== 0 ? <img src={ShoppingCartFull} alt="carrinho"/> : <FiShoppingCart size={24} />}
 
             </Link>
             {/* <Link to="/login">

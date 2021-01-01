@@ -20,12 +20,7 @@
 
 .cart-list header h4 {
   font-size: 1.8rem;
-}
-
-.cart-list header svg {
-  width: 2.4rem;
-  height: 2.4rem;
-  margin-right: 1.6rem;
+  margin-left: 1.6rem;
 }
 
 .cart-list h5 {

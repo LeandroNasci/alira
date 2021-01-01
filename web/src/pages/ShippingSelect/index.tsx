@@ -105,7 +105,7 @@ function ShippingSelect () {
       const compactJson = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId });
 
       const checkoutResponse = await api.post('/checkout', compactJson);
-      
+
       const code = checkoutResponse.data.checkout.code._text;
 
       window.location.replace(`https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`);
@@ -137,7 +137,7 @@ function ShippingSelect () {
               <div className="form-group">
                 <fieldset className="send-method" >
                   <legend>
-                    <FiPackage /><h3>Escolha o método de entrega oferecido pelos Correios</h3>
+                    <FiPackage size={24} /><h3>Escolha o método de entrega oferecido pelos Correios</h3>
                   </legend>
                   <div>
                     <Radio required name="send-category" value="PAC" onChange={handleCalculateFrete}>
@@ -159,7 +159,7 @@ function ShippingSelect () {
               <div className="form-group">
                 <fieldset className="send-method" >
                   <legend>
-                    <FiPackage /><h3>Método de entrega dos produtos escolhido</h3>
+                    <FiPackage size={24} /><h3>Método de entrega dos produtos escolhido</h3>
                   </legend>
                   <div>
                     <Radio required name="send-category" value="VENDEDOR" defaultChecked>
@@ -179,7 +179,7 @@ function ShippingSelect () {
 
               <fieldset >
                 <legend>
-                  <FiMail /><h3>Dados para Contato</h3>
+                  <FiMail size={24} /><h3>Dados para Contato</h3>
                 </legend>
 
                 <div className="box-container">
@@ -196,7 +196,7 @@ function ShippingSelect () {
                 {shipping.category!==3 ? (
                   <>
                     <legend>
-                      <FiTruck /><h3>Dados para Entrega</h3>
+                      <FiTruck size={24} /><h3>Dados para Entrega</h3>
                     </legend>
 
                     <div className="box-container">
@@ -216,7 +216,7 @@ function ShippingSelect () {
                 ) : (
                   <>
                     <legend>
-                      <FiUsers /><h3>Dados para Retirada</h3>
+                      <FiUsers size={24} /><h3>Dados para Retirada</h3>
                     </legend>
 
                     <div className="box-container">
@@ -236,7 +236,7 @@ function ShippingSelect () {
 
               <fieldset >
                 <legend>
-                  <FiClipboard /><h3>Dados para a Nota Fiscal</h3>
+                  <FiClipboard size={24} /><h3>Dados para a Nota Fiscal</h3>
                 </legend>
 
                 <div className="box-container">
@@ -256,7 +256,7 @@ function ShippingSelect () {
                 </div>
               </fieldset>
 
-              <button className="link" type="button" onClick={handleGoBack} ><FiArrowLeft />Corrigir informações</button>
+              <button className="link" type="button" onClick={handleGoBack} ><FiArrowLeft size={24} />Corrigir informações</button>
 
             </div>
           </main>

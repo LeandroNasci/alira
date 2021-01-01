@@ -61,7 +61,7 @@ const ProductItem: React.FC<ProductItemProps> = ({id, code, name, price, quantit
 
       <div className="button-container">
         <button type="button" onClick={handleDeleteItem}>
-          <FiTrash2 />
+          <FiTrash2 size={16} />
         </button>
       </div>
 
@@ -69,11 +69,11 @@ const ProductItem: React.FC<ProductItemProps> = ({id, code, name, price, quantit
         <span>Quantidade</span>
         <div>
           <button onClick={handleSubCounter}>
-            <FiMinus />
+            <FiMinus size={16} />
           </button>
           <h6>{counter}</h6>
           <button onClick={handleAddCounter}>
-            <FiPlus />
+            <FiPlus size={16} />
           </button>
         </div>
       </div>

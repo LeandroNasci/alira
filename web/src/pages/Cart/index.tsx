@@ -31,6 +31,9 @@ function Cart() {
       const total = subtotalList.reduce((total, currentItem) => total + currentItem);
       setAmount(total);
     }
+    else{
+      setAmount(0);
+    }
 
   }, [addedItems]);
 
@@ -91,7 +94,6 @@ function Cart() {
               />
             );
           })}
-
           <button type="button" onClick={handleGoToHome}>Adicionar outros produtos</button>
         </div>
 
