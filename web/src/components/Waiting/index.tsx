@@ -13,7 +13,7 @@ const Waiting: React.FC = () => {
       <img className="progress" src={progressImg} alt="Etapa 2 de 3"/>
       <div className="waiting-content">
         <h3>Espere só um pouquinho :) ...</h3>
-        <strong>Você está sendo redirecionado para a página de checkout do <em>PagSeguro</em>!(Uma forma muito mais segura de fazer suas compras on line)</strong>
+        <strong>Você está sendo redirecionado para a página de checkout do <em>PagSeguro</em>! (Uma forma muito mais segura de fazer suas compras on line)</strong>
         <img src={pagSeguroImg} alt="PagSeguro" className="pagseguro" />
         <img src={aliraNotesIcon} alt="Alira Notes" className="icon" />
       </div>

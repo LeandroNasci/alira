@@ -1,8 +1,9 @@
 .waiting-content  {
   width: 90vw;
   background: var(--color-cinza-fundo);
-  padding: 1.6rem;
+  padding: 2.4rem;
   margin: 0 auto;
+  border: 1px solid var(--color-azul-de-fundo);
   border-radius: 0.8rem;
   display: flex;
   flex-direction: column;
@@ -26,7 +27,7 @@
 }
 
 .waiting-content .pagseguro {
-  width: 30rem;
+  width: 24rem;
   max-width: 35rem;
   align-self: center;
   padding: 1.6rem;
@@ -35,4 +36,10 @@
   width: 10rem;
   align-self: center;
   padding: 1.6rem;
+}
+
+@media (min-width: 700px) {
+  .waiting-content  {
+    width: 50vw;
+  }
 }
