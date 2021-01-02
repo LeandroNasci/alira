@@ -1,0 +1,38 @@
+.waiting-content  {
+  width: 90vw;
+  background: var(--color-cinza-fundo);
+  padding: 1.6rem;
+  margin: 0 auto;
+  border-radius: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.waiting-content h3 {
+  font-size: 2.8rem;
+  text-align: center;
+  padding: 2.4rem;
+}
+.waiting-content strong {
+  display: block;
+  max-width: 64rem;
+  text-align: center;
+  align-self: center;
+}
+
+.waiting-content strong em {
+  font: 700 1.6rem Archivo;
+  color: var(--color-pagseguro);
+}
+
+.waiting-content .pagseguro {
+  width: 30rem;
+  max-width: 35rem;
+  align-self: center;
+  padding: 1.6rem;
+}
+.waiting-content .icon {
+  width: 10rem;
+  align-self: center;
+  padding: 1.6rem;
+}

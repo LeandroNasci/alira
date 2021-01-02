@@ -38,7 +38,7 @@ function Cart() {
   }, [addedItems]);
 
   function handleGoToSendData() {
-    history.push('/send-data');
+    history.replace('/send-data');
   }
 
   function handleGoToHome() {

@@ -121,7 +121,7 @@ function SendData() {
     };
 
     updateFormData(params);
-    history.push("/shipping-select");
+    history.replace("/shipping-select");
   }
 
   function handleToggleDeliveryVisible(event: ChangeEvent<HTMLInputElement>) {
