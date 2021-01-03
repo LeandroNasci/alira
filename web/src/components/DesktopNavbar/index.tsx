@@ -15,7 +15,6 @@ const DesktopNavbar: React.FC = () => {
         <Link to="/?type=post-it">Post-its</Link>
         <Link to="/?type=caneta">Canetas</Link>
         <Link to="/?type=prendedor">Prendedores</Link>
-        <Link to="/?type=kit">Kits</Link>
 
         <Link to="/about">Quem Somos</Link>
       </div>

@@ -37,7 +37,6 @@ const MobileNavbar: React.FC = () => {
           <Link to="/?type=post-it" onClick={handleToggleMenu}>Post-its</Link>
           <Link to="/?type=caneta" onClick={handleToggleMenu}>Canetas</Link>
           <Link to="/?type=prendedor" onClick={handleToggleMenu}>Prendedores</Link>
-          <Link to="/?type=kit" onClick={handleToggleMenu}>Kits</Link>
 
           <Link to="/about">Quem Somos</Link>
         </div>
