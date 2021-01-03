@@ -56,7 +56,7 @@ export const PhoneInput: React.FC<InputProps> = ({ name, ...rest }) => {
         type="text"
         name={name}
         id={name}
-        mask={ ['(', /[1-9]/,  /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/] }
+        mask={ ['(', /[1-9]/,  /\d/, ')', ' ', /9/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/] }
         {...rest}
       />
     </div>

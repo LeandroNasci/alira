@@ -7,7 +7,7 @@ import { useShoppingCart } from '../../context/shoppingCart';
 import { useFormData, FormData } from '../../context/formData';
 import api from '../../services/api';
 import { cepSanitization, cpfSanitization } from '../../utils/sanatizations';
-import { cpfValidation } from '../../utils/validations';
+import { cpfValidation, areaCodeValidation } from '../../utils/validations';
 
 import PageHeader from '../../components/PageHeader';
 import Footer from '../../components/Footer';
@@ -150,6 +150,19 @@ function SendData() {
     setIsInvoiceAdressEqual(event.target.checked);
   }
 
+  function handleValidatePhone(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.value.includes('_') && event.target.value !== '') {
+      setPhone(event.target.value);
+
+      if (areaCodeValidation( event.target.value )) {
+        event.target.setCustomValidity('');
+      }
+      else {
+        event.target.setCustomValidity('DDD inválido');
+      }
+    }
+  }
+
   function handleValidateCpf(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value.includes('_') && event.target.value !== '') {
       setCpf(event.target.value);
@@ -279,7 +292,7 @@ function SendData() {
                   name="phone"
                   placeholder="Celular"
                   value={phone}
-                  onChange={event => setPhone(event.target.value)}
+                  onChange={handleValidatePhone}
                 />
               </fieldset>
             </div>
