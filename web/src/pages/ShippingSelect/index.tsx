@@ -32,7 +32,7 @@ function ShippingSelect () {
 
   const [pacValues,setPacValues] = useState<Shipping>({ category: 1, price: 21.87, days: 8 });
   const [sedexValues,setSedexValues] = useState<Shipping>({ category: 2, price: 24.93, days: 3 });
-  const [waiting,setWaiting] = useState(true);
+  const [waiting,setWaiting] = useState(false);
 
   useEffect(() => {
     if(!formData.shippingAddress.cep){
@@ -113,7 +113,6 @@ function ShippingSelect () {
     }
     catch (error) {
       console.log(error);
-      alert(error)
     }
 
 
