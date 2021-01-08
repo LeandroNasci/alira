@@ -85,37 +85,35 @@ function ShippingSelect () {
     event.preventDefault();
     setWaiting(true);
 
-    // armazenamento no banco de dados
-    const serializedOrder = {
-      email: formData.email,
-      phone: formData.phone,
-      cpf: formData.cpf,
-      invoice: formData.invoice,
-      shippingType: shipping.category,
-      shippingCost: shipping.price,
-      shipping: formData.shippingAddress,
-      items: addedItems,
-    }
     try {
-      const orderResponse = await api.post('/orders', serializedOrder);
 
-      const { orderId } = orderResponse.data;
+      // armazenamento no banco de dados
+      const serializedOrder = {
+        email: formData.email,
+        phone: formData.phone,
+        cpf: formData.cpf,
+        invoice: formData.invoice,
+        shippingType: shipping.category,
+        shippingCost: shipping.price,
+        shipping: formData.shippingAddress,
+        items: addedItems,
+      }
+      console.log(serializedOrder);
+      // const orderResponse = await api.post('/orders', serializedOrder);
+      // const { orderId } = orderResponse.data;
 
-      // redirecionamento pagseguro
-      const compactJson = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId });
 
-      const checkoutResponse = await api.post('/checkout', compactJson);
-
-      const code = checkoutResponse.data.checkout.code._text;
-
-      window.location.replace(`https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code=${code}`);
+      // // redirecionamento pagseguro
+      const urlSearchParams = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId:42 });
+      const checkoutResponse = await api.post('/checkout', urlSearchParams);
+      console.log(checkoutResponse);
+      const code = checkoutResponse.data.checkout.code;
+      window.location.replace(`${process.env.REACT_APP_REDIRECT}/v2/checkout/payment.html?code=${code}`);
 
     }
     catch (error) {
       console.log(error);
     }
-
-
   }
 
   function handleGoBack() {

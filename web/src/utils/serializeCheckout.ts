@@ -16,96 +16,80 @@ export default function serializeCheckout (props: Checkout) {
   const { formData, shipping, addedItems, cartWeight, orderId } = props;
 
   const cost = shipping.price
-                .toFixed(2)
-                .toString();
+    .toFixed(2)
+    .toString();
 
   const amount = addedItems
-                  .reduce( (total, currentItem) => (total + (currentItem.price * currentItem.quantity) ), 0)
-                  .toFixed(2)
-                  .toString();
+    .reduce( (total, currentItem) => (total + (currentItem.price * currentItem.quantity) ), 0)
+    .toFixed(2)
+    .toString();
 
   const phone = formData.phone
-                  .toString()
-                  .trim()
-                  .split(") ")
-                  .map(element => element.replace(new RegExp(/[()-]/g, ""), ""));
+    .toString()
+    .trim()
+    .split(") ")
+    .map(element => element.replace(new RegExp(/[()-]/g, ""), ""));
 
   const cpfNumber = cpfSanitization(formData.cpf);
   // const cnpjNumber = cnpjSanitization(formData.cnpj || '');
 
-  let shippingData;
-  let postalcode
+  const postalcode = (shipping.category === 3)
+    ? '13560049'
+    : cepSanitization(formData.shippingAddress.cep);
 
-  if(shipping.category === 3){
-    postalcode = '';
-    shippingData = {
-      addressRequired: { _text: "false" },
-      type: { _text: String(shipping.category) },                               // Tipo envio (PAC SEDEX OUTROS)
-      cost: { _text: String(shipping.price) }                                   // Frete
-    };
-  }
-  else {
-    postalcode = cepSanitization(formData.shippingAddress.cep);
-    shippingData = {
-      addressRequired: { _text: "true" },
-      address: {                                                                // Endereco envio
-        street: { _text: formData.shippingAddress.street },
-        number: { _text: formData.shippingAddress.number },
-        complement: { _text: formData.shippingAddress.complement },
-        district: { _text: formData.shippingAddress.district },
-        city: { _text: formData.shippingAddress.city},
-        state: { _text: formData.shippingAddress.state},
-        country: { _text: "BRA" },
-        postalCode: { _text: postalcode }
-      },
-      type: { _text: String(shipping.category) },                               // Tipo envio (PAC SEDEX OUTROS)
-      cost: { _text: cost }                                                     // Frete
-    };
-  }
-
-  const compactJson = {
-    _declaration: {
-      _attributes: {
-        version: "1.0"
-      }
-    },
-    checkout: {
-      currency: { _text: "BRL" },                                               // Moeda
-      items: {
-        item: {
-          id: { _text: String(orderId) },                                       // ID do carrinho
-          description: { _text: `Pedido ${String(orderId)}` },                  // Descricao carrinho
-          amount: { _text: String(amount) },                                    // Preco carrinho
-          quantity: { _text: "1" },
-          weight: { _text: cartWeight }                                         // Peso carrinho
-        }
-      },
-      shipping: shippingData,
-      sender: {
-        name: { _text: `${formData.invoice.name} ${formData.invoice.lastname}` }, // Nome nota fiscal
-        email: { _text: formData.email },                                       // Email comprador
-        phone: {                                                                // Telefone comprador
-          areaCode: { _text: phone[0] },
-          number: { _text: phone[1] }
-        },
-        documents: {
-          document: {                                                           // Documento nota fiscal
-            type: { _text: "CPF" },
-            value: { _text: cpfNumber }
-          }
-        }
-      },
-      reference: { _text: `orderId=${String(orderId)}` },                        // ID da compra
-      receiver: {
-        email: { _text: "aliranotes@gmail.com" }                                // Email vendedor
-      },
-      enableRecover: { _text: "false" },                                        // Recuperar carrinho
-      timeout: { _text: "25" },                                                 // Expiracao do checkout
-      maxUses: { _text: "999" },
-      maxAge: { _text: "999999999" },
-      extraAmount: { _text: "0.00" }                                           // Taxa ou desconto sobre o total
+  const urlSearchParams = (shipping.category === 3)
+    ? {
+      currency: 'BRL',
+      itemId1: String(orderId),
+      itemDescription1: `Pedido ${String(orderId)}`,
+      itemAmount1: String(amount),
+      itemQuantity1: '1',
+      itemWeight1: String(cartWeight),
+      shippingAddressRequired: 'false',
+      senderName: `${formData.invoice.name} ${formData.invoice.lastname}`,
+      senderEmail: formData.email,
+      senderAreaCode: phone[0],
+      senderPhone: phone[1],
+      senderCPF: cpfNumber,
+      reference: `orderId=${String(orderId)}`,
+      receiverEmail: 'aliranotes@gmail.com',
+      enableRecover: 'false',
+      timeout: '30',
+      maxUses: '999',
+      maxAge: '999999999',
+      extraAmount: '0.00',
     }
-  }
+    : {
+      currency: 'BRL',
+      itemId1: String(orderId),
+      itemDescription1: `Pedido ${String(orderId)}`,
+      itemAmount1: String(amount),
+      itemQuantity1: '1',
+      itemWeight1: String(cartWeight),
+      shippingAddressRequired: 'true',
+      shippingAddressStreet: formData.shippingAddress.street,
+      shippingAddressNumber: formData.shippingAddress.number,
+      shippingAddressComplement: formData.shippingAddress.complement,
+      shippingAddressDistrict: formData.shippingAddress.district,
+      shippingAddressCity: formData.shippingAddress.city,
+      shippingAddressState: formData.shippingAddress.state,
+      shippingAddressCountry: 'BRA',
+      shippingAddressPostalCode: postalcode,
+      shippingType: String(shipping.category),
+      shippingCost: cost,
+      senderName: `${formData.invoice.name} ${formData.invoice.lastname}`,
+      senderEmail: formData.email,
+      senderAreaCode: phone[0],
+      senderPhone: phone[1],
+      senderCPF: cpfNumber,
+      reference: `orderId=${String(orderId)}`,
+      receiverEmail: 'aliranotes@gmail.com',
+      enableRecover: 'false',
+      timeout: '30',
+      maxUses: '999',
+      maxAge: '999999999',
+      extraAmount: '0.00',
+    }
 
-  return compactJson;
+  return urlSearchParams;
 };
