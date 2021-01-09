@@ -99,12 +99,12 @@ function ShippingSelect () {
         items: addedItems,
       }
       console.log(serializedOrder);
-      // const orderResponse = await api.post('/orders', serializedOrder);
-      // const { orderId } = orderResponse.data;
+      const orderResponse = await api.post('/orders', serializedOrder);
+      const { orderId } = orderResponse.data;
 
 
       // // redirecionamento pagseguro
-      const urlSearchParams = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId:42 });
+      const urlSearchParams = serializeCheckout({ formData, shipping, addedItems, cartWeight, orderId });
       const checkoutResponse = await api.post('/checkout', urlSearchParams);
       console.log(checkoutResponse);
       const code = checkoutResponse.data.checkout.code;
