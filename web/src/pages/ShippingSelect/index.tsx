@@ -54,13 +54,13 @@ function ShippingSelect () {
       api.post('/preco', args).then(response => {
         setPacValues({
           category: 1,
-          price: Number(response.data[0].Valor.replace(",", ".")) * 0.9,
+          price: Number(response.data[0].Valor.replace(",", ".")) * 0.05,
           days: Number(response.data[0].PrazoEntrega)
         });
 
         setSedexValues({
           category: 2,
-          price: Number(response.data[1].Valor.replace(",", ".")) * 0.9,
+          price: Number(response.data[1].Valor.replace(",", ".")) * 0.05,
           days: Number(response.data[1].PrazoEntrega)
         });
       });
