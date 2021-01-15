@@ -150,6 +150,28 @@ function SendData() {
     setIsInvoiceAdressEqual(event.target.checked);
   }
 
+  function handleValidateEmail(event: ChangeEvent<HTMLInputElement>, callback: (value: React.SetStateAction<string>) => void) {
+    callback(event.target.value);
+
+    if (event.target.value.includes(' ') || !event.target.value.includes('.', event.target.value.indexOf('@')) ){
+      event.target.setCustomValidity('Erro de digitação neste campo');
+    }
+    else {
+      event.target.setCustomValidity('');
+    }
+  }
+
+  function handleValidateName(event: ChangeEvent<HTMLInputElement>, callback: (value: React.SetStateAction<string>) => void) {
+    callback(event.target.value);
+
+    if (event.target.value.startsWith(' ') || event.target.value.endsWith(' ') || event.target.value.includes('  ') ){
+      event.target.setCustomValidity('Erro de digitação neste campo');
+    }
+    else {
+      event.target.setCustomValidity('');
+    }
+  }
+
   function handleValidatePhone(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value.includes('_') && event.target.value !== '') {
       setPhone(event.target.value);
@@ -199,18 +221,25 @@ function SendData() {
   async function handleInputInvoiceCep(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.value.includes('_') && event.target.value !== '') {
       setICep(event.target.value);
-      const param = cepSanitization(event.target.value);
+      const cep = cepSanitization(event.target.value);
 
-      const response = await api.get(`/cep/${param}`);
+      try{
+        const response = await api.get(`/cep/${cep}`);
 
-      if(response.data.logradouro === "" || response.data.bairro === "" ) {
-        setIncompleteInvoiceCep(true);
+        if(response.data.logradouro === "" || response.data.bairro === "" ) {
+          setIncompleteInvoiceCep(true);
+        }
+        setIStreet(response.data.logradouro);
+        setIDistrict(response.data.bairro);
+        setICity(response.data.localidade);
+        setIState(response.data.uf);
+        setICountry('Brasil');
       }
-      setIStreet(response.data.logradouro);
-      setIDistrict(response.data.bairro);
-      setICity(response.data.localidade);
-      setIState(response.data.uf);
-      setICountry('Brasil');
+      catch (err) {
+        console.log(err);
+        alert('Este CEP não existe na base dos CORREIOS');
+        setICep('');
+      }
     }
   }
 
@@ -220,18 +249,23 @@ function SendData() {
       setCep(event.target.value);
       const cep = cepSanitization(event.target.value);
 
-      const response = await api.get(`/cep/${cep}`);
+      try {
+        const response = await api.get(`/cep/${cep}`);
 
-      if(response.data.logradouro === "" || response.data.bairro === "" ) {
-        setIncompleteShippingCep(true);
+        if(response.data.logradouro === "" || response.data.bairro === "" ) {
+          setIncompleteShippingCep(true);
+        }
+        setStreet(response.data.logradouro);
+        setDistrict(response.data.bairro);
+        setCity(response.data.localidade);
+        setState(response.data.uf);
+        setCountry('Brasil');
+
+        handleCalculateShippingCost(cep);
+      } catch (err) {
+        console.log(err);
+        alert('Este CEP não existe na base dos CORREIOS');
       }
-      setStreet(response.data.logradouro);
-      setDistrict(response.data.bairro);
-      setCity(response.data.localidade);
-      setState(response.data.uf);
-      setCountry('Brasil');
-
-      handleCalculateShippingCost(cep);
     }
   }
 
@@ -285,7 +319,7 @@ function SendData() {
                   name="email"
                   placeholder="E-mail: (ex: exemplo@gmail.com)"
                   value={email}
-                  onChange={event => setEmail(event.target.value)}
+                  onChange={event => handleValidateEmail(event, setEmail)}
                 />
                 <PhoneInput
                   required
@@ -320,7 +354,7 @@ function SendData() {
                     name="name"
                     placeholder="Nome"
                     value={firstname}
-                    onChange={event => setFirstname(event.target.value)}
+                    onChange={event => handleValidateName(event, setFirstname)}
                   />
                   <Input
                     required
@@ -328,7 +362,7 @@ function SendData() {
                     name="lastname"
                     placeholder="Sobrenome"
                     value={lastname}
-                    onChange={event => setLastname(event.target.value)}
+                    onChange={event => handleValidateName(event, setLastname)}
                   />
                   <CEPInput
                     required
@@ -456,7 +490,7 @@ function SendData() {
                       name="iname"
                       placeholder="Nome"
                       value={iFirstname}
-                      onChange={event => setIFirstname(event.target.value)}
+                      onChange={event => handleValidateName(event, setIFirstname)}
                     />
                     <Input
                       required
@@ -464,7 +498,7 @@ function SendData() {
                       name="ilastname"
                       placeholder="Sobrenome"
                       value={iLastname}
-                      onChange={event => setILastname(event.target.value)}
+                      onChange={event => handleValidateName(event, setILastname)}
                     />
                     <CEPInput
                       required
