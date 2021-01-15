@@ -38,7 +38,9 @@ function Cart() {
   }, [addedItems]);
 
   function handleGoToSendData() {
-    history.replace('/send-data');
+    if(addedItems.length !== 0) {
+      history.replace('/send-data');
+    }
   }
 
   function handleGoToHome() {
@@ -105,7 +107,10 @@ function Cart() {
               <span className="shop-total">{toReal(amount)}</span>
             </div>
             <p>Escolha o MODO DE ENVIO e o FRETE nas próximas etapas</p>
-            <button type="button" onClick={handleGoToSendData}>Vou levar esse carrinho</button>
+            {addedItems.length === 0
+            ? <button type="button" className="disabled">Vou levar esse carrinho</button>
+            : <button type="button" onClick={handleGoToSendData}>Vou levar esse carrinho</button>
+            }
           </div>
           <div className="send-info">
             <div className="off">
